@@ -1,0 +1,41 @@
+-- SphinxのInstall
+pip install -U Sphinx
+
+-- Projectの作成
+sphinx-quickstart
+-- HtmlファイルのBuild
+make html
+
+
+-- ThemeのInstall
+easy_install sphinxjp.themes.sphinx_rtd_theme
+
+-- Themeの使用設定
+conf.py　→　html_theme = 'sphinx_rtd_theme'
+
+conf.py　→　
+import sphinx_rtd_theme
+html_theme = 'sphinx_rtd_theme'
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+-- CSS custmize
+conf.py　→　 
+def setup(app):
+    app.add_stylesheet('custom.css')
+
+-- Pygments
+pip install Pygments
+
+-- Html Icon
+.. raw:: html
+
+   <i class="fa fa-inbox"></i>
+
+.. |inbox| raw:: html
+
+   <i class="fa fa-inbox"></i>
+
+oo |inbox| kk
+
+-- Replace
+.. |ex1| replace:: 例1
