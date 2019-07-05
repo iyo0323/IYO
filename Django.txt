@@ -1,0 +1,55 @@
+-- 学習サイト
+https://docs.djangoproject.com/ja/2.0/intro/
+
+-- DjangoのRoot
+$ cd C:\Users\{username}\AppData\Local\Continuum\anaconda3\Scripts
+-- Project作成（ProjectName=mysite）
+$ django-admin startproject mysite
+-- Module作成（ModuleName=polls）
+$ python manage.py startapp polls
+
+
+-- Migrationファイル作成
+$ python manage.py makemigrations polls
+-- Migrationファイルの中身をSQLで表示（表示のみ）
+$ python manage.py sqlmigrate polls 0001
+-- Table実作成
+$ python manage.py migrate
+-- ShellでDjangoをいじる
+$ python manage.py shell
+
+
+-- router
+mysite.urls.py 
+	→　polls.urls.py 
+		→ polls.views.py 
+			→ pools.templates.polls.{index}.html
+
+
+
+
+$ python manage.py createsuperuser
+{username}
+{email}
+{password}
+
+
+
+-- Do Test
+$ python manage.py test polls
+
+
+
+-- building package
+$ python setup.py sdist (run from inside django-polls)
+-- install package
+$ pip install --user django-polls/dist/django-polls-0.1.tar.gz
+-- uninstall package
+$ pip uninstall django-polls
+
+
+-- Server起動
+$ python manage.py runserver
+
+http://127.0.0.1:8000/admin/
+http://localhost:8000/polls/
