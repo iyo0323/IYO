@@ -1,3 +1,34 @@
+-- PostgreSQLにてテーブルやカラムの各種情報を取得するSQL
+http://devlights.hatenablog.com/entry/20080226/p1
+
+-- PostgreSQL - Retrieve primary key columns
+https://wiki.postgresql.org/wiki/Retrieve_primary_key_columns
+
+-- List all index names, column names and its table name of a PostgreSQL database
+https://stackoverflow.com/questions/6777456/list-all-index-names-column-names-and-its-table-name-of-a-postgresql-database 
+
+
+
+
+
+SELECT relname AS table_name 
+FROM pg_stat_user_tables 
+--WHERE relname LIKE 'xxx%' 
+ORDER BY relname ASC
+
+
+
+SELECT * FROM pg_attribute limit 100
+SELECT * FROM pg_stat_user_tables limit 100
+SELECT * FROM pg_constraint limit 100
+
+
+
+
+
+
+
+
 SELECT NEXTVAL('log_seq')
 SELECT NEXTVAL FOR db2inst1.log_seq from sysibm.SYSDUMMY1
 
