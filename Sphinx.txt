@@ -48,6 +48,18 @@ oo |inbox| kk
 
 
 
+--custom.css
+th {
+    border: solid;
+    border-width: 1px;
+}
+th p, td p {
+    margin-bottom: 0px;
+}
+
+
+
+
 
 
 
