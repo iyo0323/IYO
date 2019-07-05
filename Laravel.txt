@@ -1,0 +1,123 @@
+-- Laravel 新規Project作成（Version=5.5, ProjectName=hoge）
+$ composer create-project --prefer-dist laravel/laravel=5.5.* hoge
+
+-- Laravel Version確認
+$ php artisan --version
+
+-- vendorのInstall
+$ composer install
+
+
+
+-- Migrationファイル作成
+$ php artisan make:migration create_tweets_table --create=tweets
+$ php artisan make:migration add_hash_tag_to_tweet_table --table=tweets
+
+--Specified key was too long error
+https://laravel-news.com/laravel-5-4-key-too-long-error
+
+-- マイグレーションの実行
+$ php artisan migrate
+
+-- 最後の5マイグレーション操作をロールバックする
+$ php artisan migrate:rollback --step=5
+
+-- 全マイグレーションをロールバックする
+$ php artisan migrate:reset
+
+-- 全マイグレーションをロールバックし、全部実行し直す
+$ php artisan migrate:refresh --step=5
+
+
+
+-- Controllerファイル作成
+$ php artisan make:controller TweetController
+
+
+
+-- Modelファイル作成（ModelName=Tweet）
+$ php artisan make:model Tweet
+
+
+
+-- 日本語化（Laravel5.5）
+https://qiita.com/Takahisa1984/items/f2d4347031adbf645594
+
+
+
+-- Auth機能をInstall
+php artisan make:auth
+php artisan migrate
+php artisan key:generate
+php artisan config:clear
+
+php artisan make:notification MailResetPasswordToken
+
+
+
+-- DebugBar Install
+composer require barryvdh/laravel-debugbar --dev
+
+
+
+
+-- Seed作成(データ作成)
+php artisan make:seeder TestSeeder
+
+-- 特定のSeedを実行
+php artisan db:seed --class=Sample001DataSeeder
+php artisan db:seed --class=Sample180328DataSeeder
+
+
+
+-- Laravel Server起動
+php artisan serve
+
+
+-- ファイル構成の更新
+cd C:\xampp\htdocs\{projectname}
+composer dump-autoload
+
+
+-- venderなどの更新？
+$ php composer.phar self-update
+$ php composer.phar dump-auto
+
+php artisan vendor:publish
+
+
+-- cache更新
+php artisan config:clear
+php artisan view:clear
+composer dump-autoload
+php artisan clear-compiled
+php artisan optimize
+php artisan config:cache
+
+
+
+
+-- .envの設定
+-- MariaDBの設定例
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE={dbname}
+DB_USERNAME=root
+DB_PASSWORD=
+
+-- PostgreSQLの設定例
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE={dbname}
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+
+--SMTPの設定例
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
