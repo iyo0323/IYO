@@ -9,6 +9,7 @@ make html
 
 -- ThemeのInstall
 easy_install sphinxjp.themes.sphinx_rtd_theme
+pip install sphinx_rtd_theme
 
 -- Themeの使用設定
 conf.py　→　html_theme = 'sphinx_rtd_theme'
