@@ -45,6 +45,14 @@ oo |inbox| kk
 .. |ex1| replace:: 例1
 
 
+Code with Sidebar
+-----------------
+
+.. sidebar:: A code example
+
+    With a sidebar on the right.2
+
+
 
 
 
