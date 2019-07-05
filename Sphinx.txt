@@ -11,6 +11,9 @@ make html
 easy_install sphinxjp.themes.sphinx_rtd_theme
 pip install sphinx_rtd_theme
 
+-- Read the Docs Sphinx Theme
+https://sphinx-rtd-theme.readthedocs.io/en/latest/demo/demo.html
+
 -- Themeの使用設定
 conf.py　→　html_theme = 'sphinx_rtd_theme'
 
