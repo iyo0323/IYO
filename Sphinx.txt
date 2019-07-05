@@ -56,21 +56,6 @@ Code with Sidebar
 
 
 
---custom.css
-th {
-    border: solid;
-    border-width: 1px;
-}
-th p, td p {
-    margin-bottom: 0px;
-}
-
-
-
-
-
-
-
 mermaid.js
 https://ryuta46.com/516
 .. mermaid::
