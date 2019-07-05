@@ -121,3 +121,112 @@ MAIL_PORT=2525
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
+
+
+
+
+
+
+
+
+
+
+
+-- Htmlable
+https://qiita.com/horikeso/items/f891ea52e2fcda89d170
+C:\xampp\htdocs\nh_jizensodan\src\vendor\laravel\framework\src\Illuminate\Support\helpers.php
+AppServiceProvider　→　Blade::doubleEncode();
+
+-- LaravelのGate(ゲート)機能で権限(ロール)によるアクセス制限を実装する
+https://www.ritolab.com/entry/56
+
+-- Laravel でasset()やurl()が返すURLを『https』 にするためのメモ
+http://fushigi.hatenadiary.com/entry/2018/04/12/223137
+
+
+-- RegisterController
+public function showRegistrationForm()
+{
+	abort(404);
+}
+
+
+
+
+
+
+-- \app\Http\Controllers\Apis\CsvMaker.php
+<?php 
+namespace App\Http\Controllers;
+class CsvMaker extends Controller
+{    
+    public function __construct()
+    {
+        
+    }
+
+    /**
+     * CSVダウンロード
+     * @param array $list
+     * @param array $header
+     * @param string $filename
+     * @return \Illuminate\Http\Response
+     */
+    public static function download($list, $header, $filename)
+    {
+        if (count($header) > 0) {
+            // $listの先頭に$headerを追加する
+            array_unshift($list, $header);
+        }
+        
+        // 読み込み／書き出し用にオープンします。 ファイルポインタをファイルの先頭に置きます。
+        $stream = fopen('php://temp', 'r+b');
+        foreach ($list as $row) {
+            // 行を CSV 形式にフォーマットし、ファイルポインタに書き込む
+            fputcsv($stream, $row);
+        }
+        
+        // ファイルポインタの位置を先頭に戻す
+        rewind($stream);
+        // 残りのストリームを文字列に読み込んで、replaceする
+        $csv = str_replace(PHP_EOL, "\r\n", stream_get_contents($stream));
+        // 文字コードをSJIS-winに変換する
+        $csv = mb_convert_encoding($csv, 'SJIS-win', 'auto');
+        
+        // return用の$headersを生成
+        $headers = array(
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => "attachment; filename=$filename",
+        );
+        
+        // 結果を戻す
+        return \Response::make($csv, 200, $headers);
+    }
+}
+
+-- validate
+//漢字・ひらがな・カタカナ
+public function validateKanji($attribute, $value)
+{
+	if (preg_match('/^(\p{Han}|\p{Hiragana}|\p{Katakana})+$/u', $value)) {
+		return true;
+	}
+	return false;
+}
+
+
+Laravel複数項目のValidation
+https://nextat.co.jp/staff/archives/126
+// 電話番号の桁数チェック（True: 10桁以上, False: 9桁以下）
+public function validateTelLength10($attribute, $value, $params, $validator) {
+	$data = $validator->getData();
+	$len = strlen($data['tel_1']) + strlen($data['tel_2']) + strlen($data['tel_3']);
+	if( $len >= 10){
+		return true;
+	}
+	return false;
+}
+
+'tel_3' => ['required', 'regex:/^[0-9]{1,4}$/', 'tellength10'],
+
+'tel_3.tellength10' => '電話番号を確認してください。',
