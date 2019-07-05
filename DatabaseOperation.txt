@@ -1,0 +1,79 @@
+SELECT NEXTVAL('log_seq')
+SELECT NEXTVAL FOR db2inst1.log_seq from sysibm.SYSDUMMY1
+
+
+
+-- TableColumn変更
+ALTER TABLE t_b_complete_details CHANGE t_b_complate_id t_b_complete_id int(10) UNSIGNED NOT NULL;
+
+
+
+--　TableName取得
+SELECT relname AS table_name FROM pg_stat_user_tables WHERE relname LIKE 'xxx%' ORDER BY relname ASC
+
+
+--　ColumnName取得
+SELECT column_name, data_type, * FROM information_schema.columns WHERE table_name = 'mastercustomerloan';
+
+
+-- TableのCommentを抽出
+SELECT
+	psut.relname AS TABLE_NAME
+	,pd.description AS TABLE_COMMENT
+FROM
+	pg_stat_user_tables psut
+	,pg_description pd
+WHERE 1 = 1
+	--AND psut.relname='テーブル名'
+	AND psut.relid=pd.objoid
+	AND pd.objsubid=0
+
+
+-- FieldのCommentを抽出
+SELECT
+	--pd.objsubid,
+	psat.relname AS TABLE_NAME
+	,pa.attname AS COLUMN_NAME
+	,pd.description AS COLUMN_COMMENT
+FROM
+	pg_stat_all_tables psat
+	,pg_description pd
+	,pg_attribute pa
+WHERE 1 = 1
+	--AND psat.schemaname=(select schemaname from pg_stat_user_tables where relname = 'テーブル名')
+	--AND psat.relname='テーブル名'
+	AND psat.relid = pd.objoid
+	--AND pd.objsubid=0
+	AND pd.objoid = pa.attrelid
+	AND pd.objsubid = pa.attnum
+ORDER BY
+	TABLE_NAME ASC,
+	pd.objsubid ASC
+
+
+-- Index抽出
+SELECT
+  U.usename                AS user_name,
+  ns.nspname               AS schema_name,
+  idx.indrelid :: REGCLASS AS table_name,
+  i.relname                AS index_name,
+  idx.indisunique          AS is_unique,
+  idx.indisprimary         AS is_primary,
+  am.amname                AS index_type,
+  idx.indkey,
+       ARRAY(
+           SELECT pg_get_indexdef(idx.indexrelid, k + 1, TRUE)
+           FROM
+             generate_subscripts(idx.indkey, 1) AS k
+           ORDER BY k
+       ) AS index_keys,
+  (idx.indexprs IS NOT NULL) OR (idx.indkey::int[] @> array[0]) AS is_functional,
+  idx.indpred IS NOT NULL AS is_partial
+FROM pg_index AS idx
+  JOIN pg_class AS i
+    ON i.oid = idx.indexrelid
+  JOIN pg_am AS am
+    ON i.relam = am.oid
+  JOIN pg_namespace AS NS ON i.relnamespace = NS.OID
+  JOIN pg_user AS U ON i.relowner = U.usesysid
+WHERE NOT nspname LIKE 'pg%'; -- Excluding system tables
