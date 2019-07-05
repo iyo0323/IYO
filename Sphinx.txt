@@ -43,3 +43,41 @@ oo |inbox| kk
 
 -- Replace
 .. |ex1| replace:: 例1
+
+
+
+
+
+
+
+
+mermaid.js
+https://ryuta46.com/516
+.. mermaid::
+
+    graph TB
+    
+        open(Request)
+        
+        subgraph 初期処理
+         init1(確認)
+         init2(CSV)
+         init3(明細)
+        end
+        subgraph 繰り返しコミット
+         regist1(判定)
+         regist2(更新項目)
+         regist3(更新相関)
+        end
+		
+        close(Response)
+        
+        open-->init1
+        
+        init1-->init2
+        init2-->init3
+        init3-->regist1
+        
+        regist1-->regist2
+        regist2-->regist3
+        regist3-->close
