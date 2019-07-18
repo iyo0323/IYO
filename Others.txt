@@ -1,5 +1,11 @@
 
 
+MAG2NEWS
+https://www.mag2.com/p/news
+
+MONEY VOICE
+https://www.mag2.com/p/money
+
 
 W3C Markup Validation Service
 https://validator.w3.org/#validate_by_input
