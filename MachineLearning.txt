@@ -19,6 +19,9 @@ http://playground.tensorflow.org/
 【深度学习系列】卷积神经网络CNN原理详解(一)——基本原理
 https://www.cnblogs.com/charlotte77/p/7759802.html
 
+Stanford University - Machine Learning Course
+https://www.coursera.org/learn/machine-learning
+
 
 Deep Learning with Python.pdf
 http://bioserver.cpgei.ct.utfpr.edu.br/disciplinas/eeica/papers/Livros/%5BChollet%5D-Deep_Learning_with_Python.pdf
