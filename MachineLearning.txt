@@ -27,7 +27,7 @@ StudyBook/DeepLearningBooks
 https://github.com/changwookjun/StudyBook/tree/master/DeepLearningBooks
 
 
-[Depthwise卷积与Pointwise卷积](https://blog.csdn.net/tintinetmilou/article/details/81607721)
+[Depthwise Pointwise](https://blog.csdn.net/tintinetmilou/article/details/81607721)
 
 
 变形卷积核、可分离卷积？卷积神经网络中十大拍案叫绝的操作。
