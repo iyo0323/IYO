@@ -8,7 +8,7 @@
 
 [Tensorflow](http://playground.tensorflow.org/)
 
-[【深度学习系列】卷积神经网络CNN原理详解(一)——基本原理](https://www.cnblogs.com/charlotte77/p/7759802.html)
+
 
 [Stanford University - Machine Learning Course](https://www.coursera.org/learn/machine-learning)
 
@@ -16,7 +16,13 @@
 [StudyBook/DeepLearningBooks](https://github.com/changwookjun/StudyBook/tree/master/DeepLearningBooks)
 
 
-[Depthwise & Pointwise](https://blog.csdn.net/tintinetmilou/article/details/81607721)
 
+
+CNN
+======
+
+[【深度学习系列】卷积神经网络CNN原理详解(一)——基本原理](https://www.cnblogs.com/charlotte77/p/7759802.html)
+
+[Depthwise & Pointwise](https://blog.csdn.net/tintinetmilou/article/details/81607721)
 
 [变形卷积核、可分离卷积？卷积神经网络中十大拍案叫绝的操作。](https://zhuanlan.zhihu.com/p/28749411)
