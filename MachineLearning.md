@@ -32,6 +32,8 @@ CNN
 
 [【深度学习系列】卷积神经网络CNN原理详解(一)——基本原理](https://www.cnblogs.com/charlotte77/p/7759802.html)
 
+[卷积神经网络CNN完全指南终极版（一）](https://zhuanlan.zhihu.com/p/27908027)
+
 [Depthwise & Pointwise](https://blog.csdn.net/tintinetmilou/article/details/81607721)
 
 [变形卷积核、可分离卷积？卷积神经网络中十大拍案叫绝的操作。](https://zhuanlan.zhihu.com/p/28749411)
