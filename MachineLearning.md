@@ -35,3 +35,12 @@ CNN
 [Depthwise & Pointwise](https://blog.csdn.net/tintinetmilou/article/details/81607721)
 
 [变形卷积核、可分离卷积？卷积神经网络中十大拍案叫绝的操作。](https://zhuanlan.zhihu.com/p/28749411)
+
+
+
+R-CNN
+======
+
+[關於影像辨識，所有你應該知道的深度學習模型](https://medium.com/cubo-ai/%E7%89%A9%E9%AB%94%E5%81%B5%E6%B8%AC-object-detection-740096ec4540)
+
+[一文读懂Faster RCNN](https://zhuanlan.zhihu.com/p/31426458)
