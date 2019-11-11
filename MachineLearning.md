@@ -15,7 +15,7 @@ Resource
 
 [StudyBook/DeepLearningBooks](https://github.com/changwookjun/StudyBook/tree/master/DeepLearningBooks)
 
-
+[【24個掲載】機械学習で使えるデータセット一挙勢揃い！](https://www.codexa.net/ml-dataset-list/)
 
 
 DNN
