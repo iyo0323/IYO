@@ -40,6 +40,17 @@ Resource
 [Visual Studio Hot Key](https://code.visualstudio.com/docs/getstarted/keybindings)
 
 
+
+MD5
+========
+
+[javaからwindowsのバッチファイル（*.bat）を実行する](http://www.bunkei-programmer.net/entry/20110627/p1)
+
+[Rundll32 printui.dll,PrintUIEntry](https://technet.microsoft.com/ja-jp/library/ee624057(v=ws.10).aspx)
+
+CertUtil -hashfile "C:\Users\aaa\Downloads\bbb.zip" MD5
+
+
 Others
 ========
 
