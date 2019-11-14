@@ -1,5 +1,4 @@
--- 学習サイト
-https://docs.djangoproject.com/ja/2.0/intro/
+[公式学習サイト](https://docs.djangoproject.com/ja/2.0/intro/)
 
 -- DjangoのRoot
 $ cd C:\Users\{username}\AppData\Local\Continuum\anaconda3\Scripts
