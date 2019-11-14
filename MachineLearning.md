@@ -46,3 +46,20 @@ R-CNN
 [關於影像辨識，所有你應該知道的深度學習模型](https://medium.com/cubo-ai/%E7%89%A9%E9%AB%94%E5%81%B5%E6%B8%AC-object-detection-740096ec4540)
 
 [一文读懂Faster RCNN](https://zhuanlan.zhihu.com/p/31426458)
+
+
+
+Reinforcement Learning
+=======================
+  
+[Reinforcement Learning: An Introduction (Adaptive Computation and Machine Learning series) pdf](http://incompleteideas.net/book/bookdraft2017nov5.pdf)
+
+[Deep Reinforcement Learning Hands-On: Apply modern RL methods, with deep Q-networks, value iteration, policy gradients, TRPO, AlphaGo Zero and more ](https://books.google.co.jp/books?id=xKdhDwAAQBAJ&pg=PR15&lpg=PR15&dq=Deep+Reinforcement+Learning+Hands-On:+Apply+modern+RL+methods,+with+deep+Q-networks,+value+iteration,+policy+gradients,+TRPO,+AlphaGo+Zero+and+more+pdf&source=bl&ots=wTddkr2fcG&sig=ACfU3U1aUUjt8NifibvCjVgsbYsWrrhdYw&hl=ja&sa=X&ved=2ahUKEwirp8iara7jAhUvE6YKHfcODyEQ6AEwCXoECAkQAQ#v=onepage&q&f=false)
+
+[一篇深度強化學習勸退文](https://bigdatafinance.tw/index.php/tech/data-processing/528-2018-02-27-04-31-42)
+
+[機器學習 ML NOTE Reinforcement Learning 強化學習(DQN原理)](https://medium.com/%E9%9B%9E%E9%9B%9E%E8%88%87%E5%85%94%E5%85%94%E7%9A%84%E5%B7%A5%E7%A8%8B%E4%B8%96%E7%95%8C/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-ml-note-reinforcement-learning-%E5%BC%B7%E5%8C%96%E5%AD%B8%E7%BF%92-dqn-%E5%AF%A6%E4%BD%9Catari-game-7f9185f833b0)
+
+[UCL Course on RL](http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html)
+
+[DQN 从入门到放弃1 DQN与增强学习](https://zhuanlan.zhihu.com/p/21262246?refer=intelligentunit)
