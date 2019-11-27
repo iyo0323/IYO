@@ -10,5 +10,7 @@ Python
   api
   batch
   AI
-試験
 換工
+
+
+C:\Eclipse\EclipseNeon\workspaceNeon\Hayate System
