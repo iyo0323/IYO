@@ -19,6 +19,8 @@ Resource
 
 [Deep Learning with JavaScript Neural networks in TensorFlow.js](https://www.manning.com/books/deep-learning-with-javascript)
 
+[Deep Learning with PyTorch](https://www.manning.com/books/deep-learning-with-pytorch)
+
 
 DNN
 ======
