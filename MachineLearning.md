@@ -17,6 +17,8 @@ Resource
 
 [【24個掲載】機械学習で使えるデータセット一挙勢揃い！](https://www.codexa.net/ml-dataset-list/)
 
+[Data Science for Business](https://github.com/lhduc94/IT-Ebooks/blob/master/Data%20Science%20for%20Business.pdf)
+
 [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python)
 
 [Deep Learning with JavaScript Neural networks in TensorFlow.js](https://www.manning.com/books/deep-learning-with-javascript)
