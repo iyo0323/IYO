@@ -54,6 +54,8 @@ CertUtil -hashfile "C:\Users\aaa\Downloads\bbb.zip" MD5
 Others
 ========
 
+[Python/機械学習 在宅業務](https://techacademy.jp/mentor-recruits-lp-ai?utm_source=google&utm_medium=display&utm_content=mentor2_machinelearning&utm_campaign=qiita_machinelearning&gclid=EAIaIQobChMIl4GN2tL65wIVwgdcCh2vuAL2EAEYASAAEgKN2PD_BwE)
+
 叱𠮟★☆
 
 
