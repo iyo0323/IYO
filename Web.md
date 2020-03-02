@@ -6,7 +6,38 @@ HTML
 
 [Markup Validation Service](https://validator.w3.org/#validate_by_input)
 
+
+
+How TO
+======
+
 [w3schools.com - How to](https://www.w3schools.com/howto/default.asp)
+
+[Side Navigation](https://www.w3schools.com/howto/howto_js_sidenav.asp)
+
+[Image Hover Overlay](https://www.w3schools.com/howto/howto_css_image_overlay.asp)
+
+[CSS Loader](https://www.w3schools.com/howto/howto_css_loader.asp)
+
+[Tooltip](https://www.w3schools.com/howto/howto_css_tooltip.asp)
+
+[Scroll Indicator](https://www.w3schools.com/howto/howto_js_scroll_indicator.asp)
+
+[Snackbar / Toast](https://www.w3schools.com/howto/howto_js_snackbar.asp)
+
+[Timeline](https://www.w3schools.com/howto/howto_css_timeline.asp)
+
+[Custom Scrollbars](https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp)
+
+[3D Flip Box](https://www.w3schools.com/howto/howto_css_flip_box.asp)
+
+[Vertical Line](https://www.w3schools.com/howto/howto_css_vertical_line.asp)
+
+[Typing Effect](https://www.w3schools.com/howto/howto_js_typewriter.asp)
+
+[Chat](https://www.w3schools.com/howto/howto_css_chat.asp)
+
+[Fullscreen Video](https://www.w3schools.com/howto/howto_css_fullscreen_video.asp)
 
 
 
