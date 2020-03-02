@@ -32,6 +32,11 @@ urlpatterns = [
     # 一件データ更新
     path('{aaa}/<int:pk>/update/', views.{Aaa}Update.as_view()),
 ]
+# URL Samples
+# http://127.0.0.1:8888/{AppName}/{aaa}s
+# http://127.0.0.1:8888/{AppName}/{aaa}s?{aaa}_id=1
+# http://127.0.0.1:8888/{AppName}/{aaa}/1
+# http://127.0.0.1:8888/{AppName}/{aaa}/1/update
 
 
 
