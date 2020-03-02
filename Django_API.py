@@ -61,3 +61,20 @@ class {Aaa}Update(generics.RetrieveUpdateAPIView):
     serializer_class = {Aaa}Serializer
 
 
+
+#----------------------------------------------------------------------------------
+# {AppName}\serializer.py
+#----------------------------------------------------------------------------------
+from rest_framework import serializers
+from {AppName}.models import {Table_Name}
+
+class {Aaa}Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = {Table_Name}
+        fields = (
+            'id',
+            '{TableField1}',
+            '{TableField2}',
+            '{TableField3}',
+        )
+
