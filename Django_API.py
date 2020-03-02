@@ -36,6 +36,15 @@ urlpatterns = [
 
 
 #----------------------------------------------------------------------------------
+# {AppName}\views\__init__.py
+#----------------------------------------------------------------------------------
+from {AppName}.views.XXX import {Aaa}List
+from {AppName}.views.XXX import {Aaa}
+from {AppName}.views.XXX import {Aaa}Update
+
+
+
+#----------------------------------------------------------------------------------
 # {AppName}\views\XXX.py
 #----------------------------------------------------------------------------------
 from rest_framework import generics
