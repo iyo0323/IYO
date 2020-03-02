@@ -1,11 +1,10 @@
 #----------------------------------------------------------------------------------
 # {AppName}\urls.py
 #----------------------------------------------------------------------------------
-
+#{aaa},{Aaa}
 from django.urls import path
-from customer import views
+from {AppName} import views
 urlpatterns = [
-    #{aaa},{Aaa}
     # 全件データ取得（Filterの指定で条件の設定も可能）
     path('{aaa}s', views.{Aaa}List.as_view()),
     # 一件データ取得
