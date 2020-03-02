@@ -53,3 +53,7 @@ $ python manage.py runserver
 
 http://127.0.0.1:8000/admin/
 http://localhost:8000/polls/
+
+
+--Integrating Django with a legacy database（既存DBからModelを作る）
+$ python manage.py inspectdb > models.py
