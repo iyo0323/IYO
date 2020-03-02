@@ -1,6 +1,6 @@
 
 HTML
-======
+==================
 
 [Tag index](https://www.tagindex.com/)
 
@@ -8,8 +8,8 @@ HTML
 
 
 
-How TO
-======
+w3schools.com
+==================
 
 [w3schools.com - How to](https://www.w3schools.com/howto/default.asp)
 
@@ -42,7 +42,7 @@ How TO
 
 
 Awesome
-=======
+==================
 
 [【保存版】Font Awesomeの使い方：Webアイコンフォントを使おう](https://saruwakakun.com/html-css/basic/font-awesome)
 
