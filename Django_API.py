@@ -111,4 +111,9 @@ class {Aaa}Serializer(serializers.ModelSerializer):
             '{TableField2}',
             '{TableField3}',
         )
+#         fields = '__all__'
+#         read_only_fields = (
+#             '{TableField1}',
+#             '{TableField2}',
+#         )
 
