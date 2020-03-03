@@ -62,6 +62,8 @@ class {Aaa}IdFilter(filters.FilterSet):
     # {aaa}_id　→　Django側で自命名の名前
     # urlの最後に「?{aaa}_id=1」と指定すれば、id=1のデータだけ抽出になる
     {aaa}_id = django_filters.NumberFilter(field_name="id", lookup_expr='exact')
+#     {aaa}_name = filters.CharFilter(lookup_expr='contains')
+#     {aaa}_description = filters.CharFilter(lookup_expr='contains')
 
     class Meta:
         model = {Table_Name}
