@@ -3,8 +3,6 @@
 
 [BBC Radio](https://www.bbc.co.uk/programmes/p002vsmz)
 
-[Crowdtech](https://crowdtech.jp/lp/member/engineer?ref=lst-ad_google&utm_source=google&utm_medium=gdn&gclid=EAIaIQobChMIgvPdkc__5wIVUr-9Ch2DVgBfEAEYASAAEgK2a_D_BwE)
-
 
 News
 =====
@@ -59,6 +57,8 @@ Others
 ========
 
 [Python/機械学習 在宅業務](https://techacademy.jp/mentor-recruits-lp-ai?utm_source=google&utm_medium=display&utm_content=mentor2_machinelearning&utm_campaign=qiita_machinelearning&gclid=EAIaIQobChMIl4GN2tL65wIVwgdcCh2vuAL2EAEYASAAEgKN2PD_BwE)
+
+[Crowdtech](https://crowdtech.jp/lp/member/engineer?ref=lst-ad_google&utm_source=google&utm_medium=gdn&gclid=EAIaIQobChMIgvPdkc__5wIVUr-9Ch2DVgBfEAEYASAAEgK2a_D_BwE)
 
 叱𠮟★☆
 
