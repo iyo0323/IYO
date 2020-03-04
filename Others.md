@@ -52,7 +52,7 @@ MD5
 
 [Rundll32 printui.dll,PrintUIEntry](https://technet.microsoft.com/ja-jp/library/ee624057(v=ws.10).aspx)
 
-CertUtil -hashfile "C:\Users\aaa\Downloads\bbb.zip" MD5
+$ CertUtil -hashfile "C:\Users\aaa\Downloads\bbb.zip" MD5
 
 
 Others
