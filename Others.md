@@ -7,6 +7,8 @@
 News
 =====
 
+[Deep Insider](https://www.atmarkit.co.jp/ait/subtop/di/)
+
 [MAG2NEWS](https://www.mag2.com/p/news)
 
 [MONEY VOICE](https://www.mag2.com/p/money)
