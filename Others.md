@@ -60,6 +60,9 @@ Others
 
 [Crowdtech](https://crowdtech.jp/lp/member/engineer?ref=lst-ad_google&utm_source=google&utm_medium=gdn&gclid=EAIaIQobChMIgvPdkc__5wIVUr-9Ch2DVgBfEAEYASAAEgK2a_D_BwE)
 
+Export File List by CMD
+$ dir *.java /b /a-d /s > file_list.txt
+
 叱𠮟★☆
 
 
