@@ -53,9 +53,26 @@ from {AppName}.views.XXX import {Aaa}Update
 # {AppName}\views\XXX.py
 #----------------------------------------------------------------------------------
 from rest_framework import generics
+from rest_framework import serializers
 from django_filters import rest_framework as filters
 from {AppName}.serializer import {Aaa}Serializer
+from {AppName}.models import {Table_Name}
 import django_filters
+
+class {Aaa}Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = {Table_Name}
+        fields = (
+            'id',
+            '{TableField1}',
+            '{TableField2}',
+            '{TableField3}',
+        )
+#         fields = '__all__'
+#         read_only_fields = (
+#             '{TableField1}',
+#             '{TableField2}',
+#         )
 
 class {Aaa}IdFilter(filters.FilterSet):
     # id　→　DB上の実体Field名
@@ -95,27 +112,3 @@ class {Aaa}Update(generics.RetrieveUpdateAPIView):
     """
     queryset = {Table_Name}.objects.all()
     serializer_class = {Aaa}Serializer
-
-
-
-#----------------------------------------------------------------------------------
-# {AppName}\serializer.py
-#----------------------------------------------------------------------------------
-from rest_framework import serializers
-from {AppName}.models import {Table_Name}
-
-class {Aaa}Serializer(serializers.ModelSerializer):
-    class Meta:
-        model = {Table_Name}
-        fields = (
-            'id',
-            '{TableField1}',
-            '{TableField2}',
-            '{TableField3}',
-        )
-#         fields = '__all__'
-#         read_only_fields = (
-#             '{TableField1}',
-#             '{TableField2}',
-#         )
-
