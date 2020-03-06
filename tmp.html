@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!-- HTML HEAD -->
+<head>
+   <meta charset="UTF-8">
+   <title>Dev</title>
+   <link rel="icon" href="./img/hayate.png" type="image/x-icon">
+   <meta name="description" content="">
+
+
+   <!-- CSS -->
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.1/css/all.css">
+   <link rel="stylesheet" type="text/css" href="./css/style.css" media="all">
+   <link rel="stylesheet" type="text/css" href="./css/tmp.css" media="all">
+
+   <!-- JavaScript -->
+   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+   <script src="./js/tmp.js"></script>
+</head>
+
+
+
+<!-- HTML BODY -->
+<body>
+
+	<!------------------------------------------------------------------------------------------------------------------------------------ 
+		Snackbar 
+	  ------------------------------------------------------------------------------------------------------------------------------------>
+	
+	<!-- Use a button to open the snackbar -->
+	<button onclick="myFunction()">Show Snackbar</button>
+	<!-- The actual snackbar -->
+	<div id="snackbar">Some text some message..</div>
+	
+	
+
+	
+	<!------------------------------------------------------------------------------------------------------------------------------------ 
+		Tab 
+	  ------------------------------------------------------------------------------------------------------------------------------------>
+	  
+	<!-- Tab links -->
+	<div class="tab">
+	  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
+	  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+	  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+	</div>
+
+	<!-- Tab content -->
+	<div id="London" class="tabcontent">
+	  <h3>London</h3>
+	  <p>London is the capital city of England.</p>
+	</div>
+
+	<div id="Paris" class="tabcontent">
+	  <h3>Paris</h3>
+	  <p>Paris is the capital of France.</p>
+	</div>
+
+	<div id="Tokyo" class="tabcontent">
+	  <h3>Tokyo</h3>
+	  <p>Tokyo is the capital of Japan.</p>
+	</div>
+	
+	
+	
+	
+	<!------------------------------------------------------------------------------------------------------------------------------------ 
+		Flip-Box 
+	  ------------------------------------------------------------------------------------------------------------------------------------>
+	
+	<div class="flip-box">
+	  <div class="flip-box-inner">
+		<div class="flip-box-front">
+		  <h2>Front Side</h2>
+		</div>
+		<div class="flip-box-back">
+		  <h2><i class="fas fa-camera"></i></h2>
+		</div>
+	  </div>
+	</div>
+	
+	
+	
+	
+	
+	<!------------------------------------------------------------------------------------------------------------------------------------ 
+		CSS Loader & SideNav
+	  ------------------------------------------------------------------------------------------------------------------------------------>
+	
+	<div class="loader"></div>
+	
+	
+	
+	
+	
+	<div id="mySidenav" class="sidenav">
+	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	  <div class="sidenavsub">
+		<div class="loader2"></div>
+	  </div>
+	</div>
+	
+	<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+
+
+</body>
+</html>
