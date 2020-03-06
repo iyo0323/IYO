@@ -50,6 +50,8 @@ Code Pen
 
 [コピペで絶対使いたくなるCSSボタン 25選](https://lab.sonicmoov.com/markup/css/css-button/)
 
+[ボタンにユニークなホバー・クリックエフェクトを付けたいときに参考になるエフェクトサンプル 10](https://www.nxworld.net/tips/button-hover-and-click-unique-effect-examples.html)
+
 
 Awesome
 ==================
