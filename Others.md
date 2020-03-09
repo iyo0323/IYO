@@ -64,6 +64,13 @@ Others
 
 $ dir *.java /b /a-d /s > file_list.txt
 
+VS Code (MD -> PDF)
+・Install Markdown PDF
+・Create md file
+・「F1」 or 「Ctrl+Shift+P」
+・$ markdown-pdf: Export (pdf)
+
+
 叱𠮟★☆
 
 
