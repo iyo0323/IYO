@@ -62,6 +62,8 @@ Others
 
 [Lolipop - Django を使用したWebアプリの作成](https://support.mc.lolipop.jp/hc/ja/articles/360011824713--Python-Django-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9FWeb%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E4%BD%9C%E6%88%90)
 
+[Have I Been Pwned？（HIBP）](https://haveibeenpwned.com/)
+
 $ dir *.java /b /a-d /s > file_list.txt
 
 VS Code (MD -> PDF)
