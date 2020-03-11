@@ -15,6 +15,8 @@ Resource
 
 [StudyBook/DeepLearningBooks](https://github.com/changwookjun/StudyBook/tree/master/DeepLearningBooks)
 
+[Udemy](https://udemy.benesse.co.jp/ai/)
+
 [【24個掲載】機械学習で使えるデータセット一挙勢揃い！](https://www.codexa.net/ml-dataset-list/)
 
 [Data Science for Business](https://github.com/lhduc94/IT-Ebooks/blob/master/Data%20Science%20for%20Business.pdf)
