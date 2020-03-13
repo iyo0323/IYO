@@ -1,53 +1,57 @@
--- PostgreSQLにてテーブルやカラムの各種情報を取得するSQL
-http://devlights.hatenablog.com/entry/20080226/p1
+[PostgreSQLにてテーブルやカラムの各種情報を取得するSQL](http://devlights.hatenablog.com/entry/20080226/p1)
 
--- PostgreSQL - Retrieve primary key columns
-https://wiki.postgresql.org/wiki/Retrieve_primary_key_columns
 
--- List all index names, column names and its table name of a PostgreSQL database
-https://stackoverflow.com/questions/6777456/list-all-index-names-column-names-and-its-table-name-of-a-postgresql-database 
+[PostgreSQL - Retrieve primary key columns](https://wiki.postgresql.org/wiki/Retrieve_primary_key_columns)
 
+
+[List all index names, column names and its table name of a PostgreSQL database](https://stackoverflow.com/questions/6777456/list-all-index-names-column-names-and-its-table-name-of-a-postgresql-database )
 
 
 
 
+
+```sql
 SELECT relname AS table_name 
 FROM pg_stat_user_tables 
 --WHERE relname LIKE 'xxx%' 
 ORDER BY relname ASC
+```
 
-
-
+```sql
 SELECT * FROM pg_attribute limit 100
 SELECT * FROM pg_stat_user_tables limit 100
 SELECT * FROM pg_constraint limit 100
+```
 
 
 
 
 
 
-
-
+```sql
 SELECT NEXTVAL('log_seq')
 SELECT NEXTVAL FOR db2inst1.log_seq from sysibm.SYSDUMMY1
+```
 
 
-
--- TableColumn変更
+TableColumn変更
+```sql
 ALTER TABLE t_b_complete_details CHANGE t_b_complate_id t_b_complete_id int(10) UNSIGNED NOT NULL;
+```
 
 
-
---　TableName取得
+TableName取得
+```sql
 SELECT relname AS table_name FROM pg_stat_user_tables WHERE relname LIKE 'xxx%' ORDER BY relname ASC
+```
 
-
---　ColumnName取得
+ColumnName取得
+```sql
 SELECT column_name, data_type, * FROM information_schema.columns WHERE table_name = 'mastercustomerloan';
+```
 
-
--- TableのCommentを抽出
+TableのCommentを抽出
+```sql
 SELECT
 	psut.relname AS TABLE_NAME
 	,pd.description AS TABLE_COMMENT
@@ -58,9 +62,10 @@ WHERE 1 = 1
 	--AND psut.relname='テーブル名'
 	AND psut.relid=pd.objoid
 	AND pd.objsubid=0
+```
 
-
--- FieldのCommentを抽出
+FieldのCommentを抽出
+```sql
 SELECT
 	--pd.objsubid,
 	psat.relname AS TABLE_NAME
@@ -80,9 +85,10 @@ WHERE 1 = 1
 ORDER BY
 	TABLE_NAME ASC,
 	pd.objsubid ASC
+```
 
-
--- Index抽出
+Index抽出
+```sql
 SELECT
   U.usename                AS user_name,
   ns.nspname               AS schema_name,
@@ -108,3 +114,4 @@ FROM pg_index AS idx
   JOIN pg_namespace AS NS ON i.relnamespace = NS.OID
   JOIN pg_user AS U ON i.relowner = U.usesysid
 WHERE NOT nspname LIKE 'pg%'; -- Excluding system tables
+```
