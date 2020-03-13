@@ -34,23 +34,23 @@ SELECT NEXTVAL FOR db2inst1.log_seq from sysibm.SYSDUMMY1
 ```
 
 
-TableColumn変更
+Alter Table Column
 ```sql
 ALTER TABLE t_b_complete_details CHANGE t_b_complate_id t_b_complete_id int(10) UNSIGNED NOT NULL;
 ```
 
 
-TableName取得
+Select Table Name
 ```sql
 SELECT relname AS table_name FROM pg_stat_user_tables WHERE relname LIKE 'xxx%' ORDER BY relname ASC
 ```
 
-ColumnName取得
+Select Column Name
 ```sql
 SELECT column_name, data_type, * FROM information_schema.columns WHERE table_name = 'mastercustomerloan';
 ```
 
-TableのCommentを抽出
+Select Table Comment
 ```sql
 SELECT
 	psut.relname AS TABLE_NAME
@@ -64,7 +64,7 @@ WHERE 1 = 1
 	AND pd.objsubid=0
 ```
 
-FieldのCommentを抽出
+Select Field Comment
 ```sql
 SELECT
 	--pd.objsubid,
@@ -87,7 +87,7 @@ ORDER BY
 	pd.objsubid ASC
 ```
 
-Index抽出
+Select Index
 ```sql
 SELECT
   U.usename                AS user_name,
