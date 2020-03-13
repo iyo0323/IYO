@@ -1,34 +1,50 @@
--- SphinxのInstall
-pip install -U Sphinx
+Install Sphinx
+```sh
+$ pip install -U Sphinx
+```
 
--- Projectの作成
-sphinx-quickstart
--- HtmlファイルのBuild
-make html
+Create Project
+```sh
+$ sphinx-quickstart
+```
+
+Build Html Files
+```sh
+$ make html
+```
+
+Install Theme
+```sh
+$ easy_install sphinxjp.themes.sphinx_rtd_theme
+$ pip install sphinx_rtd_theme
+```
+
+[Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/latest/demo/demo.html)
 
 
--- ThemeのInstall
-easy_install sphinxjp.themes.sphinx_rtd_theme
-pip install sphinx_rtd_theme
+Themeの使用設定
 
--- Read the Docs Sphinx Theme
-https://sphinx-rtd-theme.readthedocs.io/en/latest/demo/demo.html
-
--- Themeの使用設定
 conf.py　→　html_theme = 'sphinx_rtd_theme'
 
 conf.py　→　
+
 import sphinx_rtd_theme
+
 html_theme = 'sphinx_rtd_theme'
+
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
--- CSS custmize
+
+CSS custmize
 conf.py　→　 
 def setup(app):
     app.add_stylesheet('custom.css')
 
--- Pygments
-pip install Pygments
+
+Pygments
+```sh
+$ pip install Pygments
+```
 
 -- Html Icon
 .. raw:: html
@@ -56,8 +72,8 @@ Code with Sidebar
 
 
 
-mermaid.js
-https://ryuta46.com/516
+[mermaid.js](https://ryuta46.com/516)
+
 .. mermaid::
 
     graph TB
