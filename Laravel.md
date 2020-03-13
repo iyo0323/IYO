@@ -1,11 +1,9 @@
+Install
+=================================
+
 Create New Project (Version=5.5, ProjectName=hoge)
 ```sh
 $ composer create-project --prefer-dist laravel/laravel=5.5.* hoge
-```
-
-Version Check
-```sh
-$ php artisan --version
 ```
 
 vendorのInstall
@@ -13,20 +11,61 @@ vendorのInstall
 $ composer install
 ```
 
-
-Migrationファイル作成
-```sh
-$ php artisan make:migration create_tweets_table --create=tweets
-```
-
-```sh
-$ php artisan make:migration add_hash_tag_to_tweet_table --table=tweets
-```
-
 Specified key was too long error
 ```sh
 https://laravel-news.com/laravel-5-4-key-too-long-error
 ```
+
+Install Auth Func
+```sh
+$ php artisan make:auth
+$ php artisan migrate
+$ php artisan key:generate
+$ php artisan config:clear
+```
+
+Install Mail Reset Password
+```sh
+$ php artisan make:notification MailResetPasswordToken
+```
+
+Install DebugBar
+```sh
+$ composer require barryvdh/laravel-debugbar --dev
+```
+
+
+Create Files
+=================================
+
+Create Migration File (Create)
+```sh
+$ php artisan make:migration create_tweets_table --create=tweets
+```
+
+Create Table File (Add Column)
+```sh
+$ php artisan make:migration add_hash_tag_to_tweet_table --table=tweets
+```
+
+Create Controller File
+```sh
+$ php artisan make:controller TweetController
+```
+
+Create Model File (ModelName=Tweet)
+```sh
+$ php artisan make:model Tweet
+```
+
+Create Seed (Data)
+```sh
+$ php artisan make:seeder TestSeeder
+```
+
+
+Migration (Run & Rollback)
+=================================
 
 Do Migration
 ```sh
@@ -49,79 +88,13 @@ $ php artisan migrate:refresh --step=5
 ```
 
 
-Create Controller File
-```sh
-$ php artisan make:controller TweetController
-```
-
-
-
-Create Model File (ModelName=Tweet)
-```sh
-$ php artisan make:model Tweet
-```
-
-
-[日本語化（Laravel5.5）](https://qiita.com/Takahisa1984/items/f2d4347031adbf645594)
-
-
-
-
-Install Auth Func
-```sh
-$ php artisan make:auth
-$ php artisan migrate
-$ php artisan key:generate
-$ php artisan config:clear
-```
-
-Install Mail Reset Password
-```sh
-$ php artisan make:notification MailResetPasswordToken
-```
-
-
-Install DebugBar
-```sh
-$ composer require barryvdh/laravel-debugbar --dev
-```
-
-
-
-Create Seed (Data)
-```sh
-$ php artisan make:seeder TestSeeder
-```
-
-
-Run Specific Seed
-```sh
-$ php artisan db:seed --class=Sample001DataSeeder
-$ php artisan db:seed --class=Sample180328DataSeeder
-```
-
-
-Startup Laravel Server
-```sh
-php artisan serve
-```
-
+Reload
+=================================
 
 Reload Files
 ```sh
 $ cd C:\xampp\htdocs\{projectname}
 $ composer dump-autoload
-```
-
-
-Update Vender?
-```sh
-$ php composer.phar self-update
-$ php composer.phar dump-auto
-```
-
-```sh
-php artisan vendor:publish
 ```
 
 Refresh cache
@@ -135,7 +108,8 @@ php artisan config:cache
 ```
 
 
-
+Settings
+=================================
 
 .envの設定
 
@@ -170,26 +144,8 @@ MAIL_ENCRYPTION=null
 ```
 
 
-
-
-
-
-
-
-
-
-[Htmlable](https://qiita.com/horikeso/items/f891ea52e2fcda89d170)
-
-C:\xampp\htdocs\nh_jizensodan\src\vendor\laravel\framework\src\Illuminate\Support\helpers.php
-```php
-AppServiceProvider　→　Blade::doubleEncode();
-```
-
-[LaravelのGate(ゲート)機能で権限(ロール)によるアクセス制限を実装する](https://www.ritolab.com/entry/56)
-
-
-[Laravel でasset()やurl()が返すURLを『https』 にするためのメモ](http://fushigi.hatenadiary.com/entry/2018/04/12/223137)
-
+Code
+=================================
 
 
 RegisterController
@@ -199,10 +155,6 @@ public function showRegistrationForm()
 	abort(404);
 }
 ```
-
-
-
-
 
 
 \app\Http\Controllers\Apis\CsvMaker.php
@@ -284,4 +236,48 @@ public function validateTelLength10($attribute, $value, $params, $validator) {
 'tel_3' => ['required', 'regex:/^[0-9]{1,4}$/', 'tellength10'],
 
 'tel_3.tellength10' => '電話番号を確認してください。',
+```
+
+
+Others
+=================================
+
+[日本語化（Laravel5.5）](https://qiita.com/Takahisa1984/items/f2d4347031adbf645594)
+
+[Htmlable](https://qiita.com/horikeso/items/f891ea52e2fcda89d170)
+
+C:\xampp\htdocs\nh_jizensodan\src\vendor\laravel\framework\src\Illuminate\Support\helpers.php
+```php
+AppServiceProvider　→　Blade::doubleEncode();
+```
+
+[LaravelのGate(ゲート)機能で権限(ロール)によるアクセス制限を実装する](https://www.ritolab.com/entry/56)
+
+[Laravel でasset()やurl()が返すURLを『https』 にするためのメモ](http://fushigi.hatenadiary.com/entry/2018/04/12/223137)
+
+
+
+
+Run Specific Seed
+```sh
+$ php artisan db:seed --class=Sample001DataSeeder
+$ php artisan db:seed --class=Sample180328DataSeeder
+```
+
+
+Startup Laravel Server
+```sh
+php artisan serve
+```
+
+
+
+Update Vender?
+```sh
+$ php composer.phar self-update
+$ php composer.phar dump-auto
+```
+
+```sh
+php artisan vendor:publish
 ```
