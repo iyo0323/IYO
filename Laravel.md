@@ -34,6 +34,11 @@ Install DebugBar
 $ composer require barryvdh/laravel-debugbar --dev
 ```
 
+Startup Laravel Server
+```sh
+php artisan serve
+```
+
 
 Create Files
 =================================
@@ -261,16 +266,6 @@ AppServiceProvider　→　Blade::doubleEncode();
 
 [Laravel でasset()やurl()が返すURLを『https』 にするためのメモ](http://fushigi.hatenadiary.com/entry/2018/04/12/223137)
 
-
-
-
-
-
-
-Startup Laravel Server
-```sh
-php artisan serve
-```
 
 Update Vender?
 ```sh
