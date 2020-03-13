@@ -49,34 +49,42 @@ $ php artisan migrate:refresh --step=5
 ```
 
 
--- Controllerファイル作成
+Create Controller File
+```sh
 $ php artisan make:controller TweetController
+```
 
 
 
--- Modelファイル作成（ModelName=Tweet）
+Create Model File (ModelName=Tweet)
+```sh
 $ php artisan make:model Tweet
+```
+
+
+[日本語化（Laravel5.5）](https://qiita.com/Takahisa1984/items/f2d4347031adbf645594)
 
 
 
--- 日本語化（Laravel5.5）
-https://qiita.com/Takahisa1984/items/f2d4347031adbf645594
+
+Install Auth Func
+```sh
+$ php artisan make:auth
+$ php artisan migrate
+$ php artisan key:generate
+$ php artisan config:clear
+```
+
+Install Mail Reset Password
+```sh
+$ php artisan make:notification MailResetPasswordToken
+```
 
 
-
--- Auth機能をInstall
-php artisan make:auth
-php artisan migrate
-php artisan key:generate
-php artisan config:clear
-
-php artisan make:notification MailResetPasswordToken
-
-
-
--- DebugBar Install
-composer require barryvdh/laravel-debugbar --dev
-
+Install DebugBar
+```sh
+$ composer require barryvdh/laravel-debugbar --dev
+```
 
 
 
