@@ -178,30 +178,35 @@ MAIL_ENCRYPTION=null
 
 
 
--- Htmlable
-https://qiita.com/horikeso/items/f891ea52e2fcda89d170
+[Htmlable](https://qiita.com/horikeso/items/f891ea52e2fcda89d170)
+
 C:\xampp\htdocs\nh_jizensodan\src\vendor\laravel\framework\src\Illuminate\Support\helpers.php
+```php
 AppServiceProvider　→　Blade::doubleEncode();
+```
 
--- LaravelのGate(ゲート)機能で権限(ロール)によるアクセス制限を実装する
-https://www.ritolab.com/entry/56
-
--- Laravel でasset()やurl()が返すURLを『https』 にするためのメモ
-http://fushigi.hatenadiary.com/entry/2018/04/12/223137
+[LaravelのGate(ゲート)機能で権限(ロール)によるアクセス制限を実装する](https://www.ritolab.com/entry/56)
 
 
--- RegisterController
+[Laravel でasset()やurl()が返すURLを『https』 にするためのメモ](http://fushigi.hatenadiary.com/entry/2018/04/12/223137)
+
+
+
+RegisterController
+```php
 public function showRegistrationForm()
 {
 	abort(404);
 }
+```
 
 
 
 
 
 
--- \app\Http\Controllers\Apis\CsvMaker.php
+\app\Http\Controllers\Apis\CsvMaker.php
+```php
 <?php 
 namespace App\Http\Controllers;
 class CsvMaker extends Controller
@@ -249,8 +254,10 @@ class CsvMaker extends Controller
         return \Response::make($csv, 200, $headers);
     }
 }
+```
 
--- validate
+validate
+```php
 //漢字・ひらがな・カタカナ
 public function validateKanji($attribute, $value)
 {
@@ -259,6 +266,7 @@ public function validateKanji($attribute, $value)
 	}
 	return false;
 }
+```
 
 
 Laravel複数項目のValidation
