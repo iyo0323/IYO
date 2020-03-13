@@ -34,24 +34,25 @@ SELECT NEXTVAL FOR db2inst1.log_seq from sysibm.SYSDUMMY1
 ```
 
 
-Alter Table Column
+
 ```sql
+-- Alter Table Column
 ALTER TABLE t_b_complete_details CHANGE t_b_complate_id t_b_complete_id int(10) UNSIGNED NOT NULL;
 ```
 
 
-Select Table Name
-```sql
-SELECT relname AS table_name FROM pg_stat_user_tables WHERE relname LIKE 'xxx%' ORDER BY relname ASC
-```
 
-Select Column Name
 ```sql
+-- Select Table Name
+SELECT relname AS table_name FROM pg_stat_user_tables WHERE relname LIKE 'xxx%' ORDER BY relname ASC
+
+-- Select Column Name
 SELECT column_name, data_type, * FROM information_schema.columns WHERE table_name = 'mastercustomerloan';
 ```
 
-Select Table Comment
+
 ```sql
+-- Select Table Comment
 SELECT
 	psut.relname AS TABLE_NAME
 	,pd.description AS TABLE_COMMENT
@@ -62,10 +63,8 @@ WHERE 1 = 1
 	--AND psut.relname='テーブル名'
 	AND psut.relid=pd.objoid
 	AND pd.objsubid=0
-```
 
-Select Field Comment
-```sql
+-- Select Field Comment
 SELECT
 	--pd.objsubid,
 	psat.relname AS TABLE_NAME
@@ -87,8 +86,9 @@ ORDER BY
 	pd.objsubid ASC
 ```
 
-Select Index
+
 ```sql
+-- Select Index
 SELECT
   U.usename                AS user_name,
   ns.nspname               AS schema_name,
