@@ -8,15 +8,6 @@
 
 
 
-
-
-```sql
-SELECT relname AS table_name 
-FROM pg_stat_user_tables 
---WHERE relname LIKE 'xxx%' 
-ORDER BY relname ASC
-```
-
 ```sql
 SELECT * FROM pg_attribute limit 100
 SELECT * FROM pg_stat_user_tables limit 100
@@ -24,15 +15,11 @@ SELECT * FROM pg_constraint limit 100
 ```
 
 
-
-
-
-
 ```sql
+-- Select next Sequence
 SELECT NEXTVAL('log_seq')
 SELECT NEXTVAL FOR db2inst1.log_seq from sysibm.SYSDUMMY1
 ```
-
 
 
 ```sql
