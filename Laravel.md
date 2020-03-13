@@ -88,67 +88,86 @@ $ composer require barryvdh/laravel-debugbar --dev
 
 
 
--- Seed作成(データ作成)
-php artisan make:seeder TestSeeder
-
--- 特定のSeedを実行
-php artisan db:seed --class=Sample001DataSeeder
-php artisan db:seed --class=Sample180328DataSeeder
+Create Seed (Data)
+```sh
+$ php artisan make:seeder TestSeeder
+```
 
 
+Run Specific Seed
+```sh
+$ php artisan db:seed --class=Sample001DataSeeder
+$ php artisan db:seed --class=Sample180328DataSeeder
+```
 
--- Laravel Server起動
+
+Startup Laravel Server
+```sh
 php artisan serve
+```
 
 
--- ファイル構成の更新
-cd C:\xampp\htdocs\{projectname}
-composer dump-autoload
+Reload Files
+```sh
+$ cd C:\xampp\htdocs\{projectname}
+$ composer dump-autoload
+```
 
 
--- venderなどの更新？
+Update Vender?
+```sh
 $ php composer.phar self-update
 $ php composer.phar dump-auto
+```
 
+```sh
 php artisan vendor:publish
+```
 
-
--- cache更新
+Refresh cache
+```sh
 php artisan config:clear
 php artisan view:clear
 composer dump-autoload
 php artisan clear-compiled
 php artisan optimize
 php artisan config:cache
+```
 
 
 
 
--- .envの設定
--- MariaDBの設定例
+.envの設定
+
+MariaDBの設定例
+```php
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE={dbname}
 DB_USERNAME=root
 DB_PASSWORD=
+```
 
--- PostgreSQLの設定例
+PostgreSQLの設定例
+```php
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
 DB_DATABASE={dbname}
 DB_USERNAME=postgres
 DB_PASSWORD=postgres
+```
 
---SMTPの設定例
+SMTPの設定例
+```php
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.mailtrap.io
 MAIL_PORT=2525
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
-
+```
 
 
 
