@@ -1,22 +1,46 @@
-公式学習サイト
-https://docs.djangoproject.com/ja/2.0/intro/
+[公式学習サイト](https://docs.djangoproject.com/ja/2.0/intro/)
 
--- DjangoのRoot
+
+
+DjangoのRoot
+```sh
 $ cd C:\Users\{username}\AppData\Local\Continuum\anaconda3\Scripts
--- Project作成（ProjectName=mysite）
+```
+
+
+Project作成（ProjectName=mysite）
+```sh
 $ django-admin startproject mysite
--- Module作成（ModuleName=polls）
+```
+
+
+Module作成（ModuleName=polls）
+```sh
 $ python manage.py startapp polls
+```
 
 
--- Migrationファイル作成
+
+Migrationファイル作成
+```sh
 $ python manage.py makemigrations polls
--- Migrationファイルの中身をSQLで表示（表示のみ）
+```
+
+Migrationファイルの中身をSQLで表示（表示のみ）
+```sh
 $ python manage.py sqlmigrate polls 0001
--- Table実作成
+```
+
+Table実作成
+```sh
 $ python manage.py migrate
--- ShellでDjangoをいじる
+```
+
+ShellでDjangoをいじる
+```sh
 $ python manage.py shell
+```
+
 
 
 -- router
