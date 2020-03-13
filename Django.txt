@@ -56,4 +56,4 @@ http://localhost:8000/polls/
 
 
 --Integrating Django with a legacy database（既存DBからModelを作る）
-$ python manage.py inspectdb > models.py
+$ python manage.py inspectdb > models.py --include-views
