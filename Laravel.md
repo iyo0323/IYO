@@ -87,6 +87,12 @@ Rollback the last 5 migrations, and do migration again
 $ php artisan migrate:refresh --step=5
 ```
 
+Run Specific Seed
+```sh
+$ php artisan db:seed --class=Sample001DataSeeder
+$ php artisan db:seed --class=Sample180328DataSeeder
+```
+
 
 Reload
 =================================
@@ -246,8 +252,8 @@ Others
 
 [Htmlable](https://qiita.com/horikeso/items/f891ea52e2fcda89d170)
 
-C:\xampp\htdocs\nh_jizensodan\src\vendor\laravel\framework\src\Illuminate\Support\helpers.php
 ```php
+// C:\xampp\htdocs\nh_jizensodan\src\vendor\laravel\framework\src\Illuminate\Support\helpers.php
 AppServiceProvider　→　Blade::doubleEncode();
 ```
 
@@ -258,19 +264,13 @@ AppServiceProvider　→　Blade::doubleEncode();
 
 
 
-Run Specific Seed
-```sh
-$ php artisan db:seed --class=Sample001DataSeeder
-$ php artisan db:seed --class=Sample180328DataSeeder
-```
+
 
 
 Startup Laravel Server
 ```sh
 php artisan serve
 ```
-
-
 
 Update Vender?
 ```sh
