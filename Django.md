@@ -51,36 +51,51 @@ mysite.urls.py
 
 
 
-
+Create Superuser
+```sh
 $ python manage.py createsuperuser
 {username}
 {email}
 {password}
+```
 
 
 
--- Do Test
+
+Do Test
+```sh
 $ python manage.py test polls
+```
 
 
-
--- building package
+Building Package
+```sh
 $ python setup.py sdist (run from inside django-polls)
--- install package
+```
+
+Install Package
+```sh
 $ pip install --user django-polls/dist/django-polls-0.1.tar.gz
--- uninstall package
+```
+
+Uninstall Package
+```sh
 $ pip uninstall django-polls
+```
 
-
--- Server起動
+Server起動
+```sh
 $ python manage.py runserver
+```
 
 http://127.0.0.1:8000/admin/
 http://localhost:8000/polls/
 
 
---Integrating Django with a legacy database（既存DBからModelを作る）
+Integrating Django with a legacy database（既存DBからModelを作る）
+```sh
 $ python manage.py inspectdb > models.py --include-views
+```
 
-Django migrate コマンドで、SQLを直接実行する
-https://www.monotalk.xyz/blog/django-migrate-%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7insert-%E6%96%87%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B/
+[Django migrate コマンドで、SQLを直接実行する](https://www.monotalk.xyz/blog/django-migrate-%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7insert-%E6%96%87%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B/
+)
