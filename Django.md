@@ -2,41 +2,41 @@
 
 
 
-DjangoのRoot
+Django Root
 ```sh
 $ cd C:\Users\{username}\AppData\Local\Continuum\anaconda3\Scripts
 ```
 
 
-Project作成（ProjectName=mysite）
+Create Project（ProjectName=mysite）
 ```sh
 $ django-admin startproject mysite
 ```
 
 
-Module作成（ModuleName=polls）
+Create App（AppName=polls）
 ```sh
 $ python manage.py startapp polls
 ```
 
 
 
-Migrationファイル作成
+Create Migration File
 ```sh
 $ python manage.py makemigrations polls
 ```
 
-Migrationファイルの中身をSQLで表示（表示のみ）
+Show the detail of Migration File (SQL)
 ```sh
 $ python manage.py sqlmigrate polls 0001
 ```
 
-Table実作成
+Do Migrate (Create Table)
 ```sh
 $ python manage.py migrate
 ```
 
-ShellでDjangoをいじる
+Run Django by Shell Mode
 ```sh
 $ python manage.py shell
 ```
@@ -89,10 +89,11 @@ $ python manage.py runserver
 ```
 
 http://127.0.0.1:8000/admin/
+
 http://localhost:8000/polls/
 
 
-Integrating Django with a legacy database（既存DBからModelを作る）
+Integrating Django with a legacy database (Create Model from DB Table)
 ```sh
 $ python manage.py inspectdb > models.py --include-views
 ```
