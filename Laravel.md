@@ -269,8 +269,8 @@ public function validateKanji($attribute, $value)
 ```
 
 
-Laravel複数項目のValidation
-https://nextat.co.jp/staff/archives/126
+[Laravel複数項目のValidation](https://nextat.co.jp/staff/archives/126)
+```php
 // 電話番号の桁数チェック（True: 10桁以上, False: 9桁以下）
 public function validateTelLength10($attribute, $value, $params, $validator) {
 	$data = $validator->getData();
@@ -284,3 +284,4 @@ public function validateTelLength10($attribute, $value, $params, $validator) {
 'tel_3' => ['required', 'regex:/^[0-9]{1,4}$/', 'tellength10'],
 
 'tel_3.tellength10' => '電話番号を確認してください。',
+```
