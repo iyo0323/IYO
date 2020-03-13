@@ -1,9 +1,11 @@
-
+```css
 /* 蛍光ペンの太さのアンダーラインを引こう */
 .class {
 	background: linear-gradient(transparent 55%, yellow 55%, yellow 100%);
 }
+```
 
+```css
 /* 1文字目だけ大きくして、雑誌のようなタイポグラフィを実現 */
 .class::first-letter {
 	font-size: 4.1em;
@@ -13,12 +15,17 @@
 	line-height: 0.95em;
 	padding: 0.05em 0.05em 0 0;
 }
+```
 
+```css
 /* 1行で収まらないテキストの後ろを省略するには */
 .class {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
 }
+```
 
+```html
 <a href="tel:0123456789" >お電話
+```
