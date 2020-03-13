@@ -1,33 +1,52 @@
--- Laravel 新規Project作成（Version=5.5, ProjectName=hoge）
+Create New Project (Version=5.5, ProjectName=hoge)
+```sh
 $ composer create-project --prefer-dist laravel/laravel=5.5.* hoge
+```
 
--- Laravel Version確認
+Version Check
+```sh
 $ php artisan --version
+```
 
--- vendorのInstall
+vendorのInstall
+```sh
 $ composer install
+```
 
 
-
--- Migrationファイル作成
+Migrationファイル作成
+```sh
 $ php artisan make:migration create_tweets_table --create=tweets
+```
+
+```sh
 $ php artisan make:migration add_hash_tag_to_tweet_table --table=tweets
+```
 
---Specified key was too long error
+Specified key was too long error
+```sh
 https://laravel-news.com/laravel-5-4-key-too-long-error
+```
 
--- マイグレーションの実行
+Do Migration
+```sh
 $ php artisan migrate
+```
 
--- 最後の5マイグレーション操作をロールバックする
+Rollback the last 5 migrations
+```sh
 $ php artisan migrate:rollback --step=5
+```
 
--- 全マイグレーションをロールバックする
+Rollback all migrations
+```sh
 $ php artisan migrate:reset
+```
 
--- 全マイグレーションをロールバックし、全部実行し直す
+Rollback the last 5 migrations, and do migration again
+```sh
 $ php artisan migrate:refresh --step=5
-
+```
 
 
 -- Controllerファイル作成
