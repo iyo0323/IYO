@@ -57,3 +57,6 @@ http://localhost:8000/polls/
 
 --Integrating Django with a legacy database（既存DBからModelを作る）
 $ python manage.py inspectdb > models.py --include-views
+
+Django migrate コマンドで、SQLを直接実行する
+https://www.monotalk.xyz/blog/django-migrate-%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7insert-%E6%96%87%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B/
