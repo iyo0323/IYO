@@ -1,7 +1,7 @@
 
-
-def square_root(x):
-    '引数 x の平方根を求める'
+# Sample of Function Document
+def function_name(x):
+    '関数の註解はここに書く'
     #...
     return
-help(square_root)
+help(function_name)
