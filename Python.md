@@ -8,6 +8,7 @@ def function_name(x):
 help(function_name)
 
 #Result
+#########################################################
 #Help on function function_name in module __main__:
 #function_name(x)
 #   関数の註解はここに書く
@@ -28,6 +29,7 @@ f()
 print(b, a)
 
 #Result
+#########################################################
 #100 10
 ```
 
@@ -47,6 +49,7 @@ func_sub()
 func_main(func_sub)
 
 #Result
+#########################################################
 #sub says Hello
 #In main, sub says Hello
 ```
