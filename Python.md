@@ -7,3 +7,20 @@ def function_name(x):
     return
 help(function_name)
 ```
+
+
+
+```py
+#Use Global varable in function
+a = 10
+b = 0
+
+def f():
+    global b
+    c = a*a
+    b = c
+f()
+print(b, a)
+```
+
+
