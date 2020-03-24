@@ -30,21 +30,19 @@ print(b, a)
 
 ```py
 # Pass a function as the parameter to another function
-def f():
-    print("f says Hello")
+def func_sub():
+    print("sub says Hello")
 
 # 関数を引数でもらって実行する関数
-def F(y):
-    print("In F, ", end="")
-    y()
+def func_main(para):
+    print("In main, ", end="")
+    para()
 
-# f を実行
-f()
-# f を F に渡して F を実行
-F(f)
+func_sub()
+func_main(func_sub)
 
 #Result
-#f says Hello
-#In F, f says Hello
+#sub says Hello
+#In main, sub says Hello
 ```
 
