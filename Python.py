@@ -1,5 +1,5 @@
 
-# Sample of Function Document
+# Sample of Function docstring
 def function_name(x):
     '関数の註解はここに書く'
     #...
