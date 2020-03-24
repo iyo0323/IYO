@@ -57,3 +57,15 @@ func_main(func_sub)
 #In main, sub says Hello
 ```
 
+
+
+```py
+# Draw a Pentagon in turtle
+#########################################################
+from turtle import *
+n = 5
+for i in range(n):
+    forward(100)
+    left(72)
+done()
+```
