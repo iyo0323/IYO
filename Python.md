@@ -11,7 +11,7 @@ help(function_name)
 
 
 ```py
-#Use Global varable in function
+# Use Global variable in function
 a = 10
 b = 0
 
