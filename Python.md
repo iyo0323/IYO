@@ -73,28 +73,25 @@ func_main(func_sub)
 Class
 =========================================================
 
-
 ```py
 # Sample of a Class
 #########################################################
-# クラスの練習
 class MyClass():
-    # クラス変数(static)
+    # class variable(static)
     a = "マイクラス" # public variable
     __b = 0         # private variable
     
     # Constructor
     def __init__(self, data):
-        # インスタンス変数
+        # instance variable
         self.__number = MyClass.__b
         self.mydata = data
     
-    # 通し番号を表示するメソッド
     def show_number(self):
         print(self.__number)
 
 if __name__ == "__main__":
-    print("MyClass のクラス変数 a: ",MyClass.a)
+    # Do something
 ```
 
 
