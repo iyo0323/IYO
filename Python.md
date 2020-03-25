@@ -78,7 +78,7 @@ Class
 #########################################################
 class MyClass():
     # class variable(static)
-    a = "マイクラス" # public variable
+    a = "my class" # public variable
     __b = 0         # private variable
     
     # Constructor
