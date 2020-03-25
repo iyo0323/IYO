@@ -1,4 +1,12 @@
 
+
+```py
+# Get a input fron CUI
+#########################################################
+num = int(input("Give me an integer "))
+```
+
+
 ```py
 # Sample of Function docstring
 #########################################################
