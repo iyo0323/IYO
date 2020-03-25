@@ -1,7 +1,7 @@
 
 
 ```py
-# Get a input fron CUI
+# Get an input fron CUI
 #########################################################
 num = int(input("Give me an integer "))
 ```
