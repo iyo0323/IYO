@@ -16,9 +16,16 @@ x = fractions.Fraction(1, 3)
 ```
 
 
+```py
+# Get an input fron CUI
+#########################################################
+num = int(input("Give me an integer "))
+```
+
+
+
 List
 =========================================================
-
 
 ```py
 # Add
@@ -38,7 +45,6 @@ a_list.insert(0, 'Ω')
 # ['Ω', 'a', 2.0, 3, True, 'four', 'Ω']
 ```
 
-
 ```py
 # 
 #########################################################
@@ -52,9 +58,8 @@ a_list.count('new')
 a_list.index('mpilgrim')
 ```
 
-
 ```py
-# Delete
+# Remove
 #########################################################
 # ['a', 'b', 'new', 'mpilgrim', 'new']
 
@@ -64,7 +69,6 @@ del a_list[1]
 a_list.remove('new')
 # ['a', 'mpilgrim', 'new']
 ```
-
 
 ```py
 # Pop
@@ -79,12 +83,41 @@ a_list.pop(1)
 ```
 
 
+Tuple
+=========================================================
 
 ```py
-# Get an input fron CUI
+# 
 #########################################################
-num = int(input("Give me an integer "))
+v = ('a', 2, True)
+(x, y, z) = v
+
+(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY) = range(7)
 ```
+
+
+Sets
+=========================================================
+
+```py
+# 
+#########################################################
+a_list = ['a', 'b', 'mpilgrim', True, False, 42]
+a_set = set(a_list)
+# {'a', False, 'b', True, 'mpilgrim', 42}
+
+a_set = set()
+type(a_set)
+# <class 'set'>
+len(a_set)
+# 0
+
+not_sure = {}
+type(not_sure)
+# <class 'dict'>
+
+```
+
 
 
 
