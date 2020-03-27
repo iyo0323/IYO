@@ -129,28 +129,6 @@ a_list.pop(1)
 ```
 
 
-```py
-# List Comprehension
-#########################################################
-import os, glob
-import humansize
-
-[elem * 2 for elem in a_list]
-
-# Get all fullpath of .XML in glob.glob()
-[os.path.realpath(f) for f in glob.glob('*.xml')]
-
-# Get all files of .PY in glob.glob() which size larger than 6000
-[f for f in glob.glob('*.py') if os.stat(f).st_size > 6000]
-
-# Get all size & fullpath of .XML in glob.glob()
-[(os.stat(f).st_size, os.path.realpath(f)) for f in glob.glob('*.xml')]
-
-# Get all size & files of .XML in glob.glob()
-[(humansize.approximate_size(os.stat(f).st_size), f) for f in glob.glob('*.xml')]
-```
-
-
 Tuple
 =========================================================
 
@@ -205,6 +183,106 @@ a_set.issubset(b_set)
 b_set.issuperset(a_set)
 ```
 
+
+Comprehension
+=========================================================
+
+```py
+# List Comprehension
+#########################################################
+import os, glob
+import humansize
+
+[elem * 2 for elem in a_list]
+
+# Get all fullpath of .XML in glob.glob()
+[os.path.realpath(f) for f in glob.glob('*.xml')]
+
+# Get all files of .PY in glob.glob() which size larger than 6000
+[f for f in glob.glob('*.py') if os.stat(f).st_size > 6000]
+
+# Get all size & fullpath of .XML in glob.glob()
+[(os.stat(f).st_size, os.path.realpath(f)) for f in glob.glob('*.xml')]
+
+# Get all size & files of .XML in glob.glob()
+[(humansize.approximate_size(os.stat(f).st_size), f) for f in glob.glob('*.xml')]
+```
+
+```py
+# Dictionary Comprehension
+#########################################################
+import os, glob, humansize
+
+metadata_dict = {f:os.stat(f) for f in glob.glob('*test*.py')}
+list(metadata_dict.keys())
+
+humansize_dict = {
+    os.path.splitext(f)[0]:humansize.approximate_size(meta.st_size) 
+        for f, meta in metadata_dict.items() if meta.st_size > 6000
+}
+
+{value:key for key, value in a_dict.items()}
+```
+
+```py
+# Set Comprehension
+#########################################################
+{x ** 2 for x in a_set}
+{x for x in a_set if x % 2 == 0}
+{2**x for x in range(10)}
+```
+
+
+String
+=========================================================
+
+```py
+# Format Specifiers
+#########################################################
+"{0}'s password is {1}".format(username, password)
+
+si_suffixes
+# ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+'1000{0[0]} = 1{0[1]}'.format(si_suffixes)
+# '1000KB = 1MB'
+
+# From modules 'humansize'
+import sys
+'1MB = 1000{0.modules[humansize].SUFFIXES[1000][0]}'.format(sys)
+# '1MB = 1000KB'
+
+'{0:.1f} {1}'.format(698.24, 'GB')
+# '698.2 GB'
+
+s.splitlines()
+s.lower().count('f')
+
+# ['user=pilgrim', 'database=master', 'password=PapayaWhip']
+a_list = query.split('&')
+# ['user=pilgrim', 'database=master', 'password=PapayaWhip']
+a_list_of_lists = [v.split('=', 1) for v in a_list]
+# [['user', 'pilgrim'], ['database', 'master'], ['password', 'PapayaWhip']]
+a_dict = dict(a_list_of_lists)
+# {'password': 'PapayaWhip', 'user': 'pilgrim', 'database': 'master'}
+```
+
+```py
+# String vs Bytes
+#########################################################
+by = b'abcd\x65'
+# b'abcde' # len = 5
+type(by)
+# <class 'bytes'>
+by += b'\xff'
+# b'abcde\xff' # len = 6
+```
+
+```py
+# Encode
+#########################################################
+by = a_string.encode('utf-8')
+roundtrip = by.decode('big5')
+```
 
 
 
