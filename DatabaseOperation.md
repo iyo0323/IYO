@@ -102,3 +102,10 @@ FROM pg_index AS idx
   JOIN pg_user AS U ON i.relowner = U.usesysid
 WHERE NOT nspname LIKE 'pg%'; -- Excluding system tables
 ```
+
+```sql
+-- Grant Privileges(Table & View)
+GRANT ALL                            ON TABLE master_operator TO postgres;
+GRANT SELECT                         ON TABLE master_operator TO dbsel;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE master_operator TO dbadmin;
+```
