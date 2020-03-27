@@ -1,4 +1,84 @@
 
+Basics
+=========================================================
+
+```py
+# 
+#########################################################
+
+# Get Type
+type(2.0)
+# <class 'float'>
+
+# 分数
+import fractions
+x = fractions.Fraction(1, 3)
+```
+
+
+List
+=========================================================
+
+
+```py
+# Add
+#########################################################
+# << ['a']
+
+a_list = a_list + [2.0, 3]
+# ['a', 2.0, 3]
+
+a_list.append(True)
+# ['a', 2.0, 3, True]
+
+a_list.extend(['four', 'Ω'])
+# ['a', 2.0, 3, True, 'four', 'Ω']
+
+a_list.insert(0, 'Ω')
+# ['Ω', 'a', 2.0, 3, True, 'four', 'Ω']
+```
+
+
+```py
+# 
+#########################################################
+# Get count of element
+a_list.count('new')
+
+# Check if element in list
+'new' in a_list
+
+# Get the index number of element in list
+a_list.index('mpilgrim')
+```
+
+
+```py
+# Delete
+#########################################################
+# ['a', 'b', 'new', 'mpilgrim', 'new']
+
+del a_list[1]
+# ['a', 'new', 'mpilgrim', 'new']
+
+a_list.remove('new')
+# ['a', 'mpilgrim', 'new']
+```
+
+
+```py
+# Pop
+#########################################################
+# ['a', 'b', 'new', 'mpilgrim']
+
+a_list.pop()
+# ['a', 'b', 'new']
+
+a_list.pop(1)
+# ['a', 'new']
+```
+
+
 
 ```py
 # Get an input fron CUI
