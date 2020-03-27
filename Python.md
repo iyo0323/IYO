@@ -20,11 +20,13 @@ def function_name(x):
     #...
     return
 help(function_name)
+function_name.__doc__
 
 #Result
 #########################################################
 #Help on function function_name in module __main__:
 #function_name(x)
+#   関数の註解はここに書く
 #   関数の註解はここに書く
 ```
 
