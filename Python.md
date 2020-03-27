@@ -100,12 +100,15 @@ Sets
 =========================================================
 
 ```py
-# 
+# From list to set
 #########################################################
 a_list = ['a', 'b', 'mpilgrim', True, False, 42]
 a_set = set(a_list)
 # {'a', False, 'b', True, 'mpilgrim', 42}
 
+
+# Set vs Dictionary
+#########################################################
 a_set = set()
 type(a_set)
 # <class 'set'>
@@ -116,6 +119,22 @@ not_sure = {}
 type(not_sure)
 # <class 'dict'>
 
+
+# Set Operations
+#########################################################
+a_set.update({2, 4, 6})
+a_set.discard(10)
+a_set.remove(21)
+a_set.pop()
+a_set.clear()
+
+a_set.union(b_set)
+a_set.intersection(b_set)
+a_set.difference(b_set)
+a_set.symmetric_difference(b_set)
+
+a_set.issubset(b_set)
+b_set.issuperset(a_set)
 ```
 
 
