@@ -13,14 +13,26 @@ type(2.0)
 # 分数
 import fractions
 x = fractions.Fraction(1, 3)
+```
 
-
+```py
+# OS
+#########################################################
 import os
 print(os.path.join(os.path.expanduser('~'), 'diveintopython3', 'examples', 'humansize.py'))
 # C:\Users\iyo\diveintopython3\examples\humansize.py
 
 (dirname, filename) = os.path.split(pathname)
 (shortname, extension) = os.path.splitext(filename)
+
+print(os.getcwd())
+# C:\Users\iyo\AppData\Local\Continuum\anaconda3\Scripts
+print(os.path.realpath('feed.xml'))
+# C:\Users\iyo\AppData\Local\Continuum\anaconda3\Scripts\feed.xml
+
+metadata = os.stat('feed.xml')
+import time
+time.localtime(metadata.st_mtime)
 ```
 
 
@@ -114,6 +126,28 @@ a_list.pop()
 
 a_list.pop(1)
 # ['a', 'new']
+```
+
+
+```py
+# List Comprehension
+#########################################################
+import os, glob
+import humansize
+
+[elem * 2 for elem in a_list]
+
+# Get all fullpath of .XML in glob.glob()
+[os.path.realpath(f) for f in glob.glob('*.xml')]
+
+# Get all files of .PY in glob.glob() which size larger than 6000
+[f for f in glob.glob('*.py') if os.stat(f).st_size > 6000]
+
+# Get all size & fullpath of .XML in glob.glob()
+[(os.stat(f).st_size, os.path.realpath(f)) for f in glob.glob('*.xml')]
+
+# Get all size & files of .XML in glob.glob()
+[(humansize.approximate_size(os.stat(f).st_size), f) for f in glob.glob('*.xml')]
 ```
 
 
