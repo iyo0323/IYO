@@ -13,12 +13,14 @@ Function
 =========================================================
 
 ```py
-# Sample of Function docstring
+# Write docstring
 #########################################################
 def function_name(x):
     '関数の註解はここに書く'
     #...
     return
+    
+# Show docstring
 help(function_name)
 function_name.__doc__
 
@@ -27,7 +29,7 @@ function_name.__doc__
 #Help on function function_name in module __main__:
 #function_name(x)
 #   関数の註解はここに書く
-#   関数の註解はここに書く
+#関数の註解はここに書く
 ```
 
 
