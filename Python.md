@@ -97,6 +97,7 @@ class MyClass():
     def show_number(self):
         print(self.__number)
 
+# If you import the module, then __name__ is the module’s filename
 if __name__ == "__main__":
     # Do something
 ```
