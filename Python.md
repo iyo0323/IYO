@@ -13,6 +13,14 @@ type(2.0)
 # 分数
 import fractions
 x = fractions.Fraction(1, 3)
+
+
+import os
+print(os.path.join(os.path.expanduser('~'), 'diveintopython3', 'examples', 'humansize.py'))
+# C:\Users\iyo\diveintopython3\examples\humansize.py
+
+(dirname, filename) = os.path.split(pathname)
+(shortname, extension) = os.path.splitext(filename)
 ```
 
 
@@ -20,6 +28,32 @@ x = fractions.Fraction(1, 3)
 # Get an input fron CUI
 #########################################################
 num = int(input("Give me an integer "))
+```
+
+
+```py
+# Decorator
+#########################################################
+def deco_tag(tag):
+    def _deco_tag(func):
+        def wrapper(*args, **kwargs):
+            res = '<'+tag+'>'
+            res = res + func(*args, **kwargs)
+            res = res + '</'+tag+'>'
+            return res
+        return wrapper
+    return _deco_tag
+
+@deco_tag('html')
+@deco_tag('body')
+def test():
+    return 'Hello Decorator!'
+
+print(test())
+
+#Result
+#########################################################
+<html><body>Hello Decorator!</body></html>
 ```
 
 
