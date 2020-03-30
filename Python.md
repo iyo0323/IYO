@@ -361,7 +361,8 @@ phonePattern.search('800-555-1212')
 [To Top](#Top)
 
 
-# Closures (using the values of outside parameters within a dynamic function is called closures.)
+# Closures
+(using the values of outside parameters within a dynamic function is called closures.)
 
 ```py
 # Closures - Singular to Plural (by List)
