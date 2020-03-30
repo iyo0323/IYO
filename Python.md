@@ -32,6 +32,25 @@ x = fractions.Fraction(1, 3)
 ```
 
 ```py
+# Eval
+#########################################################
+eval('9567 + 1085 == 10652')
+# True
+eval('"AAAAA".count("A")')
+# 5
+import math
+x = 5
+eval("math.sqrt(x)")
+# 2.2360679774997898
+
+eval("__import__('subprocess').getoutput('rm /some/random/file')", {}, {})
+
+eval("2 ** 2147483647", {"__builtins__":None}, {})
+```
+
+
+
+```py
 # OS
 #########################################################
 import os
@@ -302,6 +321,19 @@ by += b'\xff'
 #########################################################
 by = a_string.encode('utf-8')
 roundtrip = by.decode('big5')
+```
+
+```py
+# 
+#########################################################
+names
+# ['Dora\n', 'Ethan\n', 'Wesley\n', 'John\n', 'Anne\n', 'Mike\n', 'Chris\n', 'Sarah\n', 'Alex\n', 'Lizzie\n']
+names = [name.rstrip() for name in names]
+# ['Dora', 'Ethan', 'Wesley', 'John', 'Anne', 'Mike', 'Chris', 'Sarah', 'Alex', 'Lizzie']
+names = sorted(names)
+# ['Alex', 'Anne', 'Chris', 'Dora', 'Ethan', 'John', 'Lizzie', 'Mike', 'Sarah', 'Wesley']
+names = sorted(names, key=len)
+# ['Alex', 'Anne', 'Dora', 'John', 'Mike', 'Chris', 'Ethan', 'Sarah', 'Lizzie', 'Wesley']
 ```
 
 [To Top](#Top)
@@ -604,6 +636,30 @@ list(itertools.product('ABC', '123'))
 
 list(itertools.combinations('ABC', 2))
 # [('A', 'B'), ('A', 'C'), ('B', 'C')]
+
+list(itertools.chain(range(0, 3), range(10, 13)))
+# [0, 1, 2, 10, 11, 12]
+
+list(zip(range(0, 3), range(10, 13)))
+# [(0, 10), (1, 11), (2, 12)]
+list(zip(range(0, 3), range(10, 14)))
+# [(0, 10), (1, 11), (2, 12)]
+
+list(itertools.zip_longest(range(0, 3), range(10, 14)))
+# [(0, 10), (1, 11), (2, 12), (None, 13)]
+
+characters = ('S', 'M', 'E', 'D', 'O', 'N', 'R', 'Y')
+guess = ('1', '2', '0', '3', '4', '5', '6', '7')
+tuple(zip(characters, guess))
+# (('S', '1'), ('M', '2'), ('E', '0'), ('D', '3'), ('O', '4'), ('N', '5'), ('R', '6'), ('Y', '7'))
+dict(zip(characters, guess))
+# {'E': '0', 'D': '3', 'M': '2', 'O': '4', 'N': '5', 'S': '1', 'R': '6', 'Y': '7'}
+
+translation_table = {ord('A'): ord('O')}
+translation_table
+# {65: 79}
+'MARK'.translate(translation_table)
+# 'MORK'
 ```
 
 
