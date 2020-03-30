@@ -284,8 +284,12 @@ by = a_string.encode('utf-8')
 roundtrip = by.decode('big5')
 ```
 
+
+Regular Expressions
+=========================================================
+
 ```py
-# Regular Expressions
+# Regular Expressions (Roman Numerals)
 #########################################################
 import re
 pattern = '^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$'
@@ -293,7 +297,7 @@ re.search(pattern, 'MMDCLXVI')
 ```
 
 ```py
-# Verbose Regular Expressions
+# Verbose Regular Expressions (Roman Numerals)
 #########################################################
 pattern = '''
 ^                   # beginning of string
@@ -309,6 +313,30 @@ $                   # end of string
 
 import re
 re.search(pattern, 'MCMLXXXIX', re.VERBOSE)
+```
+
+```py
+# Regular Expressions (Phone Pattern)
+#########################################################
+import re
+phonePattern = re.compile(r'(\d{3})\D*(\d{3})\D*(\d{4})\D*(\d*)$')
+phonePattern.search('work 1-(800) 555.1212 #1234').groups()
+# ('800', '555', '1212', '1234')
+
+phonePattern = re.compile(r'''
+            # don't match beginning of string, number can start anywhere
+(\d{3})     # area code is 3 digits (e.g. '800')
+\D*         # optional separator is any number of non-digits
+(\d{3})     # trunk is 3 digits (e.g. '555')
+\D*         # optional separator
+(\d{4})     # rest of number is 4 digits (e.g. '1212')
+\D*         # optional separator
+(\d*)       # extension is optional and can be any number of digits
+$           # end of string
+''', re.VERBOSE)
+
+phonePattern.search('800-555-1212')
+# ('800', '555', '1212', '')
 ```
 
 
