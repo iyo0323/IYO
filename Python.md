@@ -13,6 +13,7 @@
 * [Class](#Class)
 * [Turtle](#Turtle)
 
+
 # Basics
 =========================================================
 
@@ -82,7 +83,7 @@ print(test())
 <html><body>Hello Decorator!</body></html>
 ```
 
-* [To Top](#Top)
+[To Top](#Top)
 
 
 # List
@@ -143,6 +144,8 @@ a_list.pop(1)
 # ['a', 'new']
 ```
 
+[To Top](#Top)
+
 
 # Tuple
 =========================================================
@@ -155,6 +158,8 @@ v = ('a', 2, True)
 
 (MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY) = range(7)
 ```
+
+[To Top](#Top)
 
 
 # Sets
@@ -197,6 +202,8 @@ a_set.symmetric_difference(b_set)
 a_set.issubset(b_set)
 b_set.issuperset(a_set)
 ```
+
+[To Top](#Top)
 
 
 # Comprehension
@@ -246,6 +253,8 @@ humansize_dict = {
 {x for x in a_set if x % 2 == 0}
 {2**x for x in range(10)}
 ```
+
+[To Top](#Top)
 
 
 # String
@@ -298,6 +307,8 @@ by += b'\xff'
 by = a_string.encode('utf-8')
 roundtrip = by.decode('big5')
 ```
+
+[To Top](#Top)
 
 
 # RegularExpressions
@@ -354,7 +365,7 @@ phonePattern.search('800-555-1212')
 # ('800', '555', '1212', '')
 ```
 
-
+[To Top](#Top)
 
 
 # Function
@@ -380,8 +391,6 @@ function_name.__doc__
 #関数の註解はここに書く
 ```
 
-
-
 ```py
 # Use Global variable in function
 #########################################################
@@ -399,8 +408,6 @@ print(b, a)
 #########################################################
 #100 10
 ```
-
-
 
 ```py
 # Pass a function as the parameter to another function
@@ -421,6 +428,8 @@ func_main(func_sub)
 #sub says Hello
 #In main, sub says Hello
 ```
+
+[To Top](#Top)
 
 
 # Class
@@ -448,6 +457,8 @@ if __name__ == "__main__":
     # Do something
 ```
 
+[To Top](#Top)
+
 
 # Turtle
 =========================================================
@@ -462,7 +473,6 @@ for i in range(n):
     left(72)
 done()
 ```
-
 
 ```py
 # Draw two cycles in turtle
@@ -480,7 +490,6 @@ for i in range(180):
 done()
 ```
 
-
 ```py
 # Click event in turtle
 #########################################################
@@ -493,4 +502,6 @@ def come(x,y):
 onscreenclick(come)
 done()
 ```
+
+[To Top](#Top)
 
