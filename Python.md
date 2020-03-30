@@ -8,6 +8,7 @@
 * [Comprehension](#Comprehension)
 * [String](#String)
 * [Regular Expressions](#RegularExpressions)
+* [Closures](#Closures)
 * [Function](#Function)
 * [Class](#Class)
 * [Turtle](#Turtle)
@@ -359,6 +360,9 @@ phonePattern.search('800-555-1212')
 
 [To Top](#Top)
 
+
+# Closures (using the values of outside parameters within a dynamic function is called closures.)
+
 ```py
 # Closures - Singular to Plural (by List)
 #########################################################
@@ -409,6 +413,8 @@ with open('plural4-rules.txt', encoding='utf-8') as pattern_file:
         pattern, search, replace = line.split(None, 3)
         rules.append(build_match_and_apply_functions(pattern, search, replace))
 ```
+
+[To Top](#Top)
 
 
 # Function
