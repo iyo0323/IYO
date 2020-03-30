@@ -1,5 +1,5 @@
 
-[hoge](#List)
+* [List](#List)
 
 
 Basics
