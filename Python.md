@@ -9,6 +9,7 @@
 * [String](#String)
 * [Regular Expressions](#RegularExpressions)
 * [Closures](#Closures)
+* [Generator](#Generator)
 * [Function](#Function)
 * [Class](#Class)
 * [Turtle](#Turtle)
@@ -365,7 +366,7 @@ phonePattern.search('800-555-1212')
 (using the values of outside parameters within a dynamic function is called closures.)
 
 ```py
-# Closures - Singular to Plural (by List)
+# Plural Rule (by List)
 #########################################################
 import re
 def build_match_and_apply_functions(pattern, search, replace):
@@ -392,7 +393,7 @@ def plural(noun):
 ```
 
 ```py
-# Closures - Singular to Plural (by File)
+# Plural Rule (by File)
 #########################################################
 # plural4-rules.txt
 # [sxz]$              $ es
@@ -408,6 +409,42 @@ with open('plural4-rules.txt', encoding='utf-8') as pattern_file:
 ```
 
 [To Top](#Top)
+
+
+# Generator
+
+```py
+# Fibonacci
+#########################################################
+def fib(max):
+    a, b = 0, 1
+    while a < max:
+        yield a
+        a, b = b, a + b
+
+for n in fib(1000):
+    print(n, end=' ')
+# 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
+
+list(fib(1000))
+# [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987]
+```
+
+```py
+# Plural Rule
+#########################################################
+def rules(rules_filename):
+    with open(rules_filename, encoding='utf-8') as pattern_file:
+        for line in pattern_file:
+            pattern, search, replace = line.split(None, 3)
+            yield build_match_and_apply_functions(pattern, search, replace)
+
+def plural(noun, rules_filename='plural5-rules.txt'):
+    for matches_rule, apply_rule in rules(rules_filename):
+        if matches_rule(noun):
+            return apply_rule(noun)
+    raise ValueError('no matching rule for {0}'.format(noun))
+```
 
 
 # Function
