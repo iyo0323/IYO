@@ -10,6 +10,7 @@
 * [Regular Expressions](#RegularExpressions)
 * [Closures](#Closures)
 * [Generator](#Generator)
+* [Iterator](#Iterator)
 * [Function](#Function)
 * [Class](#Class)
 * [Turtle](#Turtle)
@@ -446,6 +447,44 @@ def plural(noun, rules_filename='plural5-rules.txt'):
     raise ValueError('no matching rule for {0}'.format(noun))
 ```
 
+[To Top](#Top)
+
+
+# Iterator
+
+```py
+# Fibonacci
+#########################################################
+class Fib:
+    '''iterator that yields numbers in the Fibonacci sequence'''
+    
+    def __init__(self, max):
+        self.max = max
+    
+    def __iter__(self):
+        '''
+        The __iter__() method is called whenever someone calls iter(fib). 
+        (A for loop will call this automatically, but you can also call it yourself manually.)
+        '''
+        self.a = 0
+        self.b = 1
+        return self
+    
+    def __next__(self):
+        '''The __next__() method is called whenever someone calls next() on an iterator of an instance of a class.'''
+        fib = self.a
+        if fib > self.max:
+            raise StopIteration
+        self.a, self.b = self.b, self.a + self.b
+        return fib
+
+for n in Fib(1000):
+    print(n, end=' ')
+# 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
+```
+
+
+[To Top](#Top)
 
 # Function
 
