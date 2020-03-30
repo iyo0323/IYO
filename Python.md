@@ -1,8 +1,16 @@
 
+* [Basics](#Basics)
 * [List](#List)
+* [Tuple](#Tuple)
+* [Sets](#Sets)
+* [Comprehension](#Comprehension)
+* [String](#String)
+* [Regular Expressions](#Regular Expressions)
+* [Function](#Function)
+* [Class](#Class)
+* [Turtle](#Turtle)
 
-
-Basics
+# Basics
 =========================================================
 
 ```py
@@ -132,7 +140,7 @@ a_list.pop(1)
 ```
 
 
-Tuple
+# Tuple
 =========================================================
 
 ```py
@@ -145,7 +153,7 @@ v = ('a', 2, True)
 ```
 
 
-Sets
+# Sets
 =========================================================
 
 ```py
@@ -187,7 +195,7 @@ b_set.issuperset(a_set)
 ```
 
 
-Comprehension
+# Comprehension
 =========================================================
 
 ```py
@@ -236,7 +244,7 @@ humansize_dict = {
 ```
 
 
-String
+# String
 =========================================================
 
 ```py
@@ -288,7 +296,7 @@ roundtrip = by.decode('big5')
 ```
 
 
-Regular Expressions
+# Regular Expressions
 =========================================================
 
 ```py
@@ -345,7 +353,7 @@ phonePattern.search('800-555-1212')
 
 
 
-Function
+# Function
 =========================================================
 
 ```py
@@ -411,11 +419,7 @@ func_main(func_sub)
 ```
 
 
-
-
-
-
-Class
+# Class
 =========================================================
 
 ```py
@@ -441,11 +445,7 @@ if __name__ == "__main__":
 ```
 
 
-
-
-
-
-Turtle
+# Turtle
 =========================================================
 
 ```py
