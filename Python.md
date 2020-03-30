@@ -360,6 +360,29 @@ phonePattern.search('800-555-1212')
 # ('800', '555', '1212', '')
 ```
 
+```py
+# Findall
+#########################################################
+import re
+re.findall('[0-9]+', '16 2-by-4s in rows of 8')
+# ['16', '2', '4', '8']
+
+re.findall('[A-Z]+', 'SEND + MORE == MONEY')
+# ['SEND', 'MORE', 'MONEY']
+
+re.findall(' s.*? s', "The sixth sick sheikh's sixth sheep's sick.")
+# [' sixth s', " sheikh's s", " sheep's s"]
+
+words = ['SEND', 'MORE', 'MONEY']
+set(''.join(words))
+# {'E', 'D', 'M', 'O', 'N', 'S', 'R', 'Y'}
+
+unique_characters = {'E', 'D', 'M', 'O', 'N', 'S', 'R', 'Y'}
+tuple(ord(c) for c in unique_characters)
+# (69, 68, 77, 79, 78, 83, 82, 89)
+
+```
+
 [To Top](#Top)
 
 
@@ -500,6 +523,7 @@ class LazyRules:
     def __next__(self):
         self.cache_index += 1
         if len(self.cache) >= self.cache_index:
+            # Just use the cache, because the file was loaded at first time.
             return self.cache[self.cache_index - 1]
             
         if self.pattern_file.closed:
@@ -516,6 +540,70 @@ class LazyRules:
         return funcs
 
 rules = LazyRules()
+```
+
+```py
+# Puzzle
+#########################################################
+import re
+import itertools
+
+def solve(puzzle):
+    words = re.findall('[A-Z]+', puzzle.upper())
+    unique_characters = set(''.join(words))
+    assert len(unique_characters) <= 10, 'Too many letters'
+    
+    first_letters = {word[0] for word in words}
+    n = len(first_letters)
+    sorted_characters = ''.join(first_letters) + ''.join(unique_characters - first_letters)
+    
+    characters = tuple(ord(c) for c in sorted_characters)
+    digits = tuple(ord(c) for c in '0123456789')
+    
+    zero = digits[0]
+    for guess in itertools.permutations(digits, len(characters)):
+        if zero not in guess[:n]:
+            equation = puzzle.translate(dict(zip(characters, guess)))
+            if eval(equation):
+                return equation
+
+if __name__ == '__main__':
+    import sys
+    for puzzle in sys.argv[1:]:
+        print(puzzle)
+        solution = solve(puzzle)
+        if solution:
+            print(solution)
+
+# $ python3 alphametics.py "SEND + MORE == MONEY"
+# SEND + MORE == MONEY
+# 9567 + 1085 == 10652
+```
+
+```py
+# Iteretor tools
+#########################################################
+import itertools
+
+perms = itertools.permutations([1, 2, 3], 2)
+next(perms)
+#(1, 2)
+next(perms)
+#(1, 3)
+
+perms = itertools.permutations('ABC', 3)
+next(perms)
+# ('A', 'B', 'C')
+next(perms)
+# ('A', 'C', 'B')
+list(itertools.permutations('ABC', 3))
+# [('A', 'B', 'C'), ('A', 'C', 'B'), ('B', 'A', 'C'), ('B', 'C', 'A'), ('C', 'A', 'B'), ('C', 'B', 'A')]
+
+list(itertools.product('ABC', '123'))
+# [('A', '1'), ('A', '2'), ('A', '3'), ('B', '1'), ('B', '2'), ('B', '3'), ('C', '1'), ('C', '2'), ('C', '3')]
+
+list(itertools.combinations('ABC', 2))
+# [('A', 'B'), ('A', 'C'), ('B', 'C')]
 ```
 
 
