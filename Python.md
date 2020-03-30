@@ -5,7 +5,7 @@
 * [Sets](#Sets)
 * [Comprehension](#Comprehension)
 * [String](#String)
-* [Regular Expressions](#Regular Expressions)
+* [Regular Expressions](#RegularExpressions)
 * [Function](#Function)
 * [Class](#Class)
 * [Turtle](#Turtle)
@@ -296,7 +296,7 @@ roundtrip = by.decode('big5')
 ```
 
 
-# Regular Expressions
+# RegularExpressions
 =========================================================
 
 ```py
