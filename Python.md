@@ -1,5 +1,5 @@
 
-aaa[^1]
+[hoge](#List)
 
 
 Basics
@@ -73,7 +73,7 @@ print(test())
 
 
 
-List
+# List
 =========================================================
 
 ```py
@@ -144,7 +144,7 @@ v = ('a', 2, True)
 (MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY) = range(7)
 ```
 
-[^1]: aaa
+
 Sets
 =========================================================
 
