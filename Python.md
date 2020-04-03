@@ -11,6 +11,7 @@
 * [Closures](#Closures)
 * [Generator](#Generator)
 * [Iterator](#Iterator)
+* [File](#File)
 * [Function](#Function)
 * [Class](#Class)
 * [Turtle](#Turtle)
@@ -663,8 +664,121 @@ translation_table
 # 'MORK'
 ```
 
+[To Top](#Top)
+
+
+# File
+
+```py
+# Standard Sample
+#########################################################
+a_file = open('examples/chinese.txt', encoding='utf-8')
+a_file.read()
+# 'Dive Into Python 是为有经验的程序员编写的一本 Python 书。\n'
+
+a_file.seek(0)
+a_file.read(16)
+# 'Dive Into Python'
+a_file.read(1)
+# ' '
+a_file.read(1)
+# '是'
+a_file.tell()
+# 20
+
+a_file.close()
+a_file.closed
+# True
+```
+
+```py
+# Closing files Automatically
+#########################################################
+with open('examples/chinese.txt', encoding='utf-8') as a_file:
+    a_file.seek(17)
+    a_character = a_file.read(1)
+    print(a_character)
+```
+
+```py
+# Reading data one line at a time
+#########################################################
+line_number = 0
+with open('examples/favorite-people.txt', encoding='utf-8') as a_file:
+    for a_line in a_file:
+        line_number += 1
+        print('{:>4} {}'.format(line_number, a_line.rstrip()))
+        # {:>4} means “print this argument right-justified within 4 spaces.”
+```
+
+```py
+# Writing to text file
+#########################################################
+with open('test.log', mode='w', encoding='utf-8') as a_file:
+    a_file.write('test succeeded')
+
+with open('test.log', mode='a', encoding='utf-8') as a_file:
+    a_file.write('and again')
+```
+
+```py
+# Binary files
+#########################################################
+an_image = open('examples/beauregard.jpg', mode='rb')
+an_image.tell()
+# 0
+
+data = an_image.read(3)
+# b'\xff\xd8\xff'
+type(data)
+# <class 'bytes'>
+```
+
+```py
+# String objects from non-file sources
+#########################################################
+a_string = 'PapayaWhip is the new black.'
+import io
+a_file = io.StringIO(a_string)
+a_file.read()
+# 'PapayaWhip is the new black.'
+```
+
+```py
+# Compressed Files
+#########################################################
+import gzip
+with gzip.open('out.log.gz', mode='wb') as z_file:
+    z_file.write('A nine mile walk is no joke, especially in the rain.'.encode('utf-8'))
+```
+
+```py
+# Redirecting standrad output
+#########################################################
+import sys
+class RedirectStdoutTo:
+    def __init__(self, out_new):
+        self.out_new = out_new
+        
+    def __enter__(self):
+        self.out_old = sys.stdout
+        sys.stdout = self.out_new
+        
+    def __exit__(self, *args):
+        sys.stdout = self.out_old
+
+print('A')
+with open('out.log', mode='w', encoding='utf-8') as a_file, RedirectStdoutTo(a_file):
+    print('B')
+print('C')
+
+with open('out.log', mode='w', encoding='utf-8') as a_file:
+    with RedirectStdoutTo(a_file):
+        print('B')
+```
 
 [To Top](#Top)
+
 
 # Function
 
