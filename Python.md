@@ -14,6 +14,7 @@
 * [Function](#Function)
 * [Class](#Class)
 * [Turtle](#Turtle)
+* [Test](#Test)
 
 
 # Basics
@@ -799,3 +800,28 @@ done()
 
 [To Top](#Top)
 
+
+# Test
+
+```py
+# 
+#########################################################
+import roman1
+import unittest
+
+class KnownValues(unittest.TestCase):
+    known_values = ( (1, 'I'),
+        (782, 'DCCLXXXII'),
+        (3999, 'MMMCMXCIX'))
+    
+    def test_to_roman_known_values(self):
+        '''to_roman should give known result with known input'''
+        for integer, numeral in self.known_values:
+            result = roman1.to_roman(integer)
+            self.assertEqual(numeral, result)
+            
+if __name__ == '__main__':
+    unittest.main()
+```
+
+[To Top](#Top)
