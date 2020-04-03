@@ -804,7 +804,7 @@ done()
 # Test
 
 ```py
-# 
+# Standard Case
 #########################################################
 import roman1
 import unittest
@@ -823,6 +823,31 @@ class KnownValues(unittest.TestCase):
             
 if __name__ == '__main__':
     unittest.main()
+```
+
+```py
+# Exception Case
+#########################################################
+class ToRomanBadInput(unittest.TestCase):
+    def test_too_large(self):
+        '''to_roman should fail with large input'''
+        self.assertRaises(roman2.OutOfRangeError, roman2.to_roman, 4000)
+        
+    def test_non_integer(self):
+        '''to_roman should fail with non-integer input'''
+        self.assertRaises(roman4.NotIntegerError, roman4.to_roman, 0.5)
+```
+
+```py
+# Symmetry Case
+#########################################################
+class RoundtripCheck(unittest.TestCase):
+    def test_roundtrip(self):
+        '''from_roman(to_roman(n))==n for all n'''
+        for integer in range(1, 4000):
+            numeral = roman5.to_roman(integer)
+            result = roman5.from_roman(numeral)
+            self.assertEqual(integer, result)
 ```
 
 [To Top](#Top)
