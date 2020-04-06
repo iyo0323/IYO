@@ -12,6 +12,7 @@
 * [Generator](#Generator)
 * [Iterator](#Iterator)
 * [File](#File)
+* [XML](#XML)
 * [Function](#Function)
 * [Class](#Class)
 * [Turtle](#Turtle)
@@ -775,6 +776,53 @@ print('C')
 with open('out.log', mode='w', encoding='utf-8') as a_file:
     with RedirectStdoutTo(a_file):
         print('B')
+```
+
+[To Top](#Top)
+
+
+# XML
+
+```py
+# Standard Samples
+#########################################################
+import xml.etree.ElementTree as etree
+tree = etree.parse('examples/feed.xml')
+root = tree.getroot()
+
+root.tag
+root.attrib
+for child in root:
+    print(child)
+
+entries = tree.findall('{http://www.w3.org/2005/Atom}entry')
+title_element = entries[0].find('{http://www.w3.org/2005/Atom}title')
+
+all_links = tree.findall('//{http://www.w3.org/2005/Atom}link')
+all_links[0].attrib
+```
+
+```py
+# LXML
+#########################################################
+from lxml import etree
+tree = etree.parse('examples/feed.xml')
+root = tree.getroot()
+root.findall('{http://www.w3.org/2005/Atom}entry')
+
+tree.findall('//{http://www.w3.org/2005/Atom}*[@href]')
+tree.findall("//{http://www.w3.org/2005/Atom}*[@href='http://diveintomark.org/']")
+# The // at the beginning of the query means “elements anywhere (not just as children of the root element).”
+
+NS = '{http://www.w3.org/2005/Atom}'
+tree.findall('//{NS}author[{NS}uri]'.format(NS=NS))
+
+NSMAP = {'atom': 'http://www.w3.org/2005/Atom'}
+entries = tree.xpath("//atom:category[@term='accessibility']/..", namespaces=NSMAP)
+# The XPath expression searches for category elements (in the Atom namespace) that contain a term attribute with the value accessibility. and then return the parent element of the category element you just found.
+
+entry = entries[0]
+entry.xpath('./atom:title/text()', namespaces=NSMAP)
 ```
 
 [To Top](#Top)
