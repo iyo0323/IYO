@@ -825,6 +825,35 @@ entry = entries[0]
 entry.xpath('./atom:title/text()', namespaces=NSMAP)
 ```
 
+```py
+# Generating XML
+#########################################################
+import xml.etree.ElementTree as etree
+new_feed = etree.Element('{http://www.w3.org/2005/Atom}feed', attrib={'{http://www.w3.org/XML/1998/namespace}lang': 'en'})
+print(etree.tostring(new_feed))
+# <ns0:feed xmlns:ns0='http://www.w3.org/2005/Atom' xml:lang='en'/>
+
+import lxml.etree
+NSMAP = {None: 'http://www.w3.org/2005/Atom'}
+new_feed = lxml.etree.Element('feed', nsmap=NSMAP)
+print(lxml.etree.tounicode(new_feed))
+# <feed xmlns='http://www.w3.org/2005/Atom'/>
+new_feed.set('{http://www.w3.org/XML/1998/namespace}lang', 'en')
+print(lxml.etree.tounicode(new_feed))
+# <feed xmlns='http://www.w3.org/2005/Atom' xml:lang='en'/>
+
+title = lxml.etree.SubElement(new_feed, 'title', attrib={'type':'html'})
+print(lxml.etree.tounicode(new_feed))
+# <feed xmlns='http://www.w3.org/2005/Atom' xml:lang='en'><title type='html'/></feed>
+title.text = 'dive into &hellip;'
+print(lxml.etree.tounicode(new_feed))
+# <feed xmlns='http://www.w3.org/2005/Atom' xml:lang='en'><title type='html'>dive into &amp;hellip;</title></feed>
+print(lxml.etree.tounicode(new_feed, pretty_print=True))
+# <feed xmlns='http://www.w3.org/2005/Atom' xml:lang='en'>
+# <title type='html'>dive into&amp;hellip;</title>
+# </feed>
+```
+
 [To Top](#Top)
 
 
