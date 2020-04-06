@@ -13,6 +13,7 @@
 * [Iterator](#Iterator)
 * [File](#File)
 * [XML](#XML)
+* [Serializing](#Serializing)
 * [Function](#Function)
 * [Class](#Class)
 * [Turtle](#Turtle)
@@ -852,6 +853,63 @@ print(lxml.etree.tounicode(new_feed, pretty_print=True))
 # <feed xmlns='http://www.w3.org/2005/Atom' xml:lang='en'>
 # <title type='html'>dive into&amp;hellip;</title>
 # </feed>
+```
+
+[To Top](#Top)
+
+
+# Serializing
+
+```py
+# Pickle File
+#########################################################
+import pickle
+with open('entry.pickle', 'wb') as f:
+    pickle.dump(entry, f)
+
+with open('entry.pickle', 'rb') as f:
+    entry2 = pickle.load(f)
+
+entry2 == entry
+# True
+
+b = pickle.dumps(entry)
+type(b)
+# <class 'bytes'>
+entry3 = pickle.loads(b)
+entry3 == entry
+# True
+```
+
+```py
+# Json File
+#########################################################
+import json
+with open('basic-pretty.json', mode='w', encoding='utf-8') as f:
+    json.dump(basic_entry, f, indent=2)
+
+def to_json(python_object):
+    if isinstance(python_object, time.struct_time):
+        return {'__class__': 'time.asctime', '__value__': time.asctime(python_object)}
+    if isinstance(python_object, bytes):
+        return {'__class__': 'bytes', '__value__': list(python_object)}
+    raise TypeError(repr(python_object) + ' is not JSON serializable')
+
+import customserializer
+with open('entry.json', 'w', encoding='utf-8') as f:
+    json.dump(entry, f, default=customserializer.to_json)
+
+def from_json(json_object):
+    if '__class__' in json_object:
+        if json_object['__class__'] == 'time.asctime':
+            return time.strptime(json_object['__value__'])
+        if json_object['__class__'] == 'bytes':
+            return bytes(json_object['__value__'])
+    return json_object
+
+import customserializer
+with open('entry.json', 'r', encoding='utf-8') as f:
+    entry = json.load(f, object_hook=customserializer.from_json)
 ```
 
 [To Top](#Top)
