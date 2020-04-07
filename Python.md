@@ -14,6 +14,7 @@
 * [File](#File)
 * [XML](#XML)
 * [Serializing](#Serializing)
+* [Http](#Http)
 * [Function](#Function)
 * [Class](#Class)
 * [Turtle](#Turtle)
@@ -909,6 +910,67 @@ with open('entry.json', 'w', encoding='utf-8') as f:
 
 with open('entry.json', 'r', encoding='utf-8') as f:
     entry = json.load(f, object_hook=customserializer.from_json)
+```
+
+[To Top](#Top)
+
+
+# Http
+
+```py
+# Standard Sample
+#########################################################
+import urllib.request
+a_url = 'http://diveintopython3.org/examples/feed.xml'
+data = urllib.request.urlopen(a_url).read()
+type(data)
+# <class 'bytes'>
+print(data)
+```
+
+```py
+# Analysis
+#########################################################
+from http.client import HTTPConnection
+HTTPConnection.debuglevel = 1
+from urllib.request import urlopen
+response = urlopen('http://diveintopython3.org/examples/feed.xml')
+# send: b'GET /examples/feed.xml HTTP/1.1
+# Host: diveintopython3.org
+# Accept-Encoding: identity
+# User-Agent: Python-urllib/3.1'
+# Connection: close
+# reply: 'HTTP/1.1 200 OK'
+
+print(response.headers.as_string())
+# Date: Sun, 31 May 2009 19:23:06 GMT
+# Server: Apache
+# Last-Modified: Sun, 31 May 2009 06:39:55 GMT
+# ETag: "bfe-93d9c4c0"
+# Accept-Ranges: bytes
+# Content-Length: 3070
+# Cache-Control: max-age=86400
+# Expires: Mon, 01 Jun 2009 19:23:06 GMT
+# Vary: Accept-Encoding
+# Connection: close
+# Content-Type: application/xml
+data = response.read()
+len(data)
+# 3070
+```
+
+```py
+# httplib2
+#########################################################
+import httplib2
+h = httplib2.Http('.cache')
+response, content = h.request('http://diveintopython3.org/examples/feed.xml')
+response.status
+# 200
+content[:52]
+# b"<?xml version='1.0' encoding='utf-8'?>\r\n<feed xmlns="
+len(content)
+# 3070
 ```
 
 [To Top](#Top)
