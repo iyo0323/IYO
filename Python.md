@@ -963,6 +963,7 @@ len(data)
 # httplib2
 #########################################################
 import httplib2
+httplib2.debuglevel = 1
 h = httplib2.Http('.cache')
 response, content = h.request('http://diveintopython3.org/examples/feed.xml')
 response.status
@@ -971,6 +972,52 @@ content[:52]
 # b"<?xml version='1.0' encoding='utf-8'?>\r\n<feed xmlns="
 len(content)
 # 3070
+
+response, content = h.request('http://diveintopython3.org/')
+print(dict(response.items()))
+# {'-content-encoding': 'gzip',
+# ...,
+# 'etag': '"7f806d-1a01-9fb97900"', 'last-modified': 'Tue, 02 Jun 2009 02:51:48 GMT',
+# 'vary': 'Accept-Encoding,User-Agent'}
+len(content)
+# 6657
+
+response, content = h.request('http://diveintopython3.org/')
+response.fromcache
+# True
+response.status
+# 200
+response.dict['status']
+# '304'
+len(content)
+# 6657
+```
+
+```py
+# POST & DELETE
+#########################################################
+from urllib.parse import urlencode
+import httplib2
+httplib2.debuglevel = 1
+h = httplib2.Http('.cache')
+data = {'status': 'Test update from Python 3'}
+h.add_credentials('diveintomark', 'MY_SECRET_PASSWORD', 'identi.ca')
+# This is how httplib2 handles authentication.
+resp, content = h.request('https://identi.ca/api/statuses/update.xml',
+    'POST',
+    urlencode(data),
+    headers={'Content-Type': 'application/x-www-form-urlencoded'})
+print(content.decode('utf-8'))
+# <?xml version="1.0" encoding="UTF-8"?>
+# ...
+
+from xml.etree import ElementTree as etree
+tree = etree.fromstring(content)
+status_id = tree.findtext('id')
+status_id
+# '5131472'
+url = 'https://identi.ca/api/statuses/destroy/{0}.xml'.format(status_id)
+resp, deleted_content = h.request(url, 'DELETE')
 ```
 
 [To Top](#Top)
