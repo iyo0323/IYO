@@ -77,7 +77,7 @@ time.localtime(metadata.st_mtime)
 
 
 ```py
-# Get an input fron CUI
+# Get an input from CUI
 #########################################################
 num = int(input("Give me an integer "))
 ```
@@ -116,7 +116,7 @@ print(test())
 ```py
 # Add
 #########################################################
-# << ['a']
+# ['a']
 
 a_list = a_list + [2.0, 3]
 # ['a', 2.0, 3]
