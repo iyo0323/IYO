@@ -3,6 +3,7 @@
 
 * [Basics](#Basics)
 * [NumPy Arrays](#NumPyArrays)
+* [Aggregations: Min, Max, and Everything in Between](#AggregationsMinMaxAndEverythingInBetween)
 
 
 # Basics
@@ -441,6 +442,59 @@ np.multiply.outer(x, x)
 #        [ 3,  6,  9, 12, 15],
 #        [ 4,  8, 12, 16, 20],
 #        [ 5, 10, 15, 20, 25]])
+```
+
+[To Top](#Top)
+
+
+# AggregationsMinMaxAndEverythingInBetween
+
+```py
+# Summing the Values in an Array
+#########################################################
+import numpy as np
+L = np.random.random(100)
+sum(L)
+# 55.61209116604941
+np.sum(L)
+# 55.612091166049424
+
+big_array = np.random.rand(1000000)
+%timeit sum(big_array)
+%timeit np.sum(big_array)
+# 10 loops, best of 3: 104 ms per loop
+# 1000 loops, best of 3: 442 μs per loop
+```
+
+```py
+# Minimum and Maximum
+#########################################################
+min(big_array), max(big_array)
+# (1.1717128136634614e-06, 0.9999976784968716)
+np.min(big_array), np.max(big_array)
+# (1.1717128136634614e-06, 0.9999976784968716)
+%timeit min(big_array)
+%timeit np.min(big_array)
+# 10 loops, best of 3: 82.3 ms per loop
+# 1000 loops, best of 3: 497 μs per loop
+
+print(big_array.min(), big_array.max(), big_array.sum())
+# 1.17171281366e-06 0.999997678497 499911.628197
+
+# Multidimensional aggregates
+M = np.random.random((3, 4))
+print(M)
+# [[ 0.8967576  0.03783739 0.75952519 0.06682827]
+#  [ 0.8354065  0.99196818 0.19544769 0.43447084]
+#  [ 0.66859307 0.15038721 0.37911423 0.6687194 ]]
+
+M.sum()
+# 6.0850555667307118
+M.min(axis=0)
+# array([ 0.66859307, 0.03783739, 0.19544769, 0.06682827])
+M.max(axis=1)
+# array([ 0.8967576 , 0.99196818, 0.6687194 ])
+# The axis keyword specifies the dimension of the array that will be collapsed, rather than the dimension that will be returned.
 ```
 
 [To Top](#Top)
