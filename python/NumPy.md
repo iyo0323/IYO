@@ -65,7 +65,7 @@ np.random.random((3, 3))
 # with mean 0 and standard deviation 1
 np.random.normal(0, 1, (3, 3))
 # array([[ 1.51772646, 0.39614948, -0.10634696],
-#        [ 0.25671348, 0.00732722, 0.37783601],
+#        [ 0.25671348, 0.00732722,  0.37783601],
 #        [ 0.68446945, 0.15926039, -0.70744073]])
 
 # Create a 3x3 array of random integers in the interval [0, 10)
@@ -163,8 +163,8 @@ x2[:3, ::2] # all rows, every other column
 #        [ 7, 8],
 #        [ 1, 7]])
 x2[::-1, ::-1]
-# array([[ 7, 7, 6, 1],
-#        [ 8, 8, 6, 7],
+# array([[ 7, 7, 6,  1],
+#        [ 8, 8, 6,  7],
 #        [ 4, 2, 5, 12]])
 
 # Accessing array rows and columns
@@ -277,9 +277,9 @@ print(x1, x2, x3)
 # [1 2 3] [99 99] [3 2 1]
 
 grid = np.arange(16).reshape((4, 4))
-# array([[ 0, 1, 2, 3],
-#        [ 4, 5, 6, 7],
-#        [ 8, 9, 10, 11],
+# array([[ 0,  1,  2,  3],
+#        [ 4,  5,  6,  7],
+#        [ 8,  9, 10, 11],
 #        [12, 13, 14, 15]])
 
 upper, lower = np.vsplit(grid, [2])
@@ -287,18 +287,18 @@ print(upper)
 print(lower)
 # [[0 1 2 3]
 #  [4 5 6 7]]
-# [[ 8 9 10 11]
+# [[ 8  9 10 11]
 #  [12 13 14 15]]
 
 left, right = np.hsplit(grid, [2])
 print(left)
 print(right)
-# [[ 0 1]
-#  [ 4 5]
-#  [ 8 9]
+# [[ 0  1]
+#  [ 4  5]
+#  [ 8  9]
 #  [12 13]]
-# [[ 2 3]
-#  [ 6 7]
+# [[ 2  3]
+#  [ 6  7]
 #  [10 11]
 #  [14 15]]
 ```
@@ -338,7 +338,7 @@ print("sin(theta) = ", np.sin(theta))
 print("cos(theta) = ", np.cos(theta))
 print("tan(theta) = ", np.tan(theta))
 # theta = [ 0. 1.57079633 3.14159265]
-# sin(theta) = [ 0.00000000e+00 1.00000000e+00 1.22464680e-16]
+# sin(theta) = [ 0.00000000e+00 1.00000000e+00  1.22464680e-16]
 # cos(theta) = [ 1.00000000e+00 6.12323400e-17 -1.00000000e+00]
 # tan(theta) = [ 0.00000000e+00 1.63312394e+16 -1.22464680e-16]
 
@@ -348,9 +348,9 @@ print("arcsin(x) = ", np.arcsin(x))
 print("arccos(x) = ", np.arccos(x))
 print("arctan(x) = ", np.arctan(x))
 # x = [-1, 0, 1]
-# arcsin(x) = [-1.57079633 0. 1.57079633]
-# arccos(x) = [ 3.14159265 1.57079633 0. ]
-# arctan(x) = [-0.78539816 0. 0.78539816]
+# arcsin(x) = [-1.57079633 0.         1.57079633]
+# arccos(x) = [ 3.14159265 1.57079633 0.        ]
+# arctan(x) = [-0.78539816 0.         0.78539816]
 
 # Exponents and logarithms
 ##############################
@@ -403,4 +403,44 @@ print("erfinv(x) =", special.erfinv(x))
 # erfinv(x) = [ 0. 0.27246271 0.73286908 inf]
 ```
 
+```py
+# Advanced Ufunc Features
+#########################################################
 
+# Specifying output
+##############################
+x = np.arange(5)
+y = np.empty(5)
+np.multiply(x, 10, out=y)
+print(y)
+# [ 0. 10. 20. 30. 40.]
+
+y = np.zeros(10)
+np.power(2, x, out=y[::2])
+print(y)
+# [ 1. 0. 2. 0. 4. 0. 8. 0. 16. 0.]
+
+# Aggregates
+##############################
+x = np.arange(1, 6)
+np.add.reduce(x)
+# 15
+np.multiply.reduce(x)
+# 120
+np.add.accumulate(x)
+# array([ 1, 3, 6, 10, 15])
+np.multiply.accumulate(x)
+# array([ 1, 2, 6, 24, 120])
+
+# Outer products
+##############################
+x = np.arange(1, 6)
+np.multiply.outer(x, x)
+# array([[ 1,  2,  3,  4, 5],
+#        [ 2,  4,  6,  8, 10],
+#        [ 3,  6,  9, 12, 15],
+#        [ 4,  8, 12, 16, 20],
+#        [ 5, 10, 15, 20, 25]])
+```
+
+[To Top](#Top)
