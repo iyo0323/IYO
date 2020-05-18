@@ -243,7 +243,7 @@ np.concatenate([x, y])
 # array([1, 2, 3, 3, 2, 1])
 z = [99, 99, 99]
 print(np.concatenate([x, y, z]))
-# [ 1, 2, 3, 3, 2, 1, 99, 99, 99]
+# [ 1 2 3 3 2 1 99 99 99]
 
 grid = np.array([[1, 2, 3],
                  [4, 5, 6]])
