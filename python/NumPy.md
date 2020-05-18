@@ -135,6 +135,7 @@ x1[0] = 3.14159 # this will be truncated!
 #########################################################
 
 # One-dimensional subarrays
+###################################
 x = np.arange(10)
 # array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
@@ -148,6 +149,7 @@ x[5::-2] # reversed every other from index 5
 # array([5, 3, 1])
 
 # Multidimensional subarrays
+###################################
 x2
 # array([[12, 5, 2, 4],
 #        [ 7, 6, 8, 8],
@@ -166,6 +168,7 @@ x2[::-1, ::-1]
 #        [ 4, 2, 5, 12]])
 
 # Accessing array rows and columns
+###################################
 print(x2[:, 0]) # first column of x2
 # [12 7 1]
 print(x2[0, :]) # first row of x2
@@ -174,6 +177,7 @@ print(x2[0]) # equivalent to x2[0, :]
 # [12 5 2 4]
 
 # Subarrays as no-copy views
+###################################
 x2_sub = x2[:2, :2]
 print(x2_sub)
 # [[12 5]
@@ -188,6 +192,7 @@ print(x2)
 #  [ 1 6 7 7]]
 
 # Creating copies of arrays
+###################################
 x2_sub_copy = x2[:2, :2].copy()
 print(x2_sub_copy)
 # [[99 5]
@@ -200,6 +205,102 @@ print(x2)
 # [[99 5 2 4]
 #  [ 7 6 8 8]
 #  [ 1 6 7 7]]
+```
+
+```py
+# Reshaping of Arrays
+#########################################################
+grid = np.arange(1, 10).reshape((3, 3))
+# [[1 2 3]
+#  [4 5 6]
+#  [7 8 9]]
+
+x = np.array([1, 2, 3])
+x.reshape((1, 3)) # row vector via reshape
+# array([[1, 2, 3]])
+x[np.newaxis, :]  # row vector via newaxis
+# array([[1, 2, 3]])
+
+x.reshape((3, 1)) # column vector via reshape
+# array([[1],
+#        [2],
+#        [3]])
+x[:, np.newaxis]  # column vector via newaxis
+# array([[1],
+#        [2],
+#        [3]])
+```
+
+```py
+# Array Concatenation and Splitting
+#########################################################
+
+# Concatenation of arrays
+##############################
+x = np.array([1, 2, 3])
+y = np.array([3, 2, 1])
+np.concatenate([x, y])
+# array([1, 2, 3, 3, 2, 1])
+z = [99, 99, 99]
+print(np.concatenate([x, y, z]))
+# [ 1, 2, 3, 3, 2, 1, 99, 99, 99]
+
+grid = np.array([[1, 2, 3],
+                 [4, 5, 6]])
+np.concatenate([grid, grid])  # concatenate along the first axis
+# array([[1, 2, 3],
+#        [4, 5, 6],
+#        [1, 2, 3],
+#        [4, 5, 6]])
+np.concatenate([grid, grid], axis=1)  # concatenate along the second axis (zero-indexed)
+# array([[1, 2, 3, 1, 2, 3],
+#        [4, 5, 6, 4, 5, 6]])
+
+x = np.array([1, 2, 3])
+grid = np.array([[9, 8, 7],
+                 [6, 5, 4]])
+np.vstack([x, grid])  # vertically stack the arrays
+# array([[1, 2, 3],
+#        [9, 8, 7],
+#        [6, 5, 4]])
+y = np.array([[99], # horizontally stack the arrays
+              [99]])
+np.hstack([grid, y])
+# array([[ 9, 8, 7, 99],
+#        [ 6, 5, 4, 99]])
+
+# Splitting of arrays
+##############################
+x = [1, 2, 3, 99, 99, 3, 2, 1]
+x1, x2, x3 = np.split(x, [3, 5])
+print(x1, x2, x3)
+# [1 2 3] [99 99] [3 2 1]
+
+grid = np.arange(16).reshape((4, 4))
+# array([[ 0, 1, 2, 3],
+#        [ 4, 5, 6, 7],
+#        [ 8, 9, 10, 11],
+#        [12, 13, 14, 15]])
+
+upper, lower = np.vsplit(grid, [2])
+print(upper)
+print(lower)
+# [[0 1 2 3]
+#  [4 5 6 7]]
+# [[ 8 9 10 11]
+#  [12 13 14 15]]
+
+left, right = np.hsplit(grid, [2])
+print(left)
+print(right)
+# [[ 0 1]
+#  [ 4 5]
+#  [ 8 9]
+#  [12 13]]
+# [[ 2 3]
+#  [ 6 7]
+#  [10 11]
+#  [14 15]]
 ```
 
 
