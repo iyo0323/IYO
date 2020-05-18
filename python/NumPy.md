@@ -571,6 +571,7 @@ a + b
 # • Rule 3: If in any dimension the sizes disagree and neither is equal to 1, an error is raised.
 
 # Broadcasting example 1
+##############################
 M = np.ones((2, 3))
 a = np.arange(3)
 M + a
@@ -578,6 +579,7 @@ M + a
 #        [ 1., 2., 3.]])
 
 # Broadcasting example 2
+##############################
 a = np.arange(3).reshape((3, 1))
 b = np.arange(3)
 a + b
@@ -586,6 +588,7 @@ a + b
 #        [2, 3, 4]])
 
 # Broadcasting example 3
+##############################
 M = np.ones((3, 2))
 a = np.arange(3)
 M + a
@@ -604,6 +607,35 @@ np.logaddexp(M, a[:, np.newaxis]) # logaddexp(a, b) = log(exp(a) + exp(b))
 # array([[ 1.31326169, 1.31326169],
 #        [ 1.69314718, 1.69314718],
 #        [ 2.31326169, 2.31326169]])
+```
+
+```py
+# Broadcasting in Practice
+#########################################################
+
+# Centering an array
+##############################
+X = np.random.random((10, 3))
+
+# Compute the mean of each feature using the mean aggregate across the first dimension
+Xmean = X.mean(0)
+Xmean
+# array([ 0.53514715, 0.66567217, 0.44385899])
+X_centered = X - Xmean
+X_centered.mean(0)
+# array([ 2.22044605e-17, -7.77156117e-17, -1.66533454e-17])
+
+# Plotting a two-dimensional function
+##############################
+# x and y have 50 steps from 0 to 5
+x = np.linspace(0, 5, 50)
+y = np.linspace(0, 5, 50)[:, np.newaxis]
+z = np.sin(x) ** 10 + np.cos(10 + y * x) * np.cos(x)
+
+%matplotlib inline
+import matplotlib.pyplot as plt
+plt.imshow(z, origin='lower', extent=[0, 5, 0, 5], cmap='viridis')
+plt.colorbar();
 ```
 
 [To Top](#Top)
