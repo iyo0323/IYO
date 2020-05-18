@@ -303,4 +303,104 @@ print(right)
 #  [14 15]]
 ```
 
+```py
+# NumPy’s UFuncs
+#########################################################
+
+# Array arithmetic
+##############################
+x = np.arange(4)
+# x = [0 1 2 3]
+print("x + 5 =", x + 5)
+# x + 5 = [5 6 7 8]
+np.add(x, 2)
+# array([2, 3, 4, 5])
+
+# Absolute value
+##############################
+x = np.array([-2, -1, 0, 1, 2])
+abs(x)
+# array([2, 1, 0, 1, 2])
+np.absolute(x)
+# array([2, 1, 0, 1, 2])
+np.abs(x)
+# array([2, 1, 0, 1, 2])
+
+x = np.array([3 - 4j, 4 - 3j, 2 + 0j, 0 + 1j])
+np.abs(x)
+# array([ 5., 5., 2., 1.])
+
+# Trigonometric functions
+##############################
+theta = np.linspace(0, np.pi, 3)
+print("theta = ", theta)
+print("sin(theta) = ", np.sin(theta))
+print("cos(theta) = ", np.cos(theta))
+print("tan(theta) = ", np.tan(theta))
+# theta = [ 0. 1.57079633 3.14159265]
+# sin(theta) = [ 0.00000000e+00 1.00000000e+00 1.22464680e-16]
+# cos(theta) = [ 1.00000000e+00 6.12323400e-17 -1.00000000e+00]
+# tan(theta) = [ 0.00000000e+00 1.63312394e+16 -1.22464680e-16]
+
+x = [-1, 0, 1]
+print("x = ", x)
+print("arcsin(x) = ", np.arcsin(x))
+print("arccos(x) = ", np.arccos(x))
+print("arctan(x) = ", np.arctan(x))
+# x = [-1, 0, 1]
+# arcsin(x) = [-1.57079633 0. 1.57079633]
+# arccos(x) = [ 3.14159265 1.57079633 0. ]
+# arctan(x) = [-0.78539816 0. 0.78539816]
+
+# Exponents and logarithms
+##############################
+x = [1, 2, 3]
+print("x =", x)
+print("e^x =", np.exp(x))
+print("2^x =", np.exp2(x))
+print("3^x =", np.power(3, x))
+# x = [1, 2, 3]
+# e^x = [ 2.71828183 7.3890561 20.08553692]
+# 2^x = [ 2. 4. 8.]
+# 3^x = [ 3 9 27]
+
+x = [1, 2, 4, 10]
+print("x =", x)
+print("ln(x) =", np.log(x))
+print("log2(x) =", np.log2(x))
+print("log10(x) =", np.log10(x))
+# x = [1, 2, 4, 10]
+# ln(x) = [ 0. 0.69314718 1.38629436 2.30258509]
+# log2(x) = [ 0. 1. 2. 3.32192809]
+# log10(x) = [ 0. 0.30103 0.60205999 1. ]
+
+# When x is very small, these functions give more precise values than if the raw np.log or np.exp were used.
+x = [0, 0.001, 0.01, 0.1]
+print("exp(x) - 1 =", np.expm1(x))
+print("log(1 + x) =", np.log1p(x))
+# exp(x) - 1 = [ 0. 0.0010005 0.01005017 0.10517092]
+# log(1 + x) = [ 0. 0.0009995 0.00995033 0.09531018]
+
+# Specialized ufuncs
+##############################
+from scipy import special
+# Gamma functions (generalized factorials) and related functions
+x = [1, 5, 10]
+print("gamma(x) =", special.gamma(x))
+print("ln|gamma(x)| =", special.gammaln(x))
+print("beta(x, 2) =", special.beta(x, 2))
+# gamma(x) = [ 1.00000000e+00 2.40000000e+01 3.62880000e+05]
+# ln|gamma(x)| = [ 0. 3.17805383 12.80182748]
+
+# Error function (integral of Gaussian)
+# its complement, and its inverse
+x = np.array([0, 0.3, 0.7, 1.0])
+print("erf(x) =", special.erf(x))
+print("erfc(x) =", special.erfc(x))
+print("erfinv(x) =", special.erfinv(x))
+# erf(x) = [ 0. 0.32862676 0.67780119 0.84270079]
+# erfc(x) = [ 1. 0.67137324 0.32219881 0.15729921]
+# erfinv(x) = [ 0. 0.27246271 0.73286908 inf]
+```
+
 
