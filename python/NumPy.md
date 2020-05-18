@@ -698,21 +698,13 @@ np.count_nonzero(x < 6) # To count the number of True entries in a Boolean array
 # 8
 np.sum(x < 6) # False is interpreted as 0, and True is interpreted as 1
 # 8
-
-# how many values less than 6 in each row?
-np.sum(x < 6, axis=1)
+np.sum(x < 6, axis=1) # how many values less than 6 in each row?
 # array([4, 2, 2])
-
-# are there any values greater than 8?
-np.any(x > 8)
+np.any(x > 8) # are there any values greater than 8?
 # True
-
-# are all values equal to 6?
-np.all(x == 6)
+np.all(x == 6)  # are all values equal to 6?
 # False
-
-# are all values in each row less than 8?
-np.all(x < 8, axis=1)
+np.all(x < 8, axis=1) # are all values in each row less than 8?
 # array([ True, False, True], dtype=bool)
 
 # Boolean operators
