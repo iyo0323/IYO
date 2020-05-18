@@ -89,7 +89,7 @@ np.empty(3)
 
 [To Top](#Top)
 
-# NumPy Arrays
+# NumPyArrays
 
 ```py
 # NumPy Array Attributes
