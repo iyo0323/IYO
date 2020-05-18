@@ -2,7 +2,7 @@
 # Top
 
 * [Basics](#Basics)
-* [NumPy Arrays](#NumPy Arrays)
+* [NumPy Arrays](#NumPyArrays)
 
 
 # Basics
@@ -87,6 +87,7 @@ np.empty(3)
 # array([ 1., 1., 1.])
 ```
 
+[To Top](#Top)
 
 # NumPy Arrays
 
