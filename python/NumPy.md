@@ -89,6 +89,7 @@ np.empty(3)
 
 [To Top](#Top)
 
+
 # NumPyArrays
 
 ```py
@@ -115,12 +116,79 @@ print("itemsize:", x3.itemsize, "bytes")
 print("nbytes:", x3.nbytes, "bytes")
 # itemsize: 8 bytes
 # nbytes: 480 bytes
+```
 
+```py
+# Array Indexing
+#########################################################
 x1
 # array([5, 0, 3, 3, 7, 9])
+
+x1[-1]
+# 9
 x1[0] = 3.14159 # this will be truncated!
 # array([3, 0, 3, 3, 7, 9])
 ```
 
+```py
+# Array Slicing
+#########################################################
+x = np.arange(10)
+# array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+x[::2] # every other element
+# array([0, 2, 4, 6, 8])
+x[1::2] # every other element, starting at index 1
+# array([1, 3, 5, 7, 9])
+x[::-1] # all elements, reversed
+# array([9, 8, 7, 6, 5, 4, 3, 2, 1, 0])
+x[5::-2] # reversed every other from index 5
+# array([5, 3, 1])
+
+x2
+# array([[12, 5, 2, 4],
+#        [ 7, 6, 8, 8],
+#        [ 1, 6, 7, 7]])
+
+x2[:2, :3] # two rows, three columns
+# array([[12, 5, 2],
+#        [ 7, 6, 8]])
+x2[:3, ::2] # all rows, every other column
+# array([[12, 2],
+#        [ 7, 8],
+#        [ 1, 7]])
+x2[::-1, ::-1]
+# array([[ 7, 7, 6, 1],
+#        [ 8, 8, 6, 7],
+#        [ 4, 2, 5, 12]])
+
+# Subarrays as no-copy views
+x2_sub = x2[:2, :2]
+print(x2_sub)
+# [[12 5]
+#  [ 7 6]]
+x2_sub[0, 0] = 99
+print(x2_sub)
+# [[99 5]
+#  [ 7 6]]
+print(x2)
+# [[99 5 2 4]
+#  [ 7 6 8 8]
+#  [ 1 6 7 7]]
+
+# Creating copies of arrays
+x2_sub_copy = x2[:2, :2].copy()
+print(x2_sub_copy)
+# [[99 5]
+#  [ 7 6]]
+x2_sub_copy[0, 0] = 42
+print(x2_sub_copy)
+# [[42 5]
+#  [ 7 6]]
+print(x2)
+# [[99 5 2 4]
+#  [ 7 6 8 8]
+#  [ 1 6 7 7]]
+```
 
 
