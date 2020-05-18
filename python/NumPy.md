@@ -6,6 +6,7 @@
 * [Aggregations: Min, Max, and Everything in Between](#AggregationsMinMaxAndEverythingInBetween)
 * [Computation on Arrays: Broadcasting](#ComputationOnArraysBroadcasting)
 * [Comparisons, Masks, and Boolean Logic](#ComparisonsMasksAndBooleanLogic)
+* [Fancy Indexing](#FancyIndexing)
 
 
 # Basics
@@ -794,5 +795,31 @@ x = np.arange(10)
 # ValueError: The truth value of an array with more than one element is...
 ```
 
+[To Top](#Top)
+
+
+# FancyIndexing
+
+```py
+# Exploring Fancy Indexing
+#########################################################
+import numpy as np
+rand = np.random.RandomState(42)
+x = rand.randint(100, size=10)
+print(x)
+# [51 92 14 71 60 20 82 86 74 74]
+
+[x[3], x[7], x[2]]
+# [71, 86, 14]
+ind = [3, 7, 4]
+x[ind]
+# array([71, 86, 60])
+
+ind = np.array([[3, 7],
+                [4, 5]])
+x[ind]
+# array([[71, 86],
+#        [60, 20]])
+```
 
 [To Top](#Top)
