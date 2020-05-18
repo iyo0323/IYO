@@ -4,6 +4,7 @@
 * [Basics](#Basics)
 * [NumPy Arrays](#NumPyArrays)
 * [Aggregations: Min, Max, and Everything in Between](#AggregationsMinMaxAndEverythingInBetween)
+* [Computation on Arrays: Broadcasting](#ComputationOnArraysBroadcasting)
 
 
 # Basics
@@ -538,6 +539,71 @@ plt.hist(heights)
 plt.title('Height Distribution of US Presidents')
 plt.xlabel('height (cm)')
 plt.ylabel('number');
+```
+
+[To Top](#Top)
+
+
+# ComputationOnArraysBroadcasting
+
+```py
+# Introducing Broadcasting
+#########################################################
+a = np.arange(3)
+b = np.arange(3)[:, np.newaxis]
+print(a)
+print(b)
+# [0 1 2]
+# [[0]
+#  [1]
+#  [2]]
+a + b
+# array([[0, 1, 2],
+         [1, 2, 3],
+         [2, 3, 4]])
+```
+
+```py
+# Rules of Broadcasting
+#########################################################
+# • Rule 1: If the two arrays differ in their number of dimensions, the shape of the one with fewer dimensions is padded with ones on its leading (left) side.
+# • Rule 2: If the shape of the two arrays does not match in any dimension, the array with shape equal to 1 in that dimension is stretched to match the other shape.
+# • Rule 3: If in any dimension the sizes disagree and neither is equal to 1, an error is raised.
+
+# Broadcasting example 1
+M = np.ones((2, 3))
+a = np.arange(3)
+M + a
+# array([[ 1., 2., 3.],
+#        [ 1., 2., 3.]])
+
+# Broadcasting example 2
+a = np.arange(3).reshape((3, 1))
+b = np.arange(3)
+a + b
+# array([[0, 1, 2],
+#        [1, 2, 3],
+#        [2, 3, 4]])
+
+# Broadcasting example 3
+M = np.ones((3, 2))
+a = np.arange(3)
+M + a
+# ValueError Traceback (most recent call last)
+# <ipython-input-13-9e16e9f98da6> in <module>()
+# ValueError: operands could not be broadcast together with shapes (3,2) (3,)
+
+a[:, np.newaxis].shape
+# (3, 1)
+M + a[:, np.newaxis]
+# array([[ 1., 1.],
+#        [ 2., 2.],
+#        [ 3., 3.]])
+
+np.logaddexp(M, a[:, np.newaxis]) # logaddexp(a, b) = log(exp(a) + exp(b))
+# array([[ 1.31326169, 1.31326169],
+#        [ 1.69314718, 1.69314718],
+#        [ 2.31326169, 2.31326169]])
 ```
 
 [To Top](#Top)
