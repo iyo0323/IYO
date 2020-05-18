@@ -2,6 +2,7 @@
 # Top
 
 * [Basics](#Basics)
+* [NumPy Arrays](#NumPy Arrays)
 
 
 # Basics
@@ -84,6 +85,40 @@ np.eye(3)
 # memory location
 np.empty(3)
 # array([ 1., 1., 1.])
+```
+
+
+# NumPy Arrays
+
+```py
+# NumPy Array Attributes
+#########################################################
+import numpy
+np.random.seed(0) # seed for reproducibility
+
+x1 = np.random.randint(10, size=6) # One-dimensional array
+x2 = np.random.randint(10, size=(3, 4)) # Two-dimensional array
+x3 = np.random.randint(10, size=(3, 4, 5)) # Three-dimensional array
+
+print("x3 ndim: ", x3.ndim)
+print("x3 shape:", x3.shape)
+print("x3 size: ", x3.size)
+# x3 ndim: 3
+# x3 shape: (3, 4, 5)
+# x3 size: 60
+
+print("dtype:", x3.dtype)
+# dtype: int64
+
+print("itemsize:", x3.itemsize, "bytes")
+print("nbytes:", x3.nbytes, "bytes")
+# itemsize: 8 bytes
+# nbytes: 480 bytes
+
+x1
+# array([5, 0, 3, 3, 7, 9])
+x1[0] = 3.14159 # this will be truncated!
+# array([3, 0, 3, 3, 7, 9])
 ```
 
 
