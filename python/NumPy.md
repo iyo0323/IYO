@@ -482,6 +482,7 @@ print(big_array.min(), big_array.max(), big_array.sum())
 # 1.17171281366e-06 0.999997678497 499911.628197
 
 # Multidimensional aggregates
+##############################
 M = np.random.random((3, 4))
 print(M)
 # [[ 0.8967576  0.03783739 0.75952519 0.06682827]
@@ -495,6 +496,48 @@ M.min(axis=0)
 M.max(axis=1)
 # array([ 0.8967576 , 0.99196818, 0.6687194 ])
 # The axis keyword specifies the dimension of the array that will be collapsed, rather than the dimension that will be returned.
+```
+
+```py
+# Example: What Is the Average Height of US Presidents?
+#########################################################
+!head -4 data/president_heights.csv
+# order,name,height(cm)
+# 1,George Washington,189
+# 2,John Adams,170
+# 3,Thomas Jefferson,189
+
+import pandas as pd
+data = pd.read_csv('data/president_heights.csv')
+heights = np.array(data['height(cm)'])
+print(heights)
+# [189 170 189 163 183 171 185 168 173 183 173 173 175 178 183 193 178 173
+#  174 183 183 168 170 178 182 180 183 178 182 188 175 179 183 193 182 183
+#  177 185 188 188 182 185]
+
+print("Mean height: ", heights.mean())
+print("Standard deviation:", heights.std())
+print("Minimum height: ", heights.min())
+print("Maximum height: ", heights.max())
+# Mean height: 179.738095238
+# Standard deviation: 6.93184344275
+# Minimum height: 163
+# Maximum height: 193
+
+print("25th percentile: ", np.percentile(heights, 25))
+print("Median: ", np.median(heights))
+print("75th percentile: ", np.percentile(heights, 75))
+# 25th percentile: 174.25
+# Median: 182.0
+# 75th percentile: 183.0
+
+%matplotlib inline
+import matplotlib.pyplot as plt
+import seaborn; seaborn.set() # set plot style
+plt.hist(heights)
+plt.title('Height Distribution of US Presidents')
+plt.xlabel('height (cm)')
+plt.ylabel('number');
 ```
 
 [To Top](#Top)
