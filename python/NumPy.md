@@ -133,6 +133,8 @@ x1[0] = 3.14159 # this will be truncated!
 ```py
 # Array Slicing
 #########################################################
+
+# One-dimensional subarrays
 x = np.arange(10)
 # array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
@@ -145,6 +147,7 @@ x[::-1] # all elements, reversed
 x[5::-2] # reversed every other from index 5
 # array([5, 3, 1])
 
+# Multidimensional subarrays
 x2
 # array([[12, 5, 2, 4],
 #        [ 7, 6, 8, 8],
@@ -161,6 +164,14 @@ x2[::-1, ::-1]
 # array([[ 7, 7, 6, 1],
 #        [ 8, 8, 6, 7],
 #        [ 4, 2, 5, 12]])
+
+# Accessing array rows and columns
+print(x2[:, 0]) # first column of x2
+# [12 7 1]
+print(x2[0, :]) # first row of x2
+# [12 5 2 4]
+print(x2[0]) # equivalent to x2[0, :]
+# [12 5 2 4]
 
 # Subarrays as no-copy views
 x2_sub = x2[:2, :2]
