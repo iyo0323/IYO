@@ -919,4 +919,44 @@ print(x)
 # The at() method does an in-place application of the given operator at the specified indices (here, i) with the specified value (here, 1).
 ```
 
+```py
+# Example: Binning Data
+#########################################################
+np.random.seed(42)
+x = np.random.randn(100)
+
+# compute a histogram by hand
+bins = np.linspace(-5, 5, 20)
+counts = np.zeros_like(bins)
+
+# find the appropriate bin for each x
+i = np.searchsorted(bins, x)
+
+# add 1 to each of these bins
+np.add.at(counts, i, 1)
+
+# plot the results
+plt.plot(bins, counts, linestyle='steps');
+plt.hist(x, bins, histtype='step');
+
+print("NumPy routine:")
+%timeit counts, edges = np.histogram(x, bins)
+print("Custom routine:")
+%timeit np.add.at(counts, np.searchsorted(bins, x), 1)
+# NumPy routine:
+# 10000 loops, best of 3: 97.6 μs per loop
+# Custom routine:
+# 10000 loops, best of 3: 19.5 μs per loop
+
+x = np.random.randn(1000000)
+print("NumPy routine:")
+%timeit counts, edges = np.histogram(x, bins)
+print("Custom routine:")
+%timeit np.add.at(counts, np.searchsorted(bins, x), 1)
+# NumPy routine:
+# 10 loops, best of 3: 68.7 ms per loop
+# Custom routine:
+# 10 loops, best of 3: 135 ms per loop
+```
+
 [To Top](#Top)
