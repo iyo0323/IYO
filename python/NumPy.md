@@ -864,4 +864,59 @@ X[row[:, np.newaxis], mask]
 #        [ 8, 10]])
 ```
 
+```py
+# Example: Selecting Random Points
+#########################################################
+mean = [0, 0]
+cov = [[1, 2],
+       [2, 5]]
+X = rand.multivariate_normal(mean, cov, 100)
+X.shape
+# (100, 2)
+
+%matplotlib inline
+import matplotlib.pyplot as plt
+import seaborn; seaborn.set() # for plot styling
+plt.scatter(X[:, 0], X[:, 1]);
+
+indices = np.random.choice(X.shape[0], 20, replace=False)
+# array([93, 45, 73, 81, 50, 10, 98, 94, 4, 64, 65, 89, 47, 84, 82, 80, 25, 90, 63, 20])
+selection = X[indices] # fancy indexing here
+selection.shape
+# (20, 2)
+
+plt.scatter(X[:, 0], X[:, 1], alpha=0.3)
+plt.scatter(selection[:, 0], selection[:, 1],
+facecolor='none', s=200);
+```
+
+```py
+# Modifying Values with Fancy Indexing
+#########################################################
+x = np.arange(10)
+i = np.array([2, 1, 8, 4])
+x[i] = 99
+print(x)
+# [ 0 99 99 3 99 5 6 7 99 9]
+x[i] -= 10
+print(x)
+# [ 0 89 89 3 89 5 6 7 89 9]
+
+x = np.zeros(10)
+x[[0, 0]] = [4, 6]
+print(x)
+# [ 6. 0. 0. 0. 0. 0. 0. 0. 0. 0.] 
+# The result of this operation is to first assign x[0] = 4, followedby x[0] = 6.
+i = [2, 3, 3, 4, 4, 4]
+x[i] += 1
+x
+# array([ 6., 0., 1., 1., 1., 0., 0., 0., 0., 0.])
+
+x = np.zeros(10)
+np.add.at(x, i, 1)
+print(x)
+# [ 0. 0. 1. 2. 3. 0. 0. 0. 0. 0.]
+# The at() method does an in-place application of the given operator at the specified indices (here, i) with the specified value (here, 1).
+```
+
 [To Top](#Top)
