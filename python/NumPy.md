@@ -820,6 +820,24 @@ ind = np.array([[3, 7],
 x[ind]
 # array([[71, 86],
 #        [60, 20]])
+
+X = np.arange(12).reshape((3, 4))
+# array([[ 0, 1, 2, 3],
+#        [ 4, 5, 6, 7],
+#        [ 8, 9, 10, 11]])
+row = np.array([0, 1, 2])
+col = np.array([2, 1, 3])
+X[row, col]
+# array([ 2, 5, 11])
+X[row[:, np.newaxis], col]
+# array([[ 2, 1, 3],
+#        [ 6, 5, 7],
+#        [10, 9, 11]])
+row[:, np.newaxis] * col
+# array([[0, 0, 0],
+#        [2, 1, 3],
+#        [4, 2, 6]])
+
 ```
 
 [To Top](#Top)
