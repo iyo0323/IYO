@@ -8,6 +8,7 @@
 * [Comparisons, Masks, and Boolean Logic](#ComparisonsMasksAndBooleanLogic)
 * [Indexing](#Indexing)
 * [Sorting Arrays](#SortingArrays)
+* [Structured Data: NumPy’s Structured Arrays](#StructuredArrays)
 
 
 # Basics
@@ -1074,6 +1075,98 @@ for i in range(X.shape[0]):
     # plot a line from X[i] to X[j]
     # use some zip magic to make it happen:
     plt.plot(*zip(X[j], X[i]), color='black')
+```
+
+[To Top](#Top)
+
+
+# StructuredArrays
+
+```py
+# Basic
+#########################################################
+name = ['Alice', 'Bob', 'Cathy', 'Doug']
+age = [25, 45, 37, 19]
+weight = [55.0, 85.5, 68.0, 61.5]
+x = np.zeros(4, dtype=int)
+
+# Use a compound data type for structured arrays
+data = np.zeros(4, dtype={'names':('name', 'age', 'weight'), 'formats':('U10', 'i4', 'f8')})
+print(data.dtype)
+# [('name', '<U10'), ('age', '<i4'), ('weight', '<f8')]
+# 'U10' translates to “Unicode string of maximum length 10,” 'i4' translates to “4-byte (i.e., 32 bit) integer,” and 'f8' translates to “8-byte (i.e., 64 bit) float.”
+
+data['name'] = name
+data['age'] = age
+data['weight'] = weight
+print(data)
+# [('Alice', 25, 55.0) ('Bob', 45, 85.5) ('Cathy', 37, 68.0) ('Doug', 19, 61.5)]
+
+# Get all names
+data['name']
+# array(['Alice', 'Bob', 'Cathy', 'Doug'], dtype='<U10')
+
+# Get first row of data
+data[0]
+# ('Alice', 25, 55.0)
+
+# Get the name from the last row
+data[-1]['name']
+# 'Doug'
+
+# Get names where age is under 30
+data[data['age'] < 30]['name']
+# array(['Alice', 'Doug'], dtype='<U10')
+```
+
+```py
+# Creating Structured Arrays
+#########################################################
+np.dtype({'names':('name', 'age', 'weight'), 
+  'formats':('U10', 'i4', 'f8')})
+# dtype([('name', '<U10'), ('age', '<i4'), ('weight', '<f8')])
+
+np.dtype({'names':('name', 'age', 'weight'), 
+  'formats':((np.str_, 10), int, np.float32)})
+# dtype([('name', '<U10'), ('age', '<i8'), ('weight', '<f4')])
+
+np.dtype([('name', 'S10'), ('age', 'i4'), ('weight', 'f8')])
+# dtype([('name', 'S10'), ('age', '<i4'), ('weight', '<f8')])
+
+np.dtype('S10, i4, f8')
+# dtype([('f0', 'S10'), ('f1', '<i4'), ('f2', '<f8')])
+```
+
+```py
+# More Advanced Compound Types
+#########################################################
+tp = np.dtype([('id', 'i8'), ('mat', 'f8', (3, 3))])
+X = np.zeros(1, dtype=tp)
+print(X[0])
+print(X['mat'][0])
+# (0, [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]])
+# [[ 0. 0. 0.]
+#  [ 0. 0. 0.]
+#  [ 0. 0. 0.]]
+```
+
+```py
+# RecordArrays: Structured Arrays with a Twist
+#########################################################
+# The np.recarray class, which is almost identical to the structured arrays just described, but with one additional feature: fields can be accessed as attributes rather than as dictionary keys.
+data['age']
+# array([25, 45, 37, 19], dtype=int32)
+
+data_rec = data.view(np.recarray)
+data_rec.age
+# array([25, 45, 37, 19], dtype=int32)
+
+%timeit data['age']
+%timeit data_rec['age']
+%timeit data_rec.age
+# 1000000 loops, best of 3: 241 ns per loop
+# 100000 loops, best of 3: 4.61 μs per loop
+# 100000 loops, best of 3: 7.27 μs per loop
 ```
 
 [To Top](#Top)
