@@ -4,7 +4,7 @@
 * [Basics](#Basics)
 * [NumPy Arrays](#NumPyArrays)
 * [Aggregations: Min, Max, and Everything in Between](#AggregationsMinMaxAndEverythingInBetween)
-* [Computation on Arrays: Broadcasting](#ComputationOnArraysBroadcasting)
+* [Broadcasting](#Broadcasting)
 * [Comparisons, Masks, and Boolean Logic](#ComparisonsMasksAndBooleanLogic)
 * [Indexing](#Indexing)
 * [Sorting Arrays](#SortingArrays)
@@ -547,7 +547,7 @@ plt.ylabel('number');
 [To Top](#Top)
 
 
-# ComputationOnArraysBroadcasting
+# Broadcasting
 
 ```py
 # Introducing Broadcasting
@@ -966,7 +966,7 @@ print("Custom routine:")
 # SortingArrays
 
 ```py
-# Fast Sorting in NumPy: np.sort and np.argsort
+# np.sort and np.argsort
 #########################################################
 # By default np.sort uses quicksort algorithm
 x = np.array([2, 1, 4, 3, 5])
@@ -1007,6 +1007,73 @@ np.sort(X, axis=1)
 #        [2, 3, 4, 6, 7, 7],
 #        [1, 2, 4, 5, 7, 7],
 #        [0, 1, 4, 5, 5, 9]])
+```
+
+```py
+# Partial Sorts: Partitioning
+#########################################################
+# np.partition takes an array and a number K; the result is a new array with the smallest K values to the left of the partition, and the remaining values to the right, in arbitrary order
+x = np.array([7, 2, 3, 1, 6, 5, 4])
+np.partition(x, 3)
+# array([2, 1, 3, 4, 6, 5, 7])
+
+np.partition(X, 2, axis=1)
+# array([[3, 4, 6, 7, 6, 9],
+#        [2, 3, 4, 7, 6, 7],
+#        [1, 2, 4, 5, 7, 7],
+#        [0, 1, 4, 5, 9, 5]])
+```
+
+```py
+# Example: k-Nearest Neighbors
+#########################################################
+%matplotlib inline
+import matplotlib.pyplot as plt
+import seaborn; seaborn.set() # Plot styling
+
+X = rand.rand(10, 2)
+plt.scatter(X[:, 0], X[:, 1], s=100);
+
+dist_sq = np.sum((X[:,np.newaxis,:] - X[np.newaxis,:,:]) ** 2, axis=-1)
+
+# for each pair of points, compute differences in their coordinates
+differences = X[:, np.newaxis, :] - X[np.newaxis, :, :]
+differences.shape
+# (10, 10, 2)
+
+# square the coordinate differences
+sq_differences = differences ** 2
+sq_differences.shape
+# (10, 10, 2)
+
+dist_sq.diagonal()
+# array([ 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+
+nearest = np.argsort(dist_sq, axis=1)
+print(nearest)
+# [[0 3 9 7 1 4 2 5 6 8]
+#  [1 4 7 9 3 6 8 5 0 2]
+#  [2 1 4 6 3 0 8 9 7 5]
+#  [3 9 7 0 1 4 5 8 6 2]
+#  [4 1 8 5 6 7 9 3 0 2]
+#  [5 8 6 4 1 7 9 3 2 0]
+#  [6 8 5 4 1 7 9 3 2 0]
+#  [7 9 3 1 4 0 5 8 6 2]
+#  [8 5 6 4 1 7 9 3 2 0]
+#  [9 7 3 0 1 4 5 8 6 2]]
+# the first column gives the numbers 0 through 9 in order: this is due to the fact that each point’s closest neighbor is itself
+
+K = 2
+nearest_partition = np.argpartition(dist_sq, K + 1, axis=1)
+plt.scatter(X[:, 0], X[:, 1], s=100)
+
+# draw lines from each point to its two nearest neighbors
+K = 2
+for i in range(X.shape[0]):
+  for j in nearest_partition[i, :K+1]:
+    # plot a line from X[i] to X[j]
+    # use some zip magic to make it happen:
+    plt.plot(*zip(X[j], X[i]), color='black')
 ```
 
 [To Top](#Top)
