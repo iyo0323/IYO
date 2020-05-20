@@ -6,7 +6,8 @@
 * [Aggregations: Min, Max, and Everything in Between](#AggregationsMinMaxAndEverythingInBetween)
 * [Computation on Arrays: Broadcasting](#ComputationOnArraysBroadcasting)
 * [Comparisons, Masks, and Boolean Logic](#ComparisonsMasksAndBooleanLogic)
-* [Fancy Indexing](#FancyIndexing)
+* [Indexing](#Indexing)
+* [Sorting Arrays](#SortingArrays)
 
 
 # Basics
@@ -798,7 +799,7 @@ x = np.arange(10)
 [To Top](#Top)
 
 
-# FancyIndexing
+# Indexing
 
 ```py
 # Exploring Fancy Indexing
@@ -957,6 +958,55 @@ print("Custom routine:")
 # 10 loops, best of 3: 68.7 ms per loop
 # Custom routine:
 # 10 loops, best of 3: 135 ms per loop
+```
+
+[To Top](#Top)
+
+
+# SortingArrays
+
+```py
+# Fast Sorting in NumPy: np.sort and np.argsort
+#########################################################
+# By default np.sort uses quicksort algorithm
+x = np.array([2, 1, 4, 3, 5])
+np.sort(x)
+# array([1, 2, 3, 4, 5])
+x.sort()
+print(x)
+# [1 2 3 4 5]
+
+# A related function is argsort, which instead returns the indices of the sorted elements
+x = np.array([2, 1, 4, 3, 5])
+i = np.argsort(x)
+print(i)
+# [1 0 3 2 4]
+x[i]
+# array([1, 2, 3, 4, 5])
+
+# Sorting along rows or columns
+##############################
+rand = np.random.RandomState(42)
+X = rand.randint(0, 10, (4, 6))
+print(X)
+# [[6 3 7 4 6 9]
+#  [2 6 7 4 3 7]
+#  [7 2 5 4 1 7]
+#  [5 1 4 0 9 5]]
+
+# sort each column of X
+np.sort(X, axis=0)
+# array([[2, 1, 4, 0, 1, 5],
+#        [5, 2, 5, 4, 3, 7],
+#        [6, 3, 7, 4, 6, 7],
+#        [7, 6, 7, 4, 9, 9]])
+
+# sort each row of X
+np.sort(X, axis=1)
+# array([[3, 4, 6, 6, 7, 9],
+#        [2, 3, 4, 6, 7, 7],
+#        [1, 2, 4, 5, 7, 7],
+#        [0, 1, 4, 5, 5, 9]])
 ```
 
 [To Top](#Top)
