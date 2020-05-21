@@ -106,6 +106,7 @@ print(nz)
 
 # 11
 
+11. Create a 3x3 identity matrix (★☆☆)
 ```py
 # 11. 3x3 の単位行列を生成する (★☆☆)
 #########################################################
@@ -115,6 +116,7 @@ np.eye(3)
 #        [0., 0., 1.]])
 ```
 
+12. Create a 3x3x3 array with random values (★☆☆)
 ```py
 # 12. 乱数で 3x3x3 配列を生成する (★☆☆)
 #########################################################
@@ -133,6 +135,7 @@ print(Z)
 #   [0.40253981 0.13853578 0.56675828]]]
 ```
 
+13. Create a 10x10 array with random values and find the minimum and maximum values (★☆☆)
 ```py
 # 13. 乱数で 10x10 配列を生成して、その最小値と最大値を見つける (★☆☆)
 #########################################################
@@ -142,6 +145,7 @@ print(Zmin, Zmax)
 # 0.0013772822154449749 0.9929879247278675
 ```
 
+14. Create a random vector of size 30 and find the mean value (★☆☆)
 ```py
 # 14. 大きさ 30 の乱数のベクトルを生成して、その平均を求める (★☆☆)
 #########################################################
@@ -151,6 +155,7 @@ print(m)
 # 0.5043710617045838
 ```
 
+15. Create a 2d array with 1 on the border and 0 inside (★☆☆)
 ```py
 # 15. 周囲が 1 で内部が 0 であるような2次元配列生成する (★☆☆)
 #########################################################
@@ -169,6 +174,7 @@ print(Z)
 #  [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]]
 ```
 
+16. How to add a border (filled with 0's) around an existing array? (★☆☆)
 ```py
 # 16. 既存の配列の周囲を 0 で囲む方法は? (★☆☆)
 #########################################################
@@ -184,6 +190,7 @@ print(Z)
 #  [0. 0. 0. 0. 0. 0. 0.]]
 ```
 
+17. What is the result of the following expression? (★☆☆)
 ```py
 # 17. 以下の式の結果は何か? (★☆☆)
 #########################################################
@@ -192,7 +199,7 @@ print(Z)
 # np.inf > np.nan
 # np.nan - np.nan
 # 0.3 == 3 * 0.1
-
+#########################################################
 print(0 * np.nan)
 print(np.nan == np.nan)
 print(np.inf > np.nan)
@@ -205,6 +212,7 @@ print(0.3 == 3 * 0.1)
 # False
 ```
 
+18. Create a 5x5 matrix with values 1,2,3,4 just below the diagonal (★☆☆)
 ```py
 # 18. 対角成分の直下に 1,2,3,4 の成分を持つ 5x5 行列を生成する (★☆☆)
 #########################################################
@@ -217,6 +225,7 @@ print(Z)
 #  [0 0 0 4 0]]
 ```
 
+19. Create a 8x8 matrix and fill it with a checkerboard pattern (★☆☆)
 ```py
 # 19. 8x8 行列を生成して、市松模様で埋める (★☆☆)
 #########################################################
@@ -234,6 +243,7 @@ print(Z)
 #  [1 0 1 0 1 0 1 0]]
 ```
 
+20. Consider a (6,7,8) shape array, what is the index (x,y,z) of the 100th element?
 ```py
 # 20. shape属性が (6,7,8) の配列のとき、100 番目の要素の添え字 (x,y,z)は？
 #########################################################
@@ -247,6 +257,7 @@ np.unravel_index(100, (6,7,8))
 
 # 21
 
+21. Create a checkerboard 8x8 matrix using the tile function (★☆☆)
 ```py
 # 21. tile 関数を使って 8x8 の市松模様の行列を生成する (★☆☆)
 #########################################################
@@ -262,6 +273,7 @@ print(Z)
 #  [1 0 1 0 1 0 1 0]]
 ```
 
+22. Normalize a 5x5 random matrix (★☆☆)
 ```py
 # 22. 5x5 の乱数の行列を正規化する (★☆☆)
 #########################################################
@@ -276,6 +288,7 @@ print(Z)
 #  [0.4646811  0.07425622 0.91839516 0.21776284 0.        ]]
 ```
 
+23. Create a custom dtype that describes a color as four unsigned bytes (RGBA) (★☆☆)
 ```py
 # 23. 色を 4 個の符号なしバイト型 (RGBA) で表現するカスタム dtype を作成する (★☆☆)
 #########################################################
@@ -285,6 +298,7 @@ color = np.dtype( [('r', np.ubyte, 1),
                    ('a', np.ubyte, 1)])
 ```
 
+24. Multiply a 5x3 matrix by a 3x2 matrix (real matrix product) (★☆☆)
 ```py
 # 24. 5x3 行列と 3x2 行列の掛け算 (実数の行列積) (★☆☆)
 #########################################################
@@ -299,6 +313,7 @@ print(Z)
 Z = np.ones((5,3)) @ np.ones((3,2))
 ```
 
+25. Given a 1D array, negate all elements which are between 3 and 8, in place. (★☆☆)
 ```py
 # 25. 1次元配列が与えられたとき、３番目から８番目の全要素を-1にする (★☆☆)
 #########################################################
@@ -308,13 +323,14 @@ print(Z)
 # [ 0  1  2 -1 -1 -1 -1 -1 -1  9 10]
 ```
 
+26. What is the output of the following script? (★☆☆)
 ```py
 # 26. 以下のスクリプトの出力は? (★☆☆)
 #########################################################
 # print(sum(range(5),-1))
 # from numpy import *
 # print(sum(range(5),-1))
-
+#########################################################
 print(sum(range(5),-1))
 from numpy import *
 print(sum(range(5),-1))
@@ -334,6 +350,7 @@ print(sum(range(5),-1))
 # 0 + 1 + 2 + 3 + 4 = 10となります。
 ```
 
+27. Consider an integer vector Z, which of these expressions are legal? (★☆☆)
 ```py
 # 27. Z が整数型のベクトルのとき、これらの式のどれが適切か？ (★☆☆)
 #########################################################
@@ -343,7 +360,7 @@ print(sum(range(5),-1))
 # 1j*Z
 # Z/1/1
 # ZZ
-
+#########################################################
 Z = np.arange(3)
 # array([0, 1, 2])
 Z**Z        # array([1, 1, 4], dtype=int32)
@@ -354,13 +371,14 @@ Z/1/1       # array([0., 1., 2.])
 ZZ # NameError: name 'ZZ' is not defined
 ```
 
+28. What are the result of the following expressions?
 ```py
 # 28. 以下の式の結果は何か?
 #########################################################
 # print(np.array(0) / np.array(0))
 # print(np.array(0) // np.array(0))
 # print(np.array([np.nan]).astype(int).astype(float))
-
+#########################################################
 print(np.array(0) / np.array(0))
 print(np.array(0) // np.array(0))
 print(np.array([np.nan]).astype(int).astype(float))
@@ -373,6 +391,7 @@ print(np.array([np.nan]).astype(int).astype(float))
 # 0次元のarrayというのは数学的にはスカラーだと思うのですが、NumPyにおける0次元のndarrayは、NumPyにおけるscalarとは別物のようです。
 ```
 
+29. How to round away from zero a float array ? (★☆☆)
 ```py
 # 29. ゼロから遠くなるように浮動小数点型の配列の小数点を丸める方法は? (★☆☆)
 #########################################################
@@ -386,6 +405,7 @@ print (np.copysign(np.ceil(np.abs(Z)), Z))
 # np.copysignは第一引数の符号が第二引数の符号に置き換えられる。
 ```
 
+30. How to find common values between two arrays? (★☆☆)
 ```py
 # 30. 2つの配列に共通する値の見つけ方は? (★☆☆)
 #########################################################
