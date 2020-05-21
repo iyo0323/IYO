@@ -1,18 +1,25 @@
 
 # Top
 
-* [01~20](#01)
-* [21~40](#21)
+[100 numpy exercises](https://github.com/rougier/numpy-100)
+
+
+* [01~10](#01)
+* [11~20](#11)
+* [21~30](#21)
+* [31~40](#31)
 
 
 # 01
 
+01. Import the numpy package under the name np (★☆☆)
 ```py
 # 01. numpy パッケージを `np` の名前でインポートする (★☆☆)
 #########################################################
 import numpy as np
 ```
 
+02. Print the numpy version and the configuration (★☆☆)
 ```py
 # 02. numpy バージョンとその設定を表示する (★☆☆)
 #########################################################
@@ -20,6 +27,7 @@ print(np.__version__)
 np.show_config()
 ```
 
+03. Create a null vector of size 10 (★☆☆)
 ```py
 # 03. 大きさ 10 の零ベクトルを生成する (★☆☆)
 #########################################################
@@ -28,6 +36,7 @@ print(Z)
 # [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
 ```
 
+04. How to find the memory size of any array (★☆☆)
 ```py
 # 04. 配列のメモリーサイズを知る方法は (★☆☆)
 #########################################################
@@ -36,12 +45,14 @@ print(Z.size*Z.itemsize)
 # 800
 ```
 
+05. How to get the documentation of the numpy add function from the command line? (★☆☆)
 ```py
 # 05. コマンドラインからの、numpy add 関数のドキュメントの取得方法は? (★☆☆)
 #########################################################
 python -c "import numpy; numpy.info(numpy.add)"
 ```
 
+06. Create a null vector of size 10 but the fifth value which is 1 (★☆☆)
 ```py
 # 06. 5番目の値だけ 1 の大きさ 10 の零ベクトルを生成する (★☆☆)
 #########################################################
@@ -51,6 +62,7 @@ print(Z)
 # [0. 0. 0. 0. 1. 0. 0. 0. 0. 0.]
 ```
 
+07. Create a vector with values ranging from 10 to 49 (★☆☆)
 ```py
 # 07. 値の範囲が 10 から 49 であるようなベクトルを生成する (★☆☆)
 #########################################################
@@ -59,6 +71,7 @@ print(Z)
 # [10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49]
 ```
 
+08. Reverse a vector (first element becomes last) (★☆☆)
 ```py
 # 08. ベクトルを逆転する (最初の要素が最後に) (★☆☆)
 #########################################################
@@ -68,6 +81,7 @@ print(Z)
 # [49 48 47 46 45 44 43 42 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0]
 ```
 
+09. Create a 3x3 matrix with values ranging from 0 to 8 (★☆☆)
 ```py
 # 09. 値の範囲が 0 から 8 であるような 3x3 マトリクスを生成する (★☆☆)
 #########################################################
@@ -78,6 +92,7 @@ print(Z)
 #  [6 7 8]]
 ```
 
+10. Find indices of non-zero elements from [1,2,0,0,4,0] (★☆☆)
 ```py
 # 10. [1,2,0,0,4,0] からゼロでない要素の添え字を見つける (★☆☆)
 #########################################################
@@ -85,6 +100,11 @@ nz = np.nonzero([1,2,0,0,4,0])
 print(nz)
 # (array([0, 1, 4], dtype=int64),)
 ```
+
+* [To Top](#Top)
+
+
+# 11
 
 ```py
 # 11. 3x3 の単位行列を生成する (★☆☆)
@@ -287,3 +307,102 @@ Z[(Z>=3) & (Z<=8)] = -1
 print(Z)
 # [ 0  1  2 -1 -1 -1 -1 -1 -1  9 10]
 ```
+
+```py
+# 26. 以下のスクリプトの出力は? (★☆☆)
+#########################################################
+# print(sum(range(5),-1))
+# from numpy import *
+# print(sum(range(5),-1))
+
+print(sum(range(5),-1))
+from numpy import *
+print(sum(range(5),-1))
+# 9
+# 10
+
+# python組み込みのsum()関数は、sum(iterable[, start])という引数を持ちます。これは以下のように計算されます。
+# def sum(values, start = 0):
+#     total = start
+#     for value in values:
+#         total = total + value
+#     return total
+# なので、print(sum(range(5),-1))を計算すると -1 + 0 + 1 + 2 + 3 + 4 = 9となります。
+
+# 一方、from numpy as npすると、python組み込みのsum()関数の代わりに、np.sum()が呼ばれます。
+# print(np.sum(range(5), axis=-1))
+# 0 + 1 + 2 + 3 + 4 = 10となります。
+```
+
+```py
+# 27. Z が整数型のベクトルのとき、これらの式のどれが適切か？ (★☆☆)
+#########################################################
+# Z**Z
+# 2 << Z >> 2
+# Z <- Z
+# 1j*Z
+# Z/1/1
+# ZZ
+
+Z = np.arange(3)
+# array([0, 1, 2])
+Z**Z        # array([1, 1, 4], dtype=int32)
+2 << Z >> 2 # array([0, 1, 2], dtype=int32)
+Z <- Z      # array([False, False, False])
+1j*Z        # array([0.+0.j, 0.+1.j, 0.+2.j])
+Z/1/1       # array([0., 1., 2.])
+ZZ # NameError: name 'ZZ' is not defined
+```
+
+```py
+# 28. 以下の式の結果は何か?
+#########################################################
+# print(np.array(0) / np.array(0))
+# print(np.array(0) // np.array(0))
+# print(np.array([np.nan]).astype(int).astype(float))
+
+print(np.array(0) / np.array(0))
+print(np.array(0) // np.array(0))
+print(np.array([np.nan]).astype(int).astype(float))
+# nan
+# 0
+# [-9.22337204e+18]
+
+# np.array([0])は長さ1のベクトルです。
+# np.array(0)は「0という値を持つ0次元のarray」を表すようです。
+# 0次元のarrayというのは数学的にはスカラーだと思うのですが、NumPyにおける0次元のndarrayは、NumPyにおけるscalarとは別物のようです。
+```
+
+```py
+# 29. ゼロから遠くなるように浮動小数点型の配列の小数点を丸める方法は? (★☆☆)
+#########################################################
+# Author: Charles R Harris
+Z = np.random.uniform(-10,+10,10)
+print(Z)
+print (np.copysign(np.ceil(np.abs(Z)), Z))
+# [-4.75375598  8.72993389 -2.08680534 -4.60164073 -1.92325826 -2.04734398 -4.27149975  2.62664347 -0.47571341 -1.84556154]
+# [-5.  9. -3. -5. -2. -3. -5.  3. -1. -2.]
+
+# np.copysignは第一引数の符号が第二引数の符号に置き換えられる。
+```
+
+```py
+# 30. 2つの配列に共通する値の見つけ方は? (★☆☆)
+#########################################################
+Z1 = np.random.randint(0,10,10)
+Z2 = np.random.randint(0,10,10)
+print(Z1)
+print(Z2)
+print(np.intersect1d(Z1, Z2))
+# [0 8 4 9 3 8 4 5 1 8]
+# [8 8 8 2 1 7 4 8 2 3]
+# [1 3 4 8]
+```
+
+* [To Top](#Top)
+
+
+# 31
+
+
+* [To Top](#Top)
