@@ -8,6 +8,7 @@
 * [11~20](#11)
 * [21~30](#21)
 * [31~40](#31)
+* [41~50](#41)
 
 
 # 01
@@ -431,5 +432,171 @@ print(np.intersect1d(Z1, Z2))
 
 # 31
 
+31. How to ignore all numpy warnings (not recommended)? (★☆☆)
+```py
+# 31. すべての numpy の警告を無視する方法は (非推奨)? (★☆☆)
+#########################################################
+# Suicide mode on
+defaults = np.seterr(all="ignore")
+Z = np.ones(1) / 0
+
+# Back to sanity
+_ = np.seterr(**defaults)
+
+# An equivalent way, with a context manager:
+with np.errstate(divide='ignore'):
+    Z = np.ones(1) / 0
+```
+
+32. Is the following expressions true? (★☆☆)
+```py
+# 32. 以下の式は正しいですか? (★☆☆)
+#########################################################
+np.sqrt(-1) == np.emath.sqrt(-1)
+#########################################################
+np.sqrt(-1) == np.emath.sqrt(-1)
+# False
+#########################################################
+# ■ 解説
+# np.sqrt(-1)はnanになり、np.emath.sqrt(-1)は1jになります。
+# np.sqrt() は引数が複素数の場合は、負の実数が含まれている場合も計算結果を複素数で返すが、引数が負の実数の場合には nan を返す。一方でnp.emath.sqrt() は引数が負の実数の場合にも、複素数を返す。
+```
+
+33. How to get the dates of yesterday, today and tomorrow? (★☆☆)
+```py
+# 33. 昨日、今日、明日の日付の取得方法は? (★☆☆)
+#########################################################
+yesterday = np.datetime64('today', 'D') - np.timedelta64(1, 'D')
+today = np.datetime64('today', 'D')
+tomorrow = np.datetime64('today', 'D') + np.timedelta64(1, 'D')
+print(yesterday)
+print(today)
+print(tomorrow)
+# 2020-05-20
+# 2020-05-21
+# 2020-05-22
+```
+
+34. How to get all the dates corresponding to the month of July 2016? (★★☆)
+```py
+# 34. 2016年7月のすべての日付の取得方法は? (★★☆)
+#########################################################
+Z = np.arange('2016-07', '2016-08', dtype='datetime64[D]')
+print(Z)
+# ['2016-07-01' '2016-07-02' '2016-07-03' '2016-07-04' '2016-07-05'
+#  '2016-07-06' '2016-07-07' '2016-07-08' '2016-07-09' '2016-07-10'
+#  '2016-07-11' '2016-07-12' '2016-07-13' '2016-07-14' '2016-07-15'
+#  '2016-07-16' '2016-07-17' '2016-07-18' '2016-07-19' '2016-07-20'
+#  '2016-07-21' '2016-07-22' '2016-07-23' '2016-07-24' '2016-07-25'
+#  '2016-07-26' '2016-07-27' '2016-07-28' '2016-07-29' '2016-07-30'
+#  '2016-07-31']
+```
+
+35. How to compute ((A+B)*(-A/2)) in place (without copy)? (★★☆)
+```py
+# 35. ((A+B)\*(-A/2))の計算方法は (copyせずに)? (★★☆)
+#########################################################
+A = np.ones(3)*1
+B = np.ones(3)*2
+C = np.ones(3)*3
+print( np.add(A,B,out=B)) 
+print( np.divide(A,2,out= A))
+print( np.negative(A,out= A))
+print( np.multiply(A,B,out=A))
+# [3. 3. 3.]
+# [0.5 0.5 0.5]
+# [-0.5 -0.5 -0.5]
+# [-1.5 -1.5 -1.5]
+```
+
+36. Extract the integer part of a random array using 5 different methods (★★☆)
+```py
+# 36. 乱数の配列から整数部分を抽出する5種類の方法は (★★☆)
+#########################################################
+Z = np.random.uniform(0,10,10)
+print (Z - Z%1)
+print (np.floor(Z))
+print (np.ceil(Z)-1)
+print (Z.astype(int))
+print (np.trunc(Z))
+# [4. 6. 5. 2. 9. 2. 6. 6. 1. 9.]
+# [4. 6. 5. 2. 9. 2. 6. 6. 1. 9.]
+# [4. 6. 5. 2. 9. 2. 6. 6. 1. 9.]
+# [4 6 5 2 9 2 6 6 1 9]
+# [4. 6. 5. 2. 9. 2. 6. 6. 1. 9.]
+```
+
+37. Create a 5x5 matrix with row values ranging from 0 to 4 (★★☆)
+```py
+# 37. 行の値が 0 から 4 の 5x5 行列を生成する (★★☆)
+#########################################################
+Z = np.zeros((5, 5))
+Z += np.arange(5)
+print(Z)
+# [[0. 1. 2. 3. 4.]
+#  [0. 1. 2. 3. 4.]
+#  [0. 1. 2. 3. 4.]
+#  [0. 1. 2. 3. 4.]
+#  [0. 1. 2. 3. 4.]]
+```
+
+38. Consider a generator function that generates 10 integers and use it to build an array (★☆☆)
+```py
+# 38. 10個の整数を生成するジェネレータ関数があるとき、それを使って配列を生成する (★☆☆)
+#########################################################
+def generate():
+   for i in range(10):
+       yield i
+Z = np.fromiter(generate(), dtype=float, count=-1)
+print(Z)
+# [0. 1. 2. 3. 4. 5. 6. 7. 8. 9.]
+#########################################################
+# ■ 解説
+# numpy.fromiter(iterable, dtype, count=-1)
+# Create a new 1-dimensional array from an iterable object.
+# np.fromiter()は、イテレータからndarrayを生成する関数です。引数のcountは、要素数の上限です。
+```
+
+39. Create a vector of size 10 with values ranging from 0 to 1, both excluded (★★☆)
+```py
+# 39. 0 から 1 の範囲の値を持つ大きさ 10 のベクトルを生成する (ただし、両端の 0 と 1 は含めない) (★★☆)
+#########################################################
+Z = np.linspace(0, 1, 11, endpoint=False)[1:]
+print(Z)
+# [0.09090909 0.18181818 0.27272727 0.36363636 0.45454545 0.54545455 0.63636364 0.72727273 0.81818182 0.90909091]
+#########################################################
+# ■ 解説
+# numpy.linspace()も等差数列を生成するが、間隔（公差）ではなく要素数を指定する。
+# 第一引数startに最初の値、第二引数stopに最後の値、第三引数numに要素数を指定する。それらに応じた間隔（公差）が自動的に算出される。
+```
+
+40. Create a random vector of size 10 and sort it (★★☆)
+```py
+# 40. 大きさが 10 の乱数を生成して、それを並びかえる (★★☆)
+#########################################################
+Z = np.random.random(10)
+Z.sort()
+print(Z)
+# [0.05927249 0.08552114 0.12987335 0.20097557 0.22175876 0.37299276 0.39795321 0.40155124 0.64217058 0.98197582]
+```
+
+* [To Top](#Top)
+
+
+# 41
+
+41. How to sum a small array faster than np.sum? (★★☆)
+```py
+# 41. np.sumより高速に小さい配列を集計する方法は? (★★☆)
+#########################################################
+Z = np.arange(10)
+%timeit np.add.reduce(Z)
+%timeit Z.sum()
+# 3.69 µs ± 162 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+# 6.33 µs ± 362 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+#########################################################
+# ■ 解説
+# np.sum()は内部でnp.add.reduce()を呼んでいるので、オーバーヘッド分だけnp.sum()のほうが遅くなるようです。
+```
 
 * [To Top](#Top)
