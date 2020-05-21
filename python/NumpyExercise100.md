@@ -599,4 +599,51 @@ Z = np.arange(10)
 # np.sum()は内部でnp.add.reduce()を呼んでいるので、オーバーヘッド分だけnp.sum()のほうが遅くなるようです。
 ```
 
+42. Consider two random array A and B, check if they are equal (★★☆)
+```py
+# 42. A と B の2つの乱数配列があるとき、それらが等しいかをチェックする (★★☆)
+#########################################################
+A = np.random.randint(0, 2, 5)
+B = np.random.randint(0, 2, 5)
+# Assuming identical shape of the arrays and a tolerance for the comparison of values
+equal = np.allclose(A, B)
+print(equal)
+# Checking both the shape and the element values, no tolerance (values have to be exactly equal)
+equal = np.array_equal(A, B)
+print(equal)
+# False
+# False
+```
+
+43. Make an array immutable (read-only) (★★☆)
+```py
+# 43. イミュータブル(読み取り専用)の配列を生成する (★★☆)
+#########################################################
+Z = np.zeros(10)
+Z.flags.writeable = False
+Z[0] = 1
+#       1 Z = np.zeros(10)
+#       2 Z.flags.writeable = False
+# ----> 3 Z[0] = 1
+# ValueError: assignment destination is read-only
+```
+
+44. Consider a random 10x2 matrix representing cartesian coordinates, convert them to polar coordinates (★★☆)
+```py
+# 44. 直交座標で 10x2 行列があるとき、それらを極座標に変換する (★★☆)
+#########################################################
+Z = np.random.random((10,2))
+X, Y = Z[:,0], Z[:,1]
+R = np.sqrt(X**2+Y**2)
+T = np.arctan2(Y,X)
+print(R)
+print(T)
+# [0.87681217 0.3161743  0.90135585 0.6531784  0.64847374 0.68742857 0.84485734 1.12235679 0.62017815 1.0990964 ]
+# [0.38481736 1.46375703 0.99300613 0.22501077 1.3079256  0.5497876 0.44970742 0.92537148 1.02306295 1.064497 ]
+#########################################################
+# ■ 解説
+# R = np.sqrt(X**2+Y**2)の部分はR = np.hypot(X, Y)としたほうが簡潔です。
+# np.arctan2(a, b)	a/bのarctanを返す。戻り値の範囲は[-pi, pi]
+```
+
 * [To Top](#Top)
