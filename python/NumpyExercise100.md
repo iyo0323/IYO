@@ -888,4 +888,34 @@ print(Z)
 # np.genfromtxt()を使うと、欠損値を含んでいたり複数の異なるデータ型を含んでいたりする、より複雑な構造のCSVファイルの読み込みが可能。
 ```
 
+55. What is the equivalent of enumerate for numpy arrays? (★★☆)
+```py
+# 55. numpy 配列で enumerate に相当するものは何ですか?
+#########################################################
+Z = np.arange(9).reshape(3,3)
+for index, value in np.ndenumerate(Z):
+   print(index, value)
+for index in np.ndindex(Z.shape):
+   print(index, Z[index])
+# (0, 0) 0
+# (0, 1) 1
+# (0, 2) 2
+# (1, 0) 3
+# (1, 1) 4
+# (1, 2) 5
+# (2, 0) 6
+# (2, 1) 7
+# (2, 2) 8
+
+# (0, 0) 0
+# (0, 1) 1
+# (0, 2) 2
+# (1, 0) 3
+# (1, 1) 4
+# (1, 2) 5
+# (2, 0) 6
+# (2, 1) 7
+# (2, 2) 8
+```
+
 * [To Top](#Top)
