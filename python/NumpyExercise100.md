@@ -1,7 +1,11 @@
 
 # Top
 
-[100 numpy exercises](https://github.com/rougier/numpy-100)
+[GitHub - 100 numpy exercises](https://github.com/rougier/numpy-100)
+
+[解答](https://osawat.hatenablog.com/entry/2018/12/24/044047)
+
+[解説](https://minus9d.hatenablog.com/entry/2017/05/21/221242)
 
 
 * [01~10](#01)
