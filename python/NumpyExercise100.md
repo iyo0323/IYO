@@ -798,10 +798,94 @@ np.abs(Z-v)
 
 # 51
 
+51. Create a structured array representing a position (x,y) and a color (r,g,b) (★★☆)
 ```py
-# 01. numpy パッケージを `np` の名前でインポートする (★☆☆)
+# 51. 位置 (x,y) と 色 (r,g,b) を表現する構造化配列を生成する (★★☆)
 #########################################################
-import numpy as np
+Z = np.zeros(10, [ ('position', [ ('x', float, 1), ('y', float, 1)]),
+                   ('color',    [ ('r', float, 1), ('g', float, 1), ('b', float, 1)])])
+print(Z)
+# [((0., 0.), (0., 0., 0.)) ((0., 0.), (0., 0., 0.))
+#  ((0., 0.), (0., 0., 0.)) ((0., 0.), (0., 0., 0.))
+#  ((0., 0.), (0., 0., 0.)) ((0., 0.), (0., 0., 0.))
+#  ((0., 0.), (0., 0., 0.)) ((0., 0.), (0., 0., 0.))
+#  ((0., 0.), (0., 0., 0.)) ((0., 0.), (0., 0., 0.))]
+```
+
+52. Consider a random vector with shape (100,2) representing coordinates, find point by point distances (★★☆)
+```py
+# 52. shape属性が (100, 2) の座標を表現する乱数のベクトルがあるとき、各点ごとの距離を求める
+#########################################################
+Z = np.random.random((3, 2))
+print(Z)
+X, Y = np.atleast_2d(Z[:,0], Z[:,1])
+print(X)
+print(Y)
+D = np.sqrt( (X-X.T)**2 + (Y-Y.T)**2 )
+print(D)
+# [[0.2 0.7]
+#  [0.3 0. ]
+#  [0.  0.3]]
+# [[0.2 0.3 0. ]]
+# [[0.7 0.  0.3]]
+# [[0.  0.7 0.5]
+#  [0.7 0.  0.4]
+#  [0.5 0.4 0. ]]
+
+# Much faster with scipy
+import scipy
+# Thanks Gavin Heverly-Coulson (#issue 1)
+import scipy.spatial
+Z = np.random.random((3, 2))
+D = scipy.spatial.distance.cdist(Z, Z)
+print(D)
+#########################################################
+# ■ 解説
+# np.at_least_2d()は、入力されたndarrayの次元数が最低でも2になるように次元を拡張する関数のようです。
+Z = np.array([[1, 1], [3, 1], [2, 5]])
+X, Y = Z[:,0], Z[:,1]
+X.shape, Y.shape
+# ((3,), (3,))
+X, Y = np.atleast_2d(Z[:, 0], Z[:, 1])
+X.shape, Y.shape
+# ((1, 3), (1, 3))
+X-X.T
+# array([[ 0,  2,  1],
+#        [-2,  0, -1],
+#        [-1,  1,  0]])
+```
+
+53. How to convert a float (32 bits) array into an integer (32 bits) in place?
+```py
+# 53. 浮動小数点 (32 bits) 配列を整数型 (32 bits) 配列に変換する方法は?
+#########################################################
+Z = np.arange(10, dtype=np.float32)
+Z = Z.astype(np.int32, copy=False)
+print(Z)
+# [0 1 2 3 4 5 6 7 8 9]
+```
+
+54. How to read the following file? (★★☆)
+```py
+# 54. 以下のファイル(文字列)を読む方法は? (★★☆)
+#########################################################
+ 1, 2, 3, 4, 5
+ 6,  ,  , 7, 8
+  ,  , 9,10,11
+#########################################################
+from io import StringIO
+# Fake file
+s = StringIO("""1, 2, 3, 4, 5\n
+                6,  ,  , 7, 8\n
+                 ,  , 9,10,11\n""")
+Z = np.genfromtxt(s, delimiter=",", dtype=np.int)
+print(Z)
+# [[ 1  2  3  4  5]
+#  [ 6 -1 -1  7  8]
+#  [-1 -1  9 10 11]]
+#########################################################
+# ■ 解説
+# np.genfromtxt()を使うと、欠損値を含んでいたり複数の異なるデータ型を含んでいたりする、より複雑な構造のCSVファイルの読み込みが可能。
 ```
 
 * [To Top](#Top)
