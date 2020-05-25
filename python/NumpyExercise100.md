@@ -1015,9 +1015,123 @@ print(~Z.any(axis=0))
 
 # 61
 
-01. Import the numpy package under the name np (★☆☆)
+61. Find the nearest value from a given value in an array (★★☆)
 ```py
-# 01. numpy パッケージを `np` の名前でインポートする (★☆☆)
+# 61. 与えられた値から最も近い値を配列の中に見つける (★★☆)
 #########################################################
-import numpy as np
+Z = np.random.uniform(0, 1, 10)
+z = 0.5
+m = Z.flat[np.abs(Z - z).argmin()]
+print(m)
+# 0.504222092418414
+#########################################################
+# ■ 解説
+np.abs(Z - z)
+# array([0.00422209, 0.19767948, 0.41034326, 0.27362028, 0.43928241, 0.3790531 , 0.30789328, 0.25880853, 0.18907701, 0.13576864])
+np.abs(Z - z).argmin()
+# 0
+
+# ndarray.flat: A 1-D iterator over the array.
+x = np.arange(1, 7).reshape(2, 3)
+# array([[1, 2, 3],
+#        [4, 5, 6]])
+x.flat[3]
+# 
+x.T
+# array([[1, 4],
+#        [2, 5],
+#        [3, 6]])
+x.T.flat[3]
+# 5
+```
+
+62. Considering two arrays with shape (1,3) and (3,1), how to compute their sum using an iterator? (★★☆)
+```py
+# 62. shape属性が (1,3) と (3,1) の2つの配列があるとき、イテレータを使ってその和を計算する方法は? (★★☆)
+#########################################################
+A = np.arange(3).reshape(3, 1)
+B = np.arange(3).reshape(1, 3)
+it = np.nditer([A, B, None])
+for x, y, z in it: z[...] = x + y
+print(it.operands[2])
+# [[0 1 2]
+#  [1 2 3]
+#  [2 3 4]]
+#########################################################
+# ■ 解説
+A = np.array([[1],[2],[3]])
+B = np.array([[5,6,7]])
+it = np.nditer([A,B])
+for x, y in it:
+    print("x y:", x, y)
+# x y: 1 5
+# x y: 1 6
+# x y: 1 7
+# x y: 2 5
+# x y: 2 6
+# x y: 2 7
+# x y: 3 5
+# x y: 3 6
+# x y: 3 7
+```
+
+63. Create an array class that has a name attribute (★★☆)
+```py
+# 63. name属性を持つ配列クラスを作成する (★★☆)
+#########################################################
+class NamedArray(np.ndarray):
+   def __new__(cls, array, name="no name"):
+       obj = np.asarray(array).view(cls)
+       obj.name = name
+       return obj
+   def __array_finalize__(self, obj):
+       if obj is None: return
+       self.info = getattr(obj, 'name', "no name")
+
+Z = NamedArray(np.arange(10), "range_10")
+print (Z.name)
+# range_10
+#########################################################
+# ■ 解説
+Z = NamedArray(np.arange(10))
+print (Z.name)
+# no name
+```
+
+64. Consider a given vector, how to add 1 to each element indexed by a second vector (be careful with repeated indices)? (★★★)
+```py
+# 64. あるベクトルが与えられたとき、第2のベクトルにより添え字指定されたそれぞれの要素に 1 を加える方法は (添え字は繰り返されることに注意)? (★★★)
+#########################################################
+# Author: Brett Olsen
+Z = np.ones(10)
+I = np.random.randint(0, len(Z), 20)
+Z += np.bincount(I, minlength=len(Z))
+print(Z)
+# Another solution
+# Author: Bartosz Telenczuk
+np.add.at(Z, I, 1)
+print(Z)
+[3. 2. 3. 3. 5. 2. 1. 3. 5. 3.]
+[5. 3. 5. 5. 9. 3. 1. 5. 9. 5.]
+#########################################################
+# ■ 解説
+I
+# array([1, 2, 2, 4, 9, 5, 4, 8, 8, 3, 8, 4, 7, 0, 4, 0, 3, 9, 7, 8])
+np.bincount(I, minlength=len(Z))
+# array([2, 1, 2, 2, 4, 1, 0, 2, 4, 2], dtype=int64)
+```
+
+65. How to accumulate elements of a vector (X) to an array (F) based on an index list (I)? (★★★)
+```py
+# 65. 添え字リスト (I) に基づきベクトル (X) の要素を配列 (F) に累積する方法は? (★★★)
+#########################################################
+# Author: Alan G Isaac
+X = [1, 2, 3, 4, 5, 6]
+I = [1, 3, 9, 3, 4, 1]
+F = np.bincount(I, X)
+print(F)
+# [0. 7. 0. 6. 5. 0. 0. 0. 0. 3.]
+#########################################################
+# ■ 解説
+# np.bincount(I,X)は、np.bincount(I, weights=X)と等価です。つまり、値の生起回数に重みを与えます。
 ```
