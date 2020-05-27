@@ -15,6 +15,7 @@
 * [41~50](#41)
 * [51~60](#51)
 * [61~70](#61)
+* [71~80](#71)
 
 
 # 01
@@ -1175,4 +1176,163 @@ F
 #        [256, 257, 257, 257],
 #        [257, 256, 257,   0],
 #        [  1, 257,   0,   0]], dtype=uint16)
+```
+
+67. Considering a four dimensions array, how to get sum over the last two axis at once? (★★★)
+```py
+# 67. 4次元配列のとき、一気に最後の2軸で合計する方法は? (★★★)
+#########################################################
+A = np.random.randint(0, 10, (3, 4, 3, 4))
+# solution by passing a tuple of axes (introduced in numpy 1.7.0)
+sum = A.sum(axis=(-2, -1))
+print(sum)
+# solution by flattening the last two dimensions into one
+# (useful for functions that don't accept tuples for axis argument)
+sum = A.reshape(A.shape[:-2] + (-1,)).sum(axis=-1)
+print(sum)
+# [[46 56 68 58]
+#  [28 47 40 49]
+#  [53 53 65 53]]
+# [[46 56 68 58]
+#  [28 47 40 49]
+#  [53 53 65 53]]
+```
+
+68. Considering a one-dimensional vector D, how to compute means of subsets of D using a vector S of same size describing subset indices? (★★★)
+```py
+# 68. 1次元ベクトル D を考えたとき、部分集合を添え字で記述する同じサイズのベクトル S を使用して、D の部分集合の平均を計算する方法は？
+#########################################################
+# Author: Jaime Fernández del Río
+D = np.random.uniform(0, 1, 100)
+S = np.random.randint(0, 10, 100)
+D_sums = np.bincount(S, weights=D)
+D_counts = np.bincount(S)
+D_means = D_sums / D_counts
+print(D_means)
+# Pandas solution as a reference due to more intuitive code
+import pandas as pd
+print(pd.Series(D).groupby(S).mean())
+# [0.53184825 0.45105339 0.43915429 0.49048519 0.39412586 0.48825946 0.56079188 0.48646984 0.39619038 0.21918379]
+# 0    0.531848
+# 1    0.451053
+# 2    0.439154
+# 3    0.490485
+# 4    0.394126
+# 5    0.488259
+# 6    0.560792
+# 7    0.486470
+# 8    0.396190
+# 9    0.219184
+# dtype: float64
+```
+
+69. How to get the diagonal of a dot product? (★★★)
+```py
+# 69. ドット積の対角要素を取得する方法は? (★★★)
+#########################################################
+# Author: Mathieu Blondel
+A = np.random.uniform(0, 1, (5, 5))
+B = np.random.uniform(0, 1, (5, 5))
+# Slow version  
+np.diag(np.dot(A, B))
+# Fast version
+np.sum(A * B.T, axis=1)
+# Faster version
+np.einsum("ij,ji->i", A, B)
+# array([1.13600527, 1.26483936, 1.00529482, 0.75508906, 2.15589049])
+#########################################################
+# ■ 解説
+# 第1の方法 np.diag(np.dot(A, B)) は愚直にAとBの積をとり、その対角成分を取得しています。対角成分以外の要素も計算しているので無駄が多いと言えます。
+# 第2の方法 np.sum(A * B.T, axis=1) では、要素ごとの積をとる*を使用しています。紙と鉛筆で確かめるとわかりますが、AとBの積をとったときの対角成分に相当する部分のみを演算しているので高速化が期待できます。
+# 第3の方法 np.einsum('ij,ji->i', A, B) は初めて見ました。アインシュタインの縮約記号にのっとって演算を行うための関数だそうです。
+
+a = np.arange(25).reshape(5,5)
+b = np.arange(25).reshape(5,5)*2
+print("A = ",a)
+print("B =", b)
+
+# A = [[ 0  1  2  3  4]
+#      [ 5  6  7  8  9]
+#      [10 11 12 13 14]
+#      [15 16 17 18 19]
+#      [20 21 22 23 24]]
+# B = [[ 0  2  4  6  8]
+#      [10 12 14 16 18]
+#      [20 22 24 26 28]
+#      [30 32 34 36 38]
+#      [40 42 44 46 48]]
+
+np.einsum("ii",a) #60
+np.einsum("ii->i",a) #[  0,  6, 12, 18, 24]
+np.einsum("ij->i",a) #[ 10, 35, 60, 85, 110]
+np.einsum("ij->j",a) #[ 50, 55, 60, 65, 70]
+np.einsum("ij->ji",a) 
+# array([[ 0,  5, 10, 15, 20],
+#        [ 1,  6, 11, 16, 21],
+#        [ 2,  7, 12, 17, 22],
+#        [ 3,  8, 13, 18, 23],
+#        [ 4,  9, 14, 19, 24]])
+
+np.einsum("ij,jk->ik", a, b) #AB
+np.einsum("ij,jk->ki", a, b) #BA 足(ik)が変わったのに注意
+np.einsum("ij,ij->ij", a, b) #いわゆるアダマール積
+```
+
+70. Consider the vector [1, 2, 3, 4, 5], how to build a new vector with 3 consecutive zeros interleaved between each value? (★★★)
+```py
+# 70. ベクトル \[1, 2, 3, 4, 5\] があるとき、それぞれの値の間に連続する3つのゼロをはさむ新しいベクトルを生成する方法は? (★★★)
+#########################################################
+# Author: Warren Weckesser
+Z = np.array([1, 2, 3, 4, 5])
+nz = 3
+Z0 = np.zeros(len(Z) + (len(Z) - 1) * (nz))
+Z0[:: nz + 1] = Z
+print(Z0)
+# [1. 0. 0. 0. 2. 0. 0. 0. 3. 0. 0. 0. 4. 0. 0. 0. 5.]
+```
+
+* [To Top](#Top)
+
+
+# 71
+
+71. Consider an array of dimension (5,5,3), how to mulitply it by an array with dimensions (5,5)? (★★★)
+```py
+# 71. (5,5,3) 次元の配列があるとき、それに (5,5) 次元の配列を掛ける方法は? (★★★)
+#########################################################
+A = np.ones((5, 5, 3))
+B = 2 * np.ones((5, 5))
+print(A * B[:, :, None])
+# [[[2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]]
+# 
+#  [[2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]]
+# 
+#  [[2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]]
+# 
+#  [[2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]]
+# 
+#  [[2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]
+#   [2. 2. 2.]]]
+#########################################################
+# ■ 解説
+(5,5)のshapeを持つBに対してB[:,:,None]とすると、(5,5,1)のshapeになるようです。
 ```
