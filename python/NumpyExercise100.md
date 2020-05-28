@@ -16,6 +16,7 @@
 * [51~60](#51)
 * [61~70](#61)
 * [71~80](#71)
+* [81~90](#81)
 
 
 # 01
@@ -1514,6 +1515,101 @@ Z = np.random.uniform(-1.0, 1.0, 10)
 np.negative(Z, out=Z)
 # [0 1 0 0 1 0 1 0 0 0]
 # array([ 0.30177043,  0.43012631,  0.93765857,  0.69757218,  0.68864177, -0.79638609,  0.71618958, -0.29460162, -0.19384768, -0.92111143])
+```
+
+78. Consider 2 sets of points P0,P1 describing lines (2d) and a point p, how to compute distance from p to each line i (P0[i],P1[i])? (★★★)
+```py
+# 78. 直線 (2次元) を記述する2組の点 P0、P1そして点 p があるとき、点 p から直線 i (P0\[i\],P1\[i\]) までの距離を計算する方法は? (★★★)
+#########################################################
+def distance(P0, P1, p):
+   T = P1 - P0
+   L = (T**2).sum(axis=1)
+   U = -((P0[:, 0] - p[...,0]) * T[:, 0] + (P0[:, 1] - p[..., 1]) * T[:, 1]) / L
+   U = U.reshape(len(U), 1)
+   D = P0 + U*T - p
+   return np.sqrt((D**2).sum(axis=1))
+P0 = np.random.uniform(-10, 10, (10, 2))
+P1 = np.random.uniform(-10, 10, (10, 2))
+p  = np.random.uniform(-10, 10, ( 1, 2))
+print(distance(P0, P1, p))
+# [10.72352647 13.09825264 13.73247846  2.11357729 14.96245468  5.27188098  0.40259183  1.10263579  5.30508889  3.24204977]
+```
+
+79. Consider 2 sets of points P0,P1 describing lines (2d) and a set of points P, how to compute distance from each point j (P[j]) to each line i (P0[i],P1[i])? (★★★)
+```py
+# 79. 直線 (2次元) を記述する2組の点 P0、P1 そして1組の点 P があるとき、それぞれの点 (P\[j\]) から各線 i (P0\[i\],P1\[i\]) までの距離を計算する方法は? (★★★)
+#########################################################
+# Author: Italmassov Kuanysh
+# based on distance function from previous question
+P0 = np.random.uniform(-10, 10, (5, 2))
+P1 = np.random.uniform(-10, 10, (5, 2))
+p = np.random.uniform(-10, 10, (5, 2))
+print(np.array([distance(P0, P1, p_i) for p_i in p]))
+# [[ 5.59509606 11.99011178  4.57584585  1.38373154  2.55252384]
+#  [11.37395291  4.92650438  4.16825027 14.5409501   9.81340396]
+#  [ 4.89889266 11.51905421  6.64931316  0.24980589  5.4154482 ]
+#  [14.3453139   8.24277824  9.56151317 15.77300207  7.01180281]
+#  [ 1.88569673  4.68537175  2.38912111  6.30889709  7.51266531]]
+```
+
+80. Consider an arbitrary array, write a function that extract a subpart with a fixed shape and centered on a given element (pad with a fill value when necessary) (★★★)
+```py
+# 80. 任意の配列に対して、定められたshape属性で、指定された要素が中央に配置されるような一部分を抽出する関数を書く（必要に応じて `fill` 値でパディング） (★★★)
+#########################################################
+# Author: Nicolas Rougier
+Z = np.random.randint(0, 10, (10, 10))
+shape = (5, 5)
+fill  = 0
+position = (0, 0)
+
+R = np.ones(shape, dtype=Z.dtype) * fill
+P  = np.array(list(position)).astype(int)
+Rs = np.array(list(R.shape)).astype(int)
+Zs = np.array(list(Z.shape)).astype(int)
+
+R_start = np.zeros((len(shape), )).astype(int)
+R_stop  = np.array(list(shape)).astype(int)
+Z_start = (P - Rs // 2)
+Z_stop  = (P + Rs // 2) + Rs % 2
+
+R_start = (R_start - np.minimum(Z_start, 0)).tolist()
+Z_start = (np.maximum(Z_start, 0)).tolist()
+R_stop = np.maximum(R_start, (R_stop - np.maximum(Z_stop-Zs, 0))).tolist()
+Z_stop = (np.minimum(Z_stop, Zs)).tolist()
+
+r = [slice(start, stop) for start, stop in zip(R_start, R_stop)]
+z = [slice(start, stop) for start, stop in zip(Z_start, Z_stop)]
+R[r] = Z[z]
+print(Z)
+print(R)
+
+# [[6 3 2 9 2 7 7 4 4 5]
+#  [3 9 2 6 4 4 9 4 1 8]
+#  [1 9 1 3 3 4 1 8 3 1]
+#  [0 9 4 1 9 0 8 6 2 0]
+#  [6 3 7 3 6 8 2 7 8 3]
+#  [6 2 9 1 4 6 3 1 6 5]
+#  [3 4 3 7 0 0 5 0 3 2]
+#  [4 2 8 5 8 8 3 8 3 3]
+#  [9 8 5 8 2 4 3 5 1 6]
+#  [9 5 2 4 7 1 5 6 0 2]]
+# [[0 0 0 0 0]
+#  [0 0 0 0 0]
+#  [0 0 6 3 2]
+#  [0 0 3 9 2]
+#  [0 0 1 9 1]]
+```
+
+* [To Top](#Top)
+
+
+# 81
+
+01. Import the numpy package under the name np (★☆☆)
+```py
+# 01. numpy パッケージを `np` の名前でインポートする (★☆☆)
+#########################################################
+import numpy as np
 ```
 
 * [To Top](#Top)
