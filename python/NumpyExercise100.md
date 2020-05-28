@@ -1605,11 +1605,101 @@ print(R)
 
 # 81
 
-01. Import the numpy package under the name np (★☆☆)
+81. Consider an array Z = [1,2,3,4,5,6,7,8,9,10,11,12,13,14], how to generate an array R = [[1,2,3,4], [2,3,4,5], [3,4,5,6], ..., [11,12,13,14]]? (★★★)
 ```py
-# 01. numpy パッケージを `np` の名前でインポートする (★☆☆)
+# 81. 配列 Z = [1,2,3,4,5,6,7,8,9,10,11,12,13,14] があるとき、配列 R = [[1,2,3,4], [2,3,4,5], [3,4,5,6], ..., [11,12,13,14]] の生成方法は? (★★★)
 #########################################################
-import numpy as np
+# Author: Stefan van der Walt
+Z = np.arange(1, 15, dtype=np.uint32)
+R = stride_tricks.as_strided(Z, (11, 4), (4, 4))
+print(R)
+# [[ 1  2  3  4]
+#  [ 2  3  4  5]
+#  [ 3  4  5  6]
+#  [ 4  5  6  7]
+#  [ 5  6  7  8]
+#  [ 6  7  8  9]
+#  [ 7  8  9 10]
+#  [ 8  9 10 11]
+#  [ 9 10 11 12]
+#  [10 11 12 13]
+#  [11 12 13 14]]
+```
+
+82. Compute a matrix rank (★★★)
+```py
+# 82. 行列のランク計算 (★★★)
+#########################################################
+# Author: Stefan van der Walt
+Z = np.random.uniform(0, 1, (10, 10))
+U, S, V = np.linalg.svd(Z) # Singular Value Decomposition
+rank = np.sum(S > 1e-10)
+print(rank)
+```
+
+83. How to find the most frequent value in an array?
+```py
+# 83. 配列の中での最頻値の求め方は?
+#########################################################
+Z = np.random.randint(0, 10, 50)
+print(np.bincount(Z).argmax())
+# 9
+```
+
+84. Extract all the contiguous 3x3 blocks from a random 10x10 matrix (★★★)
+```py
+# 84. 10x10 の乱数の行列から隣接するすべての 3x3 ブロックを抽出する (★★★)
+#########################################################
+# Author: Chris Barker
+Z = np.random.randint(0, 5, (10, 10))
+n = 3
+i = 1 + (Z.shape[0] - 3)
+j = 1 + (Z.shape[1] - 3)
+C = stride_tricks.as_strided(Z, shape=(i, j, n, n), strides = Z.strides + Z.strides)
+# C = stride_tricks.as_strided(Z, shape=(8, 8, 3, 3), strides = (40, 4, 40, 4))
+print(C)
+```
+
+85. Create a 2D array subclass such that Z[i,j] == Z[j,i] (★★★)
+```py
+# 85. Z[i,j] == Z[j,i] となるような2次元配列のサブクラスを作成する (★★★)
+#########################################################
+# Author: Eric O. Lebigot
+# Note: only works for 2d array and value setting using indices
+class Symetric(np.ndarray):
+    def __setitem__(self, index, value):
+        i, j = index
+        super(Symetric, self).__setitem__((i, j), value)
+        super(Symetric, self).__setitem__((j, i), value)
+
+def symetric(Z):
+    return np.asarray(Z + Z.T - np.diag(Z.diagonal())).view(Symetric)
+
+S = symetric(np.random.randint(0, 10, (5, 5)))
+S[2, 3] = 42
+print(S)
+
+# [[ 1  4 12  6 13]
+#  [ 4  2  6 12  6]
+#  [12  6  9 10  4]
+#  [ 6 12 10  5  9]
+#  [13  6  4  9  5]]
+#########################################################
+# ■ 解説
+print(Z)
+# [[1 3 7 6 5]
+#  [1 2 6 9 0]
+#  [5 0 9 6 4]
+#  [0 3 4 5 9]
+#  [8 6 0 0 5]]
+print(Z.diagonal())
+# [1 2 9 5 5]
+print(np.diag(Z.diagonal()))
+# [[1 0 0 0 0]
+#  [0 2 0 0 0]
+#  [0 0 9 0 0]
+#  [0 0 0 5 0]
+#  [0 0 0 0 5]]
 ```
 
 * [To Top](#Top)
