@@ -1700,6 +1700,9 @@ print(np.diag(Z.diagonal()))
 #  [0 0 9 0 0]
 #  [0 0 0 5 0]
 #  [0 0 0 0 5]]
+
+# view：元の配列と同じメモリを参照しているもの
+# https://deepage.net/features/numpy-copyview.html
 ```
 
 * [To Top](#Top)
