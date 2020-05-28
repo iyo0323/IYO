@@ -1442,4 +1442,78 @@ F
 #        [12, 45]])
 ```
 
+74. Given an array C that is a bincount, how to produce an array A such that np.bincount(A) == C? (★★★)
+```py
+# 74. bincountで与えられる配列 C があるとき、np.bincount(A) == C であるような配列 A の生成方法は? (★★★)
+#########################################################
+# Author: Jaime Fernández del Río
+C = np.bincount([1, 1, 2, 3, 4, 4, 6])
+A = np.repeat(np.arange(len(C)), C)
+print(A)
+# [1 1 2 3 4 4 6]
+#########################################################
+# ■ 解説
+np.arange(len(C)), C
+# (array([0, 1, 2, 3, 4, 5, 6]), array([0, 2, 1, 1, 2, 0, 1], dtype=int64))
+```
+
+75. How to compute averages using a sliding window over an array? (★★★)
+```py
+# 75. 配列にスライドウィンドウを使って平均を計算する方法は? (★★★)
+#########################################################
+# Author: Jaime Fernández del Río
+def moving_average(a, n=3) :
+   ret = np.cumsum(a, dtype=float)
+   ret[n:] = ret[n:] - ret[:-n]
+   return ret[n - 1:] / n
+Z = np.arange(20)
+print(moving_average(Z, n=3))
+# [ 1.  2.  3.  4.  5.  6.  7.  8.  9. 10. 11. 12. 13. 14. 15. 16. 17. 18.]
+#########################################################
+# ■ 解説
+a = np.array([1, 2, 3, 4, 5, 6])
+np.cumsum(a)
+# array([ 1,  3,  6, 10, 15, 21])
+```
+
+76. Consider a one-dimensional array Z, build a two-dimensional array whose first row is (Z[0],Z[1],Z[2]) and each subsequent row is shifted by 1 (last row should be (Z[-3],Z[-2],Z[-1]) (★★★)
+```py
+# 76. 1次元の配列 Z があるとき、最初の行が (Z\[0\],Z\[1\],Z\[2\]) で、それに続く行はそれぞれ 1 だけシフトされた2次元配列を生成する (最後の行は、(Z\[-3\],Z\[-2\],Z\[-1\]) になる) (★★★)
+#########################################################
+# Author: Joe Kington / Erik Rigtorp
+from numpy.lib import stride_tricks
+def rolling(a, window):
+   shape = (a.size - window + 1, window)   # この場合 (8, 3)
+   strides = (a.itemsize, a.itemsize)      # この場合 (8, 8)
+   return stride_tricks.as_strided(a, shape=shape, strides=strides) # (a)
+Z = rolling(np.arange(10), 3)
+print(Z)
+# [[0 1 2]
+#  [1 2 3]
+#  [2 3 4]
+#  [3 4 5]
+#  [4 5 6]
+#  [5 6 7]
+#  [6 7 8]
+#  [7 8 9]]
+#########################################################
+# ■ 解説
+# stride_tricks.as_stridedは、stridesの値を任意に指定することで、ポインタの進め方を偽装する関数です。
+# 式(a)は、「shapeが(10,)であるndarray aを、stridesを(8, 8)と偽装して、shapeが(8, 3)になるように舐めていく」という意味になります。stridesが(8, 8)ということは、「ポインタを一個右に動かすにも、ポインタを一個下に動かすにも、8バイト移動する」ということになります。
+```
+
+77. How to negate a boolean, or to change the sign of a float inplace? (★★★)
+```py
+# 77. ブール値を否定する方法、また、浮動小数点の符号を変更する方法は? (★★★)
+#########################################################
+# Author: Nathaniel J. Smith
+Z = np.random.randint(0, 2, 10)
+np.logical_not(Z, out=Z)
+print(Z)
+Z = np.random.uniform(-1.0, 1.0, 10)
+np.negative(Z, out=Z)
+# [0 1 0 0 1 0 1 0 0 0]
+# array([ 0.30177043,  0.43012631,  0.93765857,  0.69757218,  0.68864177, -0.79638609,  0.71618958, -0.29460162, -0.19384768, -0.92111143])
+```
+
 * [To Top](#Top)
