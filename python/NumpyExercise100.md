@@ -17,6 +17,7 @@
 * [61~70](#61)
 * [71~80](#71)
 * [81~90](#81)
+* [91~100](#91)
 
 
 # 01
@@ -1703,6 +1704,241 @@ print(np.diag(Z.diagonal()))
 
 # view：元の配列と同じメモリを参照しているもの
 # https://deepage.net/features/numpy-copyview.html
+```
+
+86. Consider a set of p matrices wich shape (n,n) and a set of p vectors with shape (n,1). How to compute the sum of of the p matrix products at once? (result has shape (n,1)) (★★★)
+```py
+# 86. p 個の shape属性 (n,n) の行列と p 個の shape属性 (n,1) のベクトルがあるとき、一度に p 個の行列積の総和を計算する方法は? (結果は shape属性が (n,1)) (★★★)
+#########################################################
+# Author: Stefan van der Walt
+p, n = 10, 5
+M = np.ones((p, n, n))
+V = np.ones((p, n, 1))
+S = np.tensordot(M, V, axes=[[0, 2], [0, 1]])
+print(S)
+# [[50.]
+#  [50.]
+#  [50.]
+#  [50.]
+#  [50.]]
+
+# It works, because:
+# M is (p, n, n)
+# V is (p, n, 1)
+# Thus, summing over the paired axes 0 and 0 (of M and V independently),
+# and 2 and 1, to remain with a (n,1) vector.
+#########################################################
+# ■ 解説
+# The idea with tensordot is pretty simple - We input the arrays and the respective axes along which the sum-reductions are intended. The axes that take part in sum-reduction are removed in the output and all of the remaining axes from the input arrays are spread-out as different axes in the output keeping the order in which the input arrays are fed.
+A = np.random.randint(2, size=(2, 6, 5))
+B = np.random.randint(2, size=(3, 2, 4))
+np.tensordot(A, B, axes=((0), (1))).shape
+# (6, 5, 3, 4)
+
+A = np.random.randint(2, size=(2, 3, 5))
+B = np.random.randint(2, size=(3, 2, 4))
+np.tensordot(A, B, axes=((0, 1), (1, 0))).shape
+# (5, 4)
+
+a = np.arange(60.).reshape(3,4,5)
+b = np.arange(24.).reshape(4,3,2)
+c = np.tensordot(a,b, axes=([1,0],[0,1]))
+c.shape
+# (5, 2)
+c
+# array([[4400., 4730.],
+#        [4532., 4874.],
+#        [4664., 5018.],
+#        [4796., 5162.],
+#        [4928., 5306.]])
+# A slower but equivalent way of computing the same...
+d = np.zeros((5,2))
+for i in range(5):
+  for j in range(2):
+    for k in range(3):
+      for n in range(4):
+        d[i,j] += a[k,n,i] * b[n,k,j]
+c == d
+# array([[ True,  True],
+#        [ True,  True],
+#        [ True,  True],
+#        [ True,  True],
+#        [ True,  True]])
+```
+
+87. Consider a 16x16 array, how to get the block-sum (block size is 4x4)? (★★★)
+```py
+# 87. 16x16 の配列があるとき、ブロック合計 (ブロック・サイズは 4x4 ) の取得方法は? (★★★)
+#########################################################
+# Author: Robert Kern
+Z = np.ones((16, 16))
+k = 4
+S = np.add.reduceat(np.add.reduceat(Z, np.arange(0, Z.shape[0], k), axis=0),
+                                       np.arange(0, Z.shape[1], k), axis=1)
+print(S)
+# [[16. 16. 16. 16.]
+#  [16. 16. 16. 16.]
+#  [16. 16. 16. 16.]
+#  [16. 16. 16. 16.]]
+#########################################################
+# ■ 解説
+np.arange(0, Z.shape[0], k)
+# array([ 0,  4,  8, 12])
+
+x = np.arange(16).reshape(4,4)
+# array([[ 0,  1,  2,  3],
+#        [ 4,  5,  6,  7],
+#        [ 8,  9, 10, 11],
+#        [12, 13, 14, 15]])
+
+np.add.reduceat(x,[0])
+# array([[24, 28, 32, 36]], dtype=int32)
+np.add.reduceat(x,[1])
+# array([[24, 27, 30, 33]], dtype=int32)
+np.add.reduceat(x,[2])
+# array([[20, 22, 24, 26]], dtype=int32)
+np.add.reduceat(x,[3])
+# array([[12, 13, 14, 15]], dtype=int32)
+
+np.add.reduceat(x,[0,1])
+# array([[ 0,  1,  2,  3],
+#        [24, 27, 30, 33]], dtype=int32)
+np.add.reduceat(x,[0,2])
+# array([[ 4,  6,  8, 10],
+#        [20, 22, 24, 26]], dtype=int32)
+np.add.reduceat(x,[0,3])
+# array([[12, 15, 18, 21],
+#        [12, 13, 14, 15]], dtype=int32)
+np.add.reduceat(x,[1,3])
+# array([[12, 14, 16, 18],
+#        [12, 13, 14, 15]], dtype=int32)
+np.add.reduceat(x,[2,3])
+# array([[ 8,  9, 10, 11],
+#        [12, 13, 14, 15]], dtype=int32)
+np.add.reduceat(x,[1,2])
+# array([[ 4,  5,  6,  7],
+#        [20, 22, 24, 26]], dtype=int32)
+```
+
+88. How to implement the Game of Life using numpy arrays? (★★★)
+```py
+# 88. numpy 配列を使ったライフゲームの実装方法は? (★★★)
+#########################################################
+# Author: Nicolas Rougier
+def iterate(Z):
+    # Count neighbours
+    N = (Z[0:-2, 0:-2] + Z[0:-2, 1:-1] + Z[0:-2, 2:] +
+         Z[1:-1, 0:-2]                 + Z[1:-1, 2:] +
+         Z[2:  , 0:-2] + Z[2:  , 1:-1] + Z[2:  , 2:])
+
+    # Apply rules
+    birth = (N == 3) & (Z[1:-1, 1:-1] == 0)
+    survive = ((N == 2) | (N == 3)) & (Z[1:-1, 1:-1] == 1)
+    Z[...] = 0
+    Z[1:-1, 1:-1][birth | survive] = 1
+    return Z
+
+Z = np.random.randint(0, 2, (50, 50))
+for i in range(100): Z = iterate(Z)
+print(Z)
+# [[0 0 0 0 0 0 0 0 0 0]
+#  [0 0 0 0 0 0 0 0 0 0]
+#  [0 0 0 0 0 0 0 0 0 0]
+#  [0 0 0 0 0 0 0 0 0 0]
+#  [0 0 0 0 0 0 0 0 0 0]
+#  [0 0 0 0 0 0 0 0 0 0]
+#  [0 1 1 0 0 0 0 0 0 0]
+#  [0 1 0 1 0 1 1 1 0 0]
+#  [0 0 1 0 0 0 0 0 0 0]
+#  [0 0 0 0 0 0 0 0 0 0]]
+#########################################################
+# ■ 解説
+# Game of Life
+# https://d.hatena.ne.jp/keyword/%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B2%E3%83%BC%E3%83%A0
+```
+
+89. How to get the n largest values of an array (★★★)
+```py
+# 89. 配列の n 個の最大値の取得方法は (★★★)
+#########################################################
+Z = np.arange(10000)
+np.random.shuffle(Z)
+n = 5
+
+# Slow
+print (Z[np.argsort(Z)[-n:]])
+# [9995 9996 9997 9998 9999]
+
+# Fast
+print (Z[np.argpartition(-Z, n)[:n]])
+# [9999 9997 9998 9996 9995]
+#########################################################
+# ■ 解説
+# np.argsort(arr)は、配列arrを昇順にソートしたときの、配列のインデックスを返します。
+# np.argpartition(arr, idx)は、配列arrのうち、値が小さいものidx + 1個分のインデックスを返します。必ずしも小さい順になっている保証はないことに注意です。
+```
+
+90. Given an arbitrary number of vectors, build the cartesian product (every combinations of every item) (★★★)
+```py
+# 90. 任意の数のベクトルがあるとき、そのデカルト積を生成する (すべての要素のすべての組み合わせ) (★★★)
+#########################################################
+# Author: Stefan Van der Walt
+def cartesian(arrays):
+    arrays = [np.asarray(a) for a in arrays]
+    shape = (len(x) for x in arrays)
+
+    ix = np.indices(shape, dtype=int)
+    ix = ix.reshape(len(arrays), -1).T
+
+    for n, arr in enumerate(arrays):
+        ix[:, n] = arrays[n][ix[:, n]]
+
+    return ix
+
+print (cartesian(([1, 2, 3], [4, 5], [6, 7])))
+# [[1 4 6]
+#  [1 4 7]
+#  [1 5 6]
+#  [1 5 7]
+#  [2 4 6]
+#  [2 4 7]
+#  [2 5 6]
+#  [2 5 7]
+#  [3 4 6]
+#  [3 4 7]
+#  [3 5 6]
+#  [3 5 7]]
+#########################################################
+# ■ 解説
+grid = np.indices((2, 3))
+grid.shape
+# (2, 2, 3)
+row, col = np.indices((2, 3))
+print(row)
+print(col)
+# [[0 0 0]
+#  [1 1 1]]
+# [[0 1 2]
+#  [0 1 2]]
+i, j = np.indices((2, 3), sparse=True)
+i
+# array([[0],
+#        [1]])
+j
+# array([[0, 1, 2]])
+```
+
+* [To Top](#Top)
+
+
+
+# 91
+
+01. Import the numpy package under the name np (★☆☆)
+```py
+# 01. numpy パッケージを `np` の名前でインポートする (★☆☆)
+#########################################################
+import numpy as np
 ```
 
 * [To Top](#Top)
