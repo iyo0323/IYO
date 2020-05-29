@@ -2249,4 +2249,38 @@ np.unique(T, return_index=True)
 #  array([1, 0, 3], dtype=int64))
 ```
 
+97. Considering 2 vectors A & B, write the einsum equivalent of inner, outer, sum, and mul function (★★★)
+```py
+# 97. 2つのベクトル A と B があるとき、内積、外積、総和、掛け算の関数をアインシュタイン縮約記法で書く (★★★)
+#########################################################
+# Author: Alex Riley
+# Make sure to read: http://ajcr.net/Basic-guide-to-einsum/
+A = np.arange(5)
+B = np.arange(5)
+np.einsum('i->', A)         # np.sum(A)
+np.einsum('i, i->i', A, B)  # A * B
+np.einsum('i, i', A, B)     # np.inner(A, B)
+np.einsum('i, j->ij', A, B)  # np.outer(A, B)
+#########################################################
+# ■ 解説
+A
+# array([0, 1, 2, 3, 4])
+B
+# array([0, 1, 2, 3, 4])
+np.einsum('i->', A)
+# 10
+np.einsum('i', A)
+# array([0, 1, 2, 3, 4])
+np.einsum('i, i->i', A, B)
+# array([ 0,  1,  4,  9, 16])
+np.einsum('i, i', A, B)
+# 30
+np.einsum('i, j->ij', A, B)
+# array([[ 0,  0,  0,  0,  0],
+#        [ 0,  1,  2,  3,  4],
+#        [ 0,  2,  4,  6,  8],
+#        [ 0,  3,  6,  9, 12],
+#        [ 0,  4,  8, 12, 16]])
+```
+
 * [To Top](#Top)
