@@ -1249,6 +1249,8 @@ np.einsum("ij,ji->i", A, B)
 # 第1の方法 np.diag(np.dot(A, B)) は愚直にAとBの積をとり、その対角成分を取得しています。対角成分以外の要素も計算しているので無駄が多いと言えます。
 # 第2の方法 np.sum(A * B.T, axis=1) では、要素ごとの積をとる*を使用しています。紙と鉛筆で確かめるとわかりますが、AとBの積をとったときの対角成分に相当する部分のみを演算しているので高速化が期待できます。
 # 第3の方法 np.einsum('ij,ji->i', A, B) は初めて見ました。アインシュタインの縮約記号にのっとって演算を行うための関数だそうです。
+# np.einsum('今ある足'->'残したい足')
+# https://www.procrasist.com/entry/einsum
 
 a = np.arange(25).reshape(5,5)
 b = np.arange(25).reshape(5,5)*2
@@ -1936,11 +1938,315 @@ j
 
 # 91
 
-01. Import the numpy package under the name np (★☆☆)
+91. How to create a record array from a regular array? (★★★)
 ```py
-# 01. numpy パッケージを `np` の名前でインポートする (★☆☆)
+# 91. 普通の配列からレコード配列の生成方法は? (★★★)
 #########################################################
-import numpy as np
+Z = np.array([("Hello", 2.5, 3),
+              ("World", 3.6, 2)])
+R = np.core.records.fromarrays(Z.T, 
+                               names='col1, col2, col3',
+                               formats = 'S8, f8, i8')
+print(R)
+# [(b'Hello', 2.5, 3) (b'World', 3.6, 2)]
+#########################################################
+# ■ 解説
+Z
+# array([['Hello', '2.5', '3'],
+#        ['World', '3.6', '2']], dtype='<U5')
+Z.T
+# array([['Hello', 'World'],
+#        ['2.5', '3.6'],
+#        ['3', '2']], dtype='<U5')
+```
+
+92. Consider a large vector Z, compute Z to the power of 3 using 3 different methods (★★★)
+```py
+# 92. 大きなベクトル Z があるとき、異なる3つの方法で Z の3乗を計算する (★★★)
+#########################################################
+# Author: Ryan G.
+x = np.random.rand(int(5e7))
+%timeit np.power(x, 3)
+%timeit x * x * x
+%timeit np.einsum('i, i, i->i', x, x, x)
+# 1.84 s ± 17.1 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+# 370 ms ± 2.06 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+# 231 ms ± 3.54 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+#########################################################
+# ■ 解説
+np.einsum('i, i, i->i', x, x, x)
+# array([0.38554063, 0.42029003, 0.0894534 , ..., 0.00898182, 0.64346735, 0.00484013])
+np.einsum('i, i, i', x, x, x)
+# 12499009.946743619
+```
+
+93. Consider two arrays A and B of shape (8,3) and (2,2). How to find rows of A that contain elements of each row of B regardless of the order of the elements in B? (★★★)
+```py
+# 93. ２つの配列 A と Ｂ、shape属性 (8,3) と (2,2) があるとき、B の要素の順序によらず、B の各行の要素を含む A の行を見つける方法は？ (★★★)
+#########################################################
+# Author: Gabe Schwartz
+np.random.seed(0)
+A = np.random.randint(0, 5, (8, 3))
+B = np.random.randint(0, 5, (2, 2))
+C = (A[..., np.newaxis, np.newaxis] == B)
+rows = np.where(C.any((3, 1)).all(1))[0]
+print(rows)
+# [0 1 4 6 7]
+#########################################################
+# ■ 解説
+A
+# array([[4, 0, 3],
+#        [3, 3, 1],
+#        [3, 2, 4],
+#        [0, 0, 4],
+#        [2, 1, 0],
+#        [1, 1, 0],
+#        [1, 4, 3],
+#        [0, 3, 0]])
+B
+# array([[2, 3],
+#        [0, 1]])
+C
+# array([[[[False, False],
+#          [False, False]],
+#         [[False, False],
+#          [ True, False]],
+#         [[False,  True],
+#          [False, False]]],
+
+#        [[[False,  True],
+#          [False, False]],
+#         [[False,  True],
+#          [False, False]],
+#         [[False, False],
+#          [False,  True]]],
+
+#        [[[False,  True],
+#          [False, False]],
+#         [[ True, False],
+#          [False, False]],
+#         [[False, False],
+#          [False, False]]],
+
+#        [[[False, False],
+#          [ True, False]],
+#         [[False, False],
+#          [ True, False]],
+#         [[False, False],
+#          [False, False]]],
+
+#        [[[ True, False],
+#          [False, False]],
+#         [[False, False],
+#          [False,  True]],
+#         [[False, False],
+#          [ True, False]]],
+
+#        [[[False, False],
+#          [False,  True]],
+#         [[False, False],
+#          [False,  True]],
+#         [[False, False],
+#          [ True, False]]],
+
+#        [[[False, False],
+#          [False,  True]],
+#         [[False, False],
+#          [False, False]],
+#         [[False,  True],
+#          [False, False]]],
+
+#        [[[False, False],
+#          [ True, False]],
+#         [[False,  True],
+#          [False, False]],
+#         [[False, False],
+#          [ True, False]]]])
+C[5]
+# array([[[False, False],
+#         [False,  True]],
+#        [[False, False],
+#         [False,  True]],
+#        [[False, False],
+#         [ True, False]]])
+C.any((3,1))
+# array([[ True,  True],
+#        [ True,  True],
+#        [ True, False],
+#        [False,  True],
+#        [ True,  True],
+#        [False,  True],
+#        [ True,  True],
+#        [ True,  True]])
+C.any((3, 1)).all(1)
+# array([ True,  True, False, False,  True, False,  True,  True])
+```
+
+94. Considering a 10x3 matrix, extract rows with unequal values (e.g. [2,2,3]) (★★★)
+```py
+# 94. 10x3 行列があるとき、等しくない値を持つ行を抽出する (例 [2,2,3]) (★★★)
+#########################################################
+# Author: Robert Kern
+Z = np.random.randint(0, 5, (10, 3))
+print(Z)
+# solution for arrays of all dtypes (including string arrays and record arrays)
+E = np.all(Z[:, 1:] == Z[:, :-1], axis=1)
+U = Z[~E]
+print(U)
+# soluiton for numerical arrays only, will work for any number of columns in Z
+U = Z[Z.max(axis=1) != Z.min(axis=1), :]
+print(U)
+# [[3 3 3]
+#  [0 1 1]
+#  [1 0 2]
+#  [4 3 3]
+#  [2 4 2]
+#  [0 0 4]
+#  [0 4 1]
+#  [4 1 2]
+#  [2 0 1]
+#  [1 1 1]]
+
+# [[0 1 1]
+#  [1 0 2]
+#  [4 3 3]
+#  [2 4 2]
+#  [0 0 4]
+#  [0 4 1]
+#  [4 1 2]
+#  [2 0 1]]
+
+# [[0 1 1]
+#  [1 0 2]
+#  [4 3 3]
+#  [2 4 2]
+#  [0 0 4]
+#  [0 4 1]
+#  [4 1 2]
+#  [2 0 1]]
+```
+
+95. Convert a vector of ints into a matrix binary representation (★★★)
+```py
+# 95. 整数型のベクトルを2進数表示の行列に変換する (★★★)
+#########################################################
+# Author: Warren Weckesser
+I = np.array([0, 1, 2, 3, 15, 16, 32, 64, 128])
+B = ((I.reshape(-1, 1) & (2**np.arange(8))) != 0).astype(int)
+print(B[:, ::-1])
+
+# Author: Daniel T. McDonald
+I = np.array([0, 1, 2, 3, 15, 16, 32, 64, 128], dtype=np.uint8)
+print(np.unpackbits(I[:, np.newaxis], axis=1))
+# [[0 0 0 0 0 0 0 0]
+#  [0 0 0 0 0 0 0 1]
+#  [0 0 0 0 0 0 1 0]
+#  [0 0 0 0 0 0 1 1]
+#  [0 0 0 0 1 1 1 1]
+#  [0 0 0 1 0 0 0 0]
+#  [0 0 1 0 0 0 0 0]
+#  [0 1 0 0 0 0 0 0]
+#  [1 0 0 0 0 0 0 0]]
+
+# [[0 0 0 0 0 0 0 0]
+#  [0 0 0 0 0 0 0 1]
+#  [0 0 0 0 0 0 1 0]
+#  [0 0 0 0 0 0 1 1]
+#  [0 0 0 0 1 1 1 1]
+#  [0 0 0 1 0 0 0 0]
+#  [0 0 1 0 0 0 0 0]
+#  [0 1 0 0 0 0 0 0]
+#  [1 0 0 0 0 0 0 0]]
+#########################################################
+# ■ 解説
+I.reshape(-1, 1)
+# array([[  0],
+#        [  1],
+#        [  2],
+#        [  3],
+#        [ 15],
+#        [ 16],
+#        [ 32],
+#        [ 64],
+#        [128]], dtype=uint8)
+(I.reshape(-1, 1) & (2**np.arange(8))) != 0
+# array([[False, False, False, False, False, False, False, False],
+#        [ True, False, False, False, False, False, False, False],
+#        [False,  True, False, False, False, False, False, False],
+#        [ True,  True, False, False, False, False, False, False],
+#        [ True,  True,  True,  True, False, False, False, False],
+#        [False, False, False, False,  True, False, False, False],
+#        [False, False, False, False, False,  True, False, False],
+#        [False, False, False, False, False, False,  True, False],
+#        [False, False, False, False, False, False, False,  True]])
+B
+# array([[0, 0, 0, 0, 0, 0, 0, 0],
+#        [1, 0, 0, 0, 0, 0, 0, 0],
+#        [0, 1, 0, 0, 0, 0, 0, 0],
+#        [1, 1, 0, 0, 0, 0, 0, 0],
+#        [1, 1, 1, 1, 0, 0, 0, 0],
+#        [0, 0, 0, 0, 1, 0, 0, 0],
+#        [0, 0, 0, 0, 0, 1, 0, 0],
+#        [0, 0, 0, 0, 0, 0, 1, 0],
+#        [0, 0, 0, 0, 0, 0, 0, 1]])
+I[:, np.newaxis]
+# array([[  0],
+#        [  1],
+#        [  2],
+#        [  3],
+#        [ 15],
+#        [ 16],
+#        [ 32],
+#        [ 64],
+#        [128]], dtype=uint8)
+```
+
+96. Given a two dimensional array, how to extract unique rows? (★★★)
+```py
+# 96. 2次元配列が与えられたとき、ユニークな行を抽出する方法は? (★★★)
+#########################################################
+# Author: Jaime Fernández del Río
+Z = np.random.randint(0, 2, (6, 3))
+T = np.ascontiguousarray(Z).view(np.dtype((np.void, Z.dtype.itemsize * Z.shape[1])))
+_, idx = np.unique(T, return_index=True)
+uZ = Z[idx]
+print(uZ)
+# [[1 0 0]
+#  [1 0 1]
+#  [1 1 0]]
+#########################################################
+# ■ 解説
+Z
+# array([[1, 0, 1],
+#        [1, 0, 0],
+#        [1, 0, 0],
+#        [1, 1, 0],
+#        [1, 0, 0],
+#        [1, 0, 0]])
+np.ascontiguousarray(Z)
+# array([[1, 0, 1],
+#        [1, 0, 0],
+#        [1, 0, 0],
+#        [1, 1, 0],
+#        [1, 0, 0],
+#        [1, 0, 0]])
+Z.dtype.itemsize
+# 4
+Z.shape[1]
+# 3
+T
+# array([[b'\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00'],
+#        [b'\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'],
+#        [b'\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'],
+#        [b'\x01\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00'],
+#        [b'\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'],
+#        [b'\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00']],
+#       dtype='|V12')
+np.unique(T, return_index=True)
+# (array([b'\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',
+#         b'\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00',
+#         b'\x01\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00'], dtype='|V12'),
+#  array([1, 0, 3], dtype=int64))
 ```
 
 * [To Top](#Top)
