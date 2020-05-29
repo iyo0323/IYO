@@ -1,6 +1,8 @@
 
 # Top
 
+[Numpy Officail Site](https://numpy.org/doc/stable/index.html)
+
 [GitHub - 100 numpy exercises](https://github.com/rougier/numpy-100)
 
 [解答](https://osawat.hatenablog.com/entry/2018/12/24/044047)
