@@ -3,6 +3,7 @@
 # Top
 
 * [np.zeros_like](#zeros_like)
+* [np.cumsum](#cumsum)
 * [np.percentile](#percentile)
 
 
@@ -19,6 +20,35 @@ a = np.array([[2, 3, 4], [5, 6, 7]])
 np.zeros_like(a)
 # array([[0, 0, 0],
 #        [0, 0, 0]])
+```
+
+# cumsum
+https://qiita.com/Sa_qiita/items/fc61f776cef657242e69
+```py
+# np.cumsum
+#########################################################
+# 要素を足し合わせたものを、配列として出力する。
+a = np.array([1, 2, 3, 4, 5, 6])
+#下記どちらの書き方でもOK
+np.cumsum(a)
+a.cumsum()
+# array([ 1,  3,  6, 10, 15, 21])
+
+a = np.array([1, 2, 3, 4, 5, 6]).reshape(2, 3)
+# array([[1, 2, 3],
+#        [4, 5, 6]])
+
+np.cumsum(a, axis=0)
+# array([[1, 2, 3],
+#        [5, 7, 9]])
+
+np.cumsum(a, axis=1)
+# array([[ 1,  3,  6],
+#        [ 4,  9, 15]])
+
+#ちなみに多次元のarrayに対してaxis指定せずにcumsum()実行すると
+np.cumsum(a)
+# array([ 1,  3,  6, 10, 15, 21])
 ```
 
 # percentile
