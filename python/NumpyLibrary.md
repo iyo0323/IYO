@@ -6,6 +6,7 @@
 * [np.cumsum](#cumsum)
 * [np.linspace](#linspace)
 * [np.percentile](#percentile)
+* [np.interp](#interp)
 
 
 # zeros_like
@@ -115,6 +116,33 @@ for p in range(0, 101, 10):
 data_4 = np.array([15, 52, 100, 73, 102])
 print(np.percentile(data_4, 17))
 # 40.16
+```
+
+# interp
+https://numpy.org/doc/stable/reference/generated/numpy.interp.html
+```py
+# np.interp
+#########################################################
+# One-dimensional linear interpolation.
+xp = [1, 2, 3]
+fp = [3, 2, 0]
+np.interp(2.5, xp, fp)
+# 1.0
+np.interp([0, 1, 1.5, 2.72, 3.14], xp, fp)
+# array([3.  , 3.  , 2.5 , 0.56, 0.  ])
+
+# Plot an interpolant to the sine function
+x = np.linspace(0, 2*np.pi, 10)
+y = np.sin(x)
+xvals = np.linspace(0, 2*np.pi, 50)
+yinterp = np.interp(xvals, x, y)
+import matplotlib.pyplot as plt
+plt.plot(x, y, 'o')
+plt.plot(xvals, yinterp, '-x')
+plt.show()
+
+# A simple check for xp being strictly increasing is:
+np.all(np.diff(xp) > 0)
 ```
 
 [To Top](#Top)
