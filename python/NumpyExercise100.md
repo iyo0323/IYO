@@ -7,6 +7,8 @@
 
 [解答](https://osawat.hatenablog.com/entry/2018/12/24/044047)
 
+[解答 1~100 日本語翻訳版](https://github.com/osawat/numpy-100/blob/master/100_Numpy_exercises.ja.ipynb)
+
 [解説](https://minus9d.hatenablog.com/entry/2017/05/21/221242)
 
 
@@ -2281,6 +2283,118 @@ np.einsum('i, j->ij', A, B)
 #        [ 0,  2,  4,  6,  8],
 #        [ 0,  3,  6,  9, 12],
 #        [ 0,  4,  8, 12, 16]])
+```
+
+98. Considering a path described by two vectors (X,Y), how to sample it using equidistant samples (★★★)?
+```py
+# 98. 2つのベクトル (X,Y) によって記述される経路を考えたとき、等距離間隔でサンプリングする方法は (★★★)?
+#########################################################
+# Author: Bas Swinckels
+phi = np.arange(0, 10 * np.pi, 0.1)
+a = 1
+x = a * phi * np.cos(phi)
+y = a * phi * np.sin(phi)
+
+dr = (np.diff(x)**2 + np.diff(y)**2)**.5 # segment lengths
+r = np.zeros_like(x)
+r[1:] = np.cumsum(dr)                # integrate path
+r_int = np.linspace(0, r.max(), 200) # regular spaced path
+x_int = np.interp(r_int, r, x)       # integrate path
+y_int = np.interp(r_int, r, y)
+#########################################################
+# ■ 解説
+# numpy.diff() は受け取った配列の隣り合う要素同士の 差分 を計算します。
+arr = np.array([1, 3, 7, 15])
+diff = np.diff(arr)
+# [2 4 8]
+
+# zeros_like 各成分の値が全て0の配列を作成します。
+a = np.array([[2,3,4],[5,6,7]])
+np.zeros_like(a)
+# array([[0, 0, 0],
+#        [0, 0, 0]])
+
+# np.cumsum 要素を足し合わせたものを、配列として出力する。
+a = np.array([1,2,3,4,5,6])
+np.cumsum(a)
+# array([ 1,  3,  6, 10, 15, 21])
+
+# numpy.linspace()も等差数列を生成するが、間隔（公差）ではなく要素数を指定する。
+print(np.linspace(0, 10, 3))
+# [ 0.  5. 10.]
+
+# numpy.interp, One-dimensional linear interpolation.
+xp = [1, 2, 3]
+fp = [3, 2, 0]
+np.interp(2.5, xp, fp)
+# 1.0
+np.interp([0, 1, 1.5, 2.72, 3.14], xp, fp)
+# array([3.  , 3.  , 2.5 , 0.56, 0.  ])
+```
+
+99. Given an integer n and a 2D array X, select from X the rows which can be interpreted as draws from a multinomial distribution with n degrees, i.e., the rows which only contain integers and which sum to n. (★★★)
+```py
+# 99. 整数 n および2次元配列 X が与えられたとき、n 項の多項分布から導かれたと解釈できる行を配列 X から選ぶ　(つまり、行は整数のみを含み、その合計は n のもの) (★★★)
+#########################################################
+# Author: Evgeni Burovski
+X = np.asarray([[1.0, 0.0, 3.0, 8.0],
+                [2.0, 0.0, 1.0, 1.0],
+                [1.5, 2.5, 1.0, 0.0]])
+n = 4
+M = np.logical_and.reduce(np.mod(X, 1) == 0, axis=-1)
+M &= (X.sum(axis=-1) == n)
+print(X[M])
+# [[2. 0. 1. 1.]]
+#########################################################
+# ■ 解説
+X
+# array([[1. , 0. , 3. , 8. ],
+#        [2. , 0. , 1. , 1. ],
+#        [1.5, 2.5, 1. , 0. ]])
+np.mod(X, 1)
+# array([[0. , 0. , 0. , 0. ],
+#        [0. , 0. , 0. , 0. ],
+#        [0.5, 0.5, 0. , 0. ]])
+np.mod(X, 1) == 0
+# array([[ True,  True,  True,  True],
+#        [ True,  True,  True,  True],
+#        [False, False,  True,  True]])
+np.logical_and.reduce(np.mod(X, 1) == 0, axis=-1)
+# array([ True,  True, False])
+X.sum(axis=-1)
+# array([12.,  4.,  5.])
+X.sum(axis=-1) == n
+# array([False,  True, False])
+M
+# array([False,  True, False])
+```
+
+100. Compute bootstrapped 95% confidence intervals for the mean of a 1D array X (i.e., resample the elements of an array with replacement N times, compute the mean of each sample, and then compute percentiles over the means). (★★★)
+```py
+# 100. 1次元配列 X の平均に対してブートストラップ95％信頼区間を計算する (すなわち、N 回の復元抽出で配列の要素を再サンプリングし、それぞれサンプルの平均を計算し、平均値に対するパーセンタイルを計算する) (★★★)
+#########################################################
+# Author: Jessica B. Hamrick
+X = np.random.randn(100) # random 1D array
+N = 1000 # number of bootstrap samples
+idx = np.random.randint(0, X.size, (N, X.size))
+means = X[idx].mean(axis=1)
+confint = np.percentile(means, [2.5, 97.5])
+print(confint)
+#########################################################
+# ■ 解説
+# bootstrapとは、与えられた一つのサンプルから、シミュレーションにより統計値を求める方法です。
+
+# X = np.random.randn(100)
+# 長さ100のサンプルが一つで与えられます。
+
+# N = 1000; idx = np.random.randint(0, X.size, (N, X.size))
+# 1000回、復元抽出ありで、100個の要素を取り出すシミュレーションを実施します。
+
+# means = X[idx].mean(axis=1)
+# 1000回のシミュレーションのそれぞれで取り出した要素の平均値をとります
+
+# confint = np.percentile(means, [2.5, 97.5])
+# 1000個分の平均値をソートして、中央の95%の範囲をとったものが、95%の信頼区間になります。
 ```
 
 * [To Top](#Top)
