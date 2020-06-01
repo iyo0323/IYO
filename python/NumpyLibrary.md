@@ -141,6 +141,13 @@ plt.plot(x, y, 'o')
 plt.plot(xvals, yinterp, '-x')
 plt.show()
 
+# Complex interpolation:
+x = [1.5, 4.0]
+xp = [2,3,5]
+fp = [1.0j, 0, 2+3j]
+np.interp(x, xp, fp)
+# array([0.+1.j , 1.+1.5j])
+
 # A simple check for xp being strictly increasing is:
 np.all(np.diff(xp) > 0)
 ```
