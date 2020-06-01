@@ -63,12 +63,15 @@ print(np.linspace(0, 10, 3))
 print(np.linspace(0, 10, 5))
 # [ 0.   2.5  5.   7.5 10. ]
 
+# 引数endpoint
 print(np.linspace(0, 10, 5, endpoint=False))
 # [0. 2. 4. 6. 8.]
 
+# 逆順に変換
 print(np.linspace(0, 10, 5)[::-1])
 # [10.   7.5  5.   2.5  0. ]
 
+# 多次元配列に変換
 print(np.linspace(0, 10, 12).reshape(3, 4))
 # [[ 0.          0.90909091  1.81818182  2.72727273]
 #  [ 3.63636364  4.54545455  5.45454545  6.36363636]
