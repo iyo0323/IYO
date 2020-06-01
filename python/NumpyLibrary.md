@@ -2,11 +2,27 @@
 
 # Top
 
+* [np.zeros_like](#zeros_like)
 * [np.percentile](#percentile)
 
 
+# zeros_like
+https://deepage.net/features/numpy-zeros.html
+```py
+# np.zeros_like
+#########################################################
+# 元の配列と同じ形状の配列を生成する。
+b = np.zeros_like(a)
+b = np.zeros(a.shape)
+
+a = np.array([[2, 3, 4], [5, 6, 7]])
+np.zeros_like(a)
+# array([[0, 0, 0],
+#        [0, 0, 0]])
+```
+
 # percentile
-(https://analytics-note.xyz/programming/numpy-percentile/)
+https://analytics-note.xyz/programming/numpy-percentile/
 ```py
 # np.percentile
 #########################################################
