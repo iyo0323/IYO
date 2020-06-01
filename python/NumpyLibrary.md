@@ -4,6 +4,7 @@
 
 * [np.zeros_like](#zeros_like)
 * [np.cumsum](#cumsum)
+* [np.linspace](#linspace)
 * [np.percentile](#percentile)
 
 
@@ -49,6 +50,29 @@ np.cumsum(a, axis=1)
 #ちなみに多次元のarrayに対してaxis指定せずにcumsum()実行すると
 np.cumsum(a)
 # array([ 1,  3,  6, 10, 15, 21])
+```
+
+# linspace
+https://note.nkmk.me/python-numpy-arange-linspace/
+```py
+# np.cumsum
+#########################################################
+# 第一引数startに最初の値、第二引数stopに最後の値、第三引数numに要素数を指定する。それらに応じた間隔（公差）が自動的に算出される。
+print(np.linspace(0, 10, 3))
+# [ 0.  5. 10.]
+print(np.linspace(0, 10, 5))
+# [ 0.   2.5  5.   7.5 10. ]
+
+print(np.linspace(0, 10, 5, endpoint=False))
+# [0. 2. 4. 6. 8.]
+
+print(np.linspace(0, 10, 5)[::-1])
+# [10.   7.5  5.   2.5  0. ]
+
+print(np.linspace(0, 10, 12).reshape(3, 4))
+# [[ 0.          0.90909091  1.81818182  2.72727273]
+#  [ 3.63636364  4.54545455  5.45454545  6.36363636]
+#  [ 7.27272727  8.18181818  9.09090909 10.        ]]
 ```
 
 # percentile
