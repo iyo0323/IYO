@@ -2380,6 +2380,7 @@ idx = np.random.randint(0, X.size, (N, X.size))
 means = X[idx].mean(axis=1)
 confint = np.percentile(means, [2.5, 97.5])
 print(confint)
+# [-0.22509616  0.18460925]
 #########################################################
 # ■ 解説
 # bootstrapとは、与えられた一つのサンプルから、シミュレーションにより統計値を求める方法です。
