@@ -209,8 +209,8 @@ np.einsum("ij, ij->ij", a, b) #いわゆるアダマール積
 #        [ 800,  882,  968, 1058, 1152]])
 
 # ベクトル演算
-v1 = np.arange(3)       #[0,1,2]
-v2 = np.arange(3) + 1   #[1,2,3]
+v1 = np.arange(3)       #[0, 1, 2]
+v2 = np.arange(3) + 1   #[1, 2, 3]
 np.einsum("i, i", v1, v2)     #内積
 # 8
 np.einsum("i, j->ij", v1, v2) #直積
@@ -238,6 +238,11 @@ cross_numpy  = np.cross(v1, v2))
 # array([-1,  2, -1])
 cross_einsum = np.einsum('ijk, i, j->k', eijk, v1, v2))
 # array([-1., 2., -1.])
+
+# 行列式(Determinant)
+A = np.arange(9).reshape(3, 3)
+det_numpy  = np.linalg.det(A)
+det_einsum = np.einsum('ijk, i, j, k', eijk, A[0], A[1], A[2]) #0
 ```
 
 [To Top](#Top)
