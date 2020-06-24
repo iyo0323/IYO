@@ -64,6 +64,10 @@ Others
 
 [Have I Been Pwned？（HIBP）](https://haveibeenpwned.com/)
 
+[NLP 笔记 - Question Answering System](http://www.shuang0420.com/2017/03/02/NLP%20%E7%AC%94%E8%AE%B0%20-%20Question%20Answering%20System/)
+
+
+
 $ dir *.java /b /a-d /s > file_list.txt
 
 VS Code (MD -> PDF)
@@ -75,5 +79,35 @@ VS Code (MD -> PDF)
 
 叱𠮟★☆
 
+վ'ᴗ' ի
+
+
+
+Python
+========
+ipython notebook 
+
+
+-- Python Root
+C:\Users\jts00086\AppData\Local\Continuum\anaconda3
+
+python mysite/server.py
+
+
+環境変数
+C:\Users\jts00086\AppData\Local\Continuum\anaconda3\Library\bin;
+
+C:\Users\jts00086\AppData\Local\Continuum\anaconda3\Scripts\
+jupyter notebook
+
+
+Basemapについて
+conda install basemap-data-hires
+
+https://stackoverflow.com/questions/52295117/basemap-import-error-in-pycharm-keyerror-proj-lib
+#### For Window's Users
+     import os
+     os.environ['PROJ_LIB'] = r'C:\Users\XXXXX\Anaconda3\pkgs\proj4-5.2.0- 
+     ha925a31_1\Library\share'
 
 
