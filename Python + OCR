@@ -1,0 +1,64 @@
+Tesseract OCR 公式GitHub
+https://github.com/tesseract-ocr/tesseract/
+
+
+PyOCR 公式GitLab
+https://gitlab.gnome.org/World/OpenPaperwork/pyocr
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+【python】OCR(tesseract-ocr / pyocr)で賞味期限を読み取る(画像→数列)
+http://motojapan.hateblo.jp/entry/2018/03/12/094636
+
+
+PythonでOCR
+https://qiita.com/it__ssei/items/fd804dcb10997566593b
+
+
+No OCR tool found について
+https://teratail.com/questions/143022
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+tesseract + pyocr使い方メモ
+https://blog.sgry.jp/entry/2019/06/09/175539
+
+
+
+Improving the quality of the output
+https://github.com/tesseract-ocr/tessdoc/blob/master/ImproveQuality.md
+
+
+
+PythonとTesseract OCRで文字認識
+https://qiita.com/henjiganai/items/7a5e871f652b32b41a18
+
+
+
+
+
+
+%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Tesseract-OCR
+
+
+https://github.com/tesseract-ocr/tesseract/blob/master/doc/tesseract.1.asc#config-files-and-augmenting-with-user-data
+
+
+
+
+Tesseract OCR 4.x(LSTM)で言語データのトレーニング前に実施するべき品質の改善方法について
+https://qiita.com/henjiganai/items/f99cdd541dacf6328d07
+
+
+PyOCRでTesseractを使う
+https://blog.machine-powers.net/2018/08/04/pyocr-and-tips/
+
+
+Pythonで日本語OCRを行うときのメモ
+https://qiita.com/bohemian916/items/67f22ee7aeac103dd205
