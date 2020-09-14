@@ -1,0 +1,176 @@
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+YOLOの原理と概要
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+YOLO — You Only Look Once 介紹
+https://medium.com/@chenchoulo/yolo-%E4%BB%8B%E7%B4%B9-4307e79524fe
+
+深度學習-物件偵測YOLOv1、YOLOv2和YOLOv3 cfg 檔解讀(一)
+https://medium.com/@chih.sheng.huang821/%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92-%E7%89%A9%E4%BB%B6%E5%81%B5%E6%B8%ACyolov1-yolov2%E5%92%8Cyolov3-cfg-%E6%AA%94%E8%A7%A3%E8%AE%80-75793cd61a01
+
+YOLO目标检测原理与实践
+https://chenzomi12.github.io/2016/12/14/YOLO-details/
+
+建立自己的YOLO辨識模型 – 以柑橘辨識為例
+https://chtseng.wordpress.com/2018/09/01/%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84yolo%E8%BE%A8%E8%AD%98%E6%A8%A1%E5%9E%8B-%E4%BB%A5%E6%9F%91%E6%A9%98%E8%BE%A8%E8%AD%98%E7%82%BA%E4%BE%8B/
+
+
+YOLO（You Only Look Once）算法详解
+https://blog.csdn.net/u014380165/article/details/72616238
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+YOLOの使い方
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Windows 10 で YOLOv3 を自前画像で学習させる（環境構築編）【機械学習】
+https://rightcode.co.jp/blog/information-technology/learn-yolov3-image-windows10-environment-construction
+
+
+Windows 10 で YOLOv3 を自前画像で学習させる（物体検出編）【機械学習】
+https://rightcode.co.jp/blog/information-technology/learn-yolov3-image-windows10-object-detection#i-2
+
+
+
+
+
+C:\Users\yueng
+
+C:\Users\yueng\AppData\Local\Temp\CUDA
+
+
+
+
+CUDA Toolkit 10.0 Archive
+https://developer.nvidia.com/cuda-10.0-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Anaconda仮想環境の使い方
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+仮想環境の一覧を表示
+conda-env list
+
+
+「yolo3_peace」という名前の仮想環境を作っていきます。
+conda create -n yolo3_peace python=3.7
+
+
+仮想環境を起動してみます。（有効化）
+conda activate yolo3_peace
+
+無効化
+conda deactivate
+
+
+仮想環境の削除
+conda remove -n yolo3_peace --all
+
+
+
+Tensorflow のインストール
+pip install tensorflow-gpu==1.14.0
+
+
+Keras のインストール
+pip install keras==2.2.4
+
+
+
+
+
+
+python mnist_cnn.py
+
+
+
+f = open(r'C:\Users\UserName\Desktop\test.json','r',encoding="utf-8")
+
+f = open(r'C:\Users\UserName\Desktop\test.json','r',encoding="utf-8_sig")
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+labelImg
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+labelImg GitHub
+https://github.com/tzutalin/labelImg
+
+cd C:\Users\yueng\Documents\Work\2020\VOLOv3\keras-yolo3\labelImg
+conda install pyqt=5
+conda install -c anaconda lxml
+pyrcc5 -o libs/resources.py resources.qrc
+
+python labelImg.py
+
+
+Microsoft VoTT GitHub
+https://github.com/microsoft/VoTT/releases/tag/v2.2.0
+
+
+
+\\gekko\研究\サンショウ\受領データ\4.高校\い-75高\出稿済D-75高
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+YOLOv3
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+weights を Keras 用に変換
+python convert.py yolov3.cfg yolov3.weights model_data/yolo.h5
+
+必要なパッケージをいくつかインストールしておきましょう
+pip install pillow matplotlib opencv-python
+
+weights をコンバート
+python convert.py -w yolov3.cfg yolov3.weights model_data/yolo_weights.h5
+
+
+
+物体検出
+python yolo_video.py --image
+
+python yolo_video.py --model logs/000/trained_weights_final.h5 --classes model_data/voc_classes.txt --image
+
+
+
+
+YOLOv3 のアノテーションに変換
+python voc_annotation.py
+
+
+
+
+学習
+conda activate yolo3_peace
+cd C:\Users\yueng\Documents\Work\2020\VOLOv3\keras-yolo3
+python train.py
+
+
+
+
+
+python yolo_webcam.py
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+TensorBoard
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+cd C:\Users\yueng\Downloads\keras-yolo3
+tensorboard --logdir=logs/000/
+http://localhost:6006/
+
+
+
