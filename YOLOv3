@@ -21,24 +21,16 @@ https://blog.csdn.net/u014380165/article/details/72616238
 
 
 
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 YOLOの使い方
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
 Windows 10 で YOLOv3 を自前画像で学習させる（環境構築編）【機械学習】
 https://rightcode.co.jp/blog/information-technology/learn-yolov3-image-windows10-environment-construction
-
 
 Windows 10 で YOLOv3 を自前画像で学習させる（物体検出編）【機械学習】
 https://rightcode.co.jp/blog/information-technology/learn-yolov3-image-windows10-object-detection#i-2
 
-
-
-
-
-C:\Users\yueng
 
 C:\Users\yueng\AppData\Local\Temp\CUDA
 
@@ -55,39 +47,32 @@ https://developer.nvidia.com/cuda-10.0-download-archive?target_os=Windows&target
 Anaconda仮想環境の使い方
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-仮想環境の一覧を表示
+Anacondaで仮想環境構築・削除
+https://blog.mktia.com/how-to-create-and-remove-virtual-environment-on-anaconda/#toc5
+
+
+# 仮想環境の一覧を表示
 conda-env list
 
-
-「yolo3_peace」という名前の仮想環境を作っていきます。
+# 「yolo3_peace」という名前の仮想環境を作っていきます。
 conda create -n yolo3_peace python=3.7
 
-
-仮想環境を起動してみます。（有効化）
+# 仮想環境を起動してみます。（有効化）
 conda activate yolo3_peace
 
-無効化
+# 無効化
 conda deactivate
 
-
-仮想環境の削除
+# 仮想環境の削除
 conda remove -n yolo3_peace --all
 
 
 
-Tensorflow のインストール
+# Install Tensorflow 1.14.0
 pip install tensorflow-gpu==1.14.0
 
-
-Keras のインストール
+# Install Keras 2.2.4
 pip install keras==2.2.4
-
-
-
-
-
-
-python mnist_cnn.py
 
 
 
@@ -103,7 +88,7 @@ f = open(r'C:\Users\UserName\Desktop\test.json','r',encoding="utf-8_sig")
 labelImg
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-labelImg GitHub
+# labelImg GitHub
 https://github.com/tzutalin/labelImg
 
 cd C:\Users\yueng\Documents\Work\2020\VOLOv3\keras-yolo3\labelImg
@@ -114,51 +99,53 @@ pyrcc5 -o libs/resources.py resources.qrc
 python labelImg.py
 
 
-Microsoft VoTT GitHub
+# Microsoft VoTT GitHub
 https://github.com/microsoft/VoTT/releases/tag/v2.2.0
 
 
+
+\\gekko\研究\サンショウ\受領データ\4.高校\い-75高\出稿済D-75高
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 YOLOv3
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-weights を Keras 用に変換
+# weights を Keras 用に変換
 python convert.py yolov3.cfg yolov3.weights model_data/yolo.h5
 
-必要なパッケージをいくつかインストールしておきましょう
+# 必要なパッケージをいくつかインストールしておきましょう
 pip install pillow matplotlib opencv-python
 
-weights をコンバート
+# weights をコンバート
 python convert.py -w yolov3.cfg yolov3.weights model_data/yolo_weights.h5
 
 
 
-物体検出
+# 物体検出
 python yolo_video.py --image
 
-python yolo_video.py --model logs/000/trained_weights_final.h5 --classes model_data/voc_classes.txt --image
-
-
-
-
-YOLOv3 のアノテーションに変換
+# YOLOv3 のアノテーションに変換
 python voc_annotation.py
 
 
 
-
-学習
+# 学習
 conda activate yolo3_peace
 cd C:\Users\yueng\Documents\Work\2020\VOLOv3\keras-yolo3
 python train.py
 
+python train_tiny.py
 
 
 
+
+
+# KerasのYOLO-v3を動かしたった
+https://qiita.com/yoyoyo_/items/10d550b03b4b9c175d9c
 
 python yolo_webcam.py
+python yolo_tiny_webcam.py
 
 
 
@@ -169,6 +156,5 @@ TensorBoard
 cd C:\Users\yueng\Downloads\keras-yolo3
 tensorboard --logdir=logs/000/
 http://localhost:6006/
-
 
 
